@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Portfolio &amp; Testimonials — Fox &amp; Setter</title>
+  <meta name="description" content="A selection of websites and brands built by Fox & Setter, and what their owners say.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0C100D;
+      --pine: #16271E;
+      --forest: #1E3A2D;
+      --bone: #EDE8DA;
+      --gold: #C2A04A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--bone); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 300px 300px;
+    }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    ::selection { background: var(--forest); color: var(--bone); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+
+    /* top bar */
+    .topbar { display: flex; align-items: center; justify-content: space-between; max-width: 1180px; margin: 0 auto; padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem); }
+    .back {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(237,232,218,0.7); transition: color 0.25s ease, gap 0.25s ease;
+    }
+    .back:hover { color: var(--gold); gap: 0.8rem; }
+    .brandmark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: rgba(237,232,218,0.6); }
+
+    /* header */
+    header.hero { padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem); }
+    .kicker {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem;
+    }
+    .kicker::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+    h1.cat {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
+      font-size: clamp(2.8rem, 7vw, 5.4rem); line-height: 0.98; color: var(--bone); letter-spacing: -0.01em; margin-bottom: 1.25rem; max-width: 16ch;
+    }
+    .lede { font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: rgba(237,232,218,0.66); line-height: 1.6; max-width: 56ch; }
+    .rule { height: 1px; background: linear-gradient(90deg, var(--gold), rgba(237,232,218,0.06)); margin: clamp(2.5rem,5vw,3.5rem) 0; }
+
+    .sec-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(237,232,218,0.45); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.7rem;
+    }
+    .sec-label .n { color: var(--gold); }
+    .sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(237,232,218,0.1); }
+
+    /* ── work gallery ─────────────────────────────────────────────
+       To add a real project: drop an <img> into .work-img (replace the
+       placeholder), set the <a href> to the live site, and edit the meta. */
+    .work-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 620px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 980px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+    .work {
+      display: block; border-radius: 1.25rem; overflow: hidden;
+      background: var(--pine); border: 1px solid rgba(30,58,45,0.5);
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease, border-color 0.3s ease;
+    }
+    .work:hover { transform: translateY(-6px); box-shadow: 0 26px 70px rgba(0,0,0,0.5); border-color: rgba(194,160,74,0.5); }
+    .work-img {
+      position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(150deg, var(--forest), var(--pine) 60%, var(--ink));
+    }
+    .work-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .work-img .ph {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(237,232,218,0.35);
+    }
+    .work-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; }
+    .work-name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--bone); line-height: 1.1; }
+    .work-cat { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(237,232,218,0.45); }
+    .work-arrow { color: var(--gold); font-size: 1rem; opacity: 0; transform: translateX(-4px); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .work:hover .work-arrow { opacity: 1; transform: translateX(0); }
+
+    /* curating note */
+    .note {
+      margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.05rem; color: rgba(237,232,218,0.5); border-left: 2px solid var(--gold); padding-left: 1.25rem; max-width: 60ch;
+    }
+
+    /* ── testimonials ─────────────────────────────────────────────
+       Add a quote: copy a .tcard block, edit the quote and the by-line. */
+    .t-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 760px) { .t-grid { grid-template-columns: repeat(2, 1fr); } }
+    .tcard { background: var(--pine); border: 1px solid rgba(30,58,45,0.5); border-radius: 1.25rem; padding: clamp(1.75rem, 3vw, 2.4rem); }
+    .tcard .mark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 3rem; line-height: 0.4; color: var(--gold); display: block; height: 1.6rem; }
+    .tcard .q { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.4; color: rgba(237,232,218,0.9); margin-bottom: 1.4rem; }
+    .tcard .by { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+
+    /* CTA */
+    .cta { padding: clamp(3rem,6vw,5rem) 0 clamp(4rem,8vw,6rem); }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem,4.5vw,3.25rem); color: var(--bone); margin-bottom: 1.5rem; max-width: 16ch; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--ink); background: var(--gold); border-radius: 9999px; padding: 0.85rem 1.9rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(194,160,74,0.3); }
+
+    footer { border-top: 1px solid rgba(237,232,218,0.08); padding: 2rem 0; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em; color: rgba(237,232,218,0.35); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back" href="index.html#clientele"><span aria-hidden="true">←</span> Back to Fox &amp; Setter</a>
+    <span class="brandmark">Fox &amp; Setter</span>
+  </div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="kicker">Portfolio &amp; Testimonials</div>
+      <h1 class="cat font-serif">The brands we've built.</h1>
+      <p class="lede">A selection of websites and brands we've designed and launched, and what their owners say about working with us.</p>
+    </header>
+
+    <div class="rule"></div>
+
+    <!-- ══════════════════ WORK GALLERY ══════════════════ -->
+    <section class="reveal">
+      <div class="sec-label"><span class="n">01</span> Selected Work</div>
+
+      <div class="work-grid">
+        <!-- TEMPLATE — duplicate one block per project.
+             1) Replace the placeholder div with: <img src="images/your-shot.jpg" alt="Project name">
+             2) Set href to the live site (target="_blank" optional)
+             3) Edit .work-name and .work-cat -->
+
+        <a class="work" href="#" >
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project One</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="work" href="#">
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project Two</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="work" href="#">
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project Three</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="work" href="#">
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project Four</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="work" href="#">
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project Five</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+
+        <a class="work" href="#">
+          <div class="work-img"><span class="ph">Add screenshot</span></div>
+          <div class="work-meta">
+            <div><div class="work-name">Project Six</div><div class="work-cat">Category · Year</div></div>
+            <span class="work-arrow" aria-hidden="true">↗</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="note">More work being added here. Drop your website screenshots into the cards above and link each one to the live site.</p>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- ══════════════════ TESTIMONIALS ══════════════════ -->
+    <section class="reveal">
+      <div class="sec-label"><span class="n">02</span> What Clients Say</div>
+
+      <div class="t-grid">
+        <!-- TEMPLATE — duplicate one block per testimonial. -->
+        <div class="tcard">
+          <span class="mark">&ldquo;</span>
+          <p class="q">Add a client testimonial here — a sentence or two in their own words about the result and the experience.</p>
+          <div class="by">— Client name, Business</div>
+        </div>
+
+        <div class="tcard">
+          <span class="mark">&ldquo;</span>
+          <p class="q">Add a client testimonial here — a sentence or two in their own words about the result and the experience.</p>
+          <div class="by">— Client name, Business</div>
+        </div>
+
+        <div class="tcard">
+          <span class="mark">&ldquo;</span>
+          <p class="q">Add a client testimonial here — a sentence or two in their own words about the result and the experience.</p>
+          <div class="by">— Client name, Business</div>
+        </div>
+
+        <div class="tcard">
+          <span class="mark">&ldquo;</span>
+          <p class="q">Add a client testimonial here — a sentence or two in their own words about the result and the experience.</p>
+          <div class="by">— Client name, Business</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="cta reveal">
+      <h2>Want this for your brand?</h2>
+      <a class="btn" href="index.html#contact"><span>Book a free consult</span><span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Fox &amp; Setter</span>
+      <span>Greater Toronto Area</span>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+  </script>
+</body>
+</html>
