@@ -990,7 +990,6 @@
     <a href="#why-now"    class="nav-link">Why Now?</a>
     <a href="#approach"   class="nav-link">Our Approach</a>
     <a href="#clientele"  class="nav-link">Portfolio</a>
-    <a href="#apart"      class="nav-link">Demo</a>
     <a href="#calculator" class="nav-link">Calculator</a>
     <a href="#faq"        class="nav-link">FAQ</a>
   </div>
@@ -1010,7 +1009,6 @@
   <a href="#why-now"   class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Why Now?</a>
   <a href="#approach"  class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Our Approach</a>
   <a href="#clientele" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Portfolio</a>
-  <a href="#apart"     class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Demo</a>
   <a href="#calculator" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Calculator</a>
   <a href="#faq"       class="nav-link text-base py-2" onclick="this.closest('#mobile-menu').classList.add('hidden')">FAQ</a>
   <a href="#contact"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
@@ -1727,16 +1725,76 @@
 </div>
 
 
-<div class="hairline" style="max-width:1140px;margin:0 0 0 2rem;"></div>
-
-
-
-
 <!-- ══════════════════════════════════════════════
      WHO WE SERVE — clientele / social proof
 ══════════════════════════════════════════════ -->
-<section id="clientele" style="padding:3.5rem 2rem 2.5rem;max-width:1320px;margin:0 auto 0 0;">
-  <div class="reveal" style="margin-bottom:3.5rem;max-width:1000px;">
+<style>
+  /* ── Who We Serve · photographic field backdrop ─────────────────── */
+  #clientele { position: relative; isolation: isolate; }
+  /* full-bleed photo band — breaks out of the section's max-width */
+  .serve-bg {
+    position: absolute; z-index: 0; pointer-events: none;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 100vw; height: 100%;
+    overflow: hidden;
+  }
+  /* the photo itself: soft editorial grade, slow Ken-Burns drift */
+  .serve-photo {
+    position: absolute; inset: -6% -4%;
+    background-image: url('https://images.unsplash.com/photo-1697653664649-936ed36b3c8c?auto=format&fit=crop&w=2000&q=80');
+    background-size: cover; background-position: center 38%;
+    filter: saturate(0.85) brightness(0.72) contrast(1.04);
+    transform: scale(1.04);
+    animation: servePan 44s ease-in-out infinite alternate;
+  }
+  /* fade to PURE ink at both edges — the top & bottom rows are solid
+     --ink, identical to the neighbouring sections, so the image
+     gradients seamlessly into the section above and below */
+  .serve-veil {
+    position: absolute; inset: 0;
+    background:
+      /* soft warm gold bloom, upper area */
+      radial-gradient(65% 50% at 80% 22%, rgba(194,160,74,0.16), transparent 62%),
+      /* gentle lower vignette for depth */
+      radial-gradient(120% 90% at 22% 100%, rgba(8,11,9,0.62), transparent 58%),
+      /* the seam-killer: vertical fade that holds solid --ink across the top
+         (so the photo dissolves up into the ink section above with no edge),
+         eases the image in gradually, then bottoms out fully at --ink again */
+      linear-gradient(to bottom,
+        var(--ink) 0%,
+        var(--ink) 12%,
+        rgba(20,24,21,0.92) 20%,
+        rgba(20,24,21,0.78) 30%,
+        rgba(20,24,21,0.62) 48%,
+        rgba(20,24,21,0.74) 68%,
+        rgba(20,24,21,0.94) 88%,
+        var(--ink) 97%,
+        var(--ink) 100%),
+      /* overall darkening tint so overlaid text stays legible */
+      linear-gradient(rgba(12,16,13,0.34), rgba(12,16,13,0.34)),
+      /* faint pine grade for brand cohesion */
+      linear-gradient(120deg, rgba(22,39,30,0.48) 0%, rgba(20,24,21,0.10) 55%, rgba(30,58,45,0.46) 100%);
+  }
+  /* fine film grain for an editorial, printed feel */
+  .serve-grain {
+    position: absolute; inset: 0; opacity: 0.10; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+  @keyframes servePan {
+    from { transform: scale(1.04) translate3d(0,0,0); }
+    to   { transform: scale(1.12) translate3d(-2.5%, -2%, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .serve-photo { animation: none; } }
+</style>
+<section id="clientele" style="padding:clamp(4rem,7vw,7rem) clamp(1.5rem,4vw,3rem) clamp(4rem,7vw,7rem);max-width:1320px;margin:0 auto 0 0;">
+  <!-- photographic field backdrop -->
+  <div class="serve-bg" aria-hidden="true">
+    <div class="serve-photo"></div>
+    <div class="serve-veil"></div>
+    <div class="serve-grain"></div>
+  </div>
+
+  <div class="reveal" style="position:relative;z-index:1;margin-bottom:3.5rem;max-width:1000px;">
     <div class="section-label">Who We Serve</div>
     <!-- headline -->
     <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.4rem);font-style:italic;font-weight:400;color:#EDE8DA;line-height:1.18;margin-bottom:1.75rem;max-width:920px;text-wrap:balance;">
@@ -1800,7 +1858,7 @@
     }
     @media (prefers-reduced-motion: reduce) { .portfolio-cta { transition: none; } }
   </style>
-  <div class="reveal" style="margin-bottom:2.5rem;">
+  <div class="reveal" style="position:relative;z-index:1;margin-bottom:2.5rem;">
     <div class="serve-grid">
       <span class="serve-chip">Custom Home Builds</span>
       <span class="serve-chip">Landscape Design</span>
@@ -1814,7 +1872,7 @@
   </div>
 
   <!-- Single high-converting CTA → portfolio & testimonials page -->
-  <div class="reveal" style="margin-bottom:2.5rem;">
+  <div class="reveal" style="position:relative;z-index:1;margin-bottom:2.5rem;">
     <a class="portfolio-cta" href="portfolio.html">
       <span class="pc-label">Click here to see our brand portfolio &amp; testimonials</span>
       <span class="pc-arrow" aria-hidden="true">→</span>
@@ -1825,158 +1883,6 @@
 
 
 <div class="hairline" style="max-width:1140px;margin:0 0 0 2rem;"></div>
-
-
-<!-- ══════════════════════════════════════════════
-     WHAT SETS US APART — custom AI differentiator widget
-══════════════════════════════════════════════ -->
-<style>
-  .apart-grid {
-    display: grid;
-    grid-template-columns: 0.92fr 1.08fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: stretch;
-    margin-top: 3rem;
-  }
-  @media(max-width:880px){ .apart-grid { grid-template-columns: 1fr; } }
-
-  /* Left — differentiator selector */
-  .apart-tabs { display: flex; flex-direction: column; gap: 0.7rem; }
-  .apart-tab {
-    position: relative;
-    overflow: hidden;
-    text-align: left;
-    background: rgba(12,16,13,0.35);
-    border: 1px solid rgba(30,58,45,0.55);
-    border-radius: 1.1rem;
-    padding: 1.05rem 1.25rem;
-    cursor: pointer;
-    color: rgba(237,232,218,0.62);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    display: flex; align-items: center; gap: 0.9rem;
-    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, transform 0.25s ease;
-  }
-  .apart-tab:hover { border-color: rgba(194,160,74,0.45); color: rgba(237,232,218,0.9); transform: translateX(2px); }
-  .apart-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--gold); opacity: 0.55; flex-shrink: 0; }
-  .apart-title { font-size: 0.97rem; font-weight: 600; }
-  .apart-tab[aria-selected="true"] {
-    background: rgba(30,58,45,0.55);
-    border-color: rgba(194,160,74,0.55);
-    color: #EDE8DA;
-    box-shadow: 0 10px 32px rgba(0,0,0,0.35);
-  }
-  .apart-tab[aria-selected="true"] .apart-num { opacity: 1; }
-  .apart-prog { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--gold); }
-
-  /* Right — AI chat widget */
-  .apart-widget {
-    display: flex; flex-direction: column;
-    background: linear-gradient(160deg, #1b3127 0%, #15251c 60%, #10201a 100%);
-    border: 1px solid rgba(194,160,74,0.22);
-    border-radius: 1.5rem;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  }
-  .widget-head {
-    display: flex; align-items: center; gap: 0.6rem;
-    padding: 0.95rem 1.25rem;
-    border-bottom: 1px solid rgba(30,58,45,0.5);
-  }
-  .widget-head .wlabel { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(237,232,218,0.5); }
-  .widget-head .wlive { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.4rem; }
-  .widget-body { padding: 1.6rem 1.6rem 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; flex: 1; }
-  .chat-user {
-    align-self: flex-end; max-width: 82%;
-    background: rgba(237,232,218,0.08); border: 1px solid rgba(237,232,218,0.12);
-    color: rgba(237,232,218,0.82);
-    padding: 0.7rem 1.05rem; border-radius: 1rem 1rem 0.25rem 1rem;
-    font-size: 0.88rem;
-  }
-  .chat-ai { display: flex; gap: 0.85rem; align-items: flex-start; }
-  .ai-avatar {
-    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-    background: rgba(194,160,74,0.12); border: 1px solid rgba(194,160,74,0.32);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .ai-col { flex: 1; min-width: 0; }
-  .ai-name { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(194,160,74,0.75); margin-bottom: 0.55rem; }
-  .chat-bubble {
-    background: rgba(12,16,13,0.42); border: 1px solid rgba(30,58,45,0.6);
-    border-radius: 0.25rem 1rem 1rem 1rem;
-    padding: 1.05rem 1.2rem;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: clamp(1rem, 1.4vw, 1.12rem); color: rgba(237,232,218,0.88); line-height: 1.6;
-    min-height: 150px;
-  }
-  .chat-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.9rem;
-    opacity: 0; transform: translateY(4px); transition: opacity 0.5s ease, transform 0.5s ease;
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold); background: rgba(194,160,74,0.08); border: 1px solid rgba(194,160,74,0.28);
-    border-radius: 9999px; padding: 0.4rem 0.9rem;
-  }
-  .chat-tag.show { opacity: 1; transform: translateY(0); }
-</style>
-<section id="apart" style="background:var(--pine);padding:7rem 2rem 3rem;overflow:hidden;position:relative;">
-  <!-- Subtle background image layer — the "ground you own": misty open country,
-       echoing the hero so the section reads on-brand rather than as stock decoration -->
-  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center 55%;opacity:0.07;filter:saturate(0.2) brightness(0.9);"></div>
-  <!-- forest depth + a warm gold wash toward the AI widget keeps it intentional -->
-  <div style="position:absolute;inset:0;background:radial-gradient(120% 85% at 88% 0%, rgba(194,160,74,0.08), transparent 55%), radial-gradient(110% 90% at 0% 100%, rgba(12,16,13,0.55), transparent 60%);"></div>
-  <!-- Edge fades: the pine band dissolves into the ink sections above (Portfolio) and below (Calculator) -->
-  <div style="position:absolute;left:0;right:0;top:0;height:220px;pointer-events:none;background:linear-gradient(to bottom, var(--ink) 0%, rgba(20,24,21,0.6) 38%, transparent 100%);"></div>
-  <div style="position:absolute;left:0;right:0;bottom:0;height:200px;pointer-events:none;background:linear-gradient(to top, var(--ink) 0%, rgba(20,24,21,0.55) 40%, transparent 100%);"></div>
-
-  <div style="position:relative;z-index:1;max-width:1320px;margin:0 auto 0 0;">
-    <div class="apart-head" style="max-width:640px;">
-      <div class="section-label reveal">What Sets Us Apart</div>
-      <h2 class="reveal font-serif" style="font-size:clamp(2.2rem,5vw,4rem);font-weight:400;font-style:italic;line-height:1.05;color:#EDE8DA;margin-bottom:1.25rem;">
-        Ask our own intelligence what makes us different.
-      </h2>
-      <p class="reveal" style="font-size:1.05rem;color:rgba(237,232,218,0.6);line-height:1.7;">
-        Ask our own intelligence what makes us different. It answers in the same voice we'd build
-        for you, which is rather the point.
-      </p>
-    </div>
-
-    <div class="apart-grid">
-      <!-- Differentiator selector -->
-      <div class="apart-tabs reveal" role="tablist" aria-label="What sets us apart">
-        <button class="apart-tab" role="tab" data-i="0" aria-selected="true"><span class="apart-num">01</span><span class="apart-title">We work the ground you own</span><span class="apart-prog"></span></button>
-        <button class="apart-tab" role="tab" data-i="1" aria-selected="false"><span class="apart-num">02</span><span class="apart-title">It speaks in your brand voice</span><span class="apart-prog"></span></button>
-        <button class="apart-tab" role="tab" data-i="2" aria-selected="false"><span class="apart-num">03</span><span class="apart-title">One brand per category</span><span class="apart-prog"></span></button>
-        <button class="apart-tab" role="tab" data-i="3" aria-selected="false"><span class="apart-num">04</span><span class="apart-title">Done for you, live in 14 days</span><span class="apart-prog"></span></button>
-        <button class="apart-tab" role="tab" data-i="4" aria-selected="false"><span class="apart-num">05</span><span class="apart-title">Discretion is the product</span><span class="apart-prog"></span></button>
-      </div>
-
-      <!-- AI chat widget -->
-      <div class="apart-widget reveal" id="apart-widget">
-        <div class="widget-head">
-          <div class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:#C2A04A;"></div>
-          <span class="wlabel">Fox &amp; Setter · Brand Intelligence</span>
-          <span class="wlive"><span class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:#4ade80;"></span>Live</span>
-        </div>
-        <div class="widget-body">
-          <div class="chat-user">What makes Fox &amp; Setter different?</div>
-          <div class="chat-ai">
-            <div class="ai-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C2A04A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/>
-              </svg>
-            </div>
-            <div class="ai-col">
-              <div class="ai-name">Fox &amp; Setter AI</div>
-              <div class="chat-bubble"><span id="apart-type"></span><span class="tw-cursor"></span></div>
-              <div class="chat-tag" id="apart-tag"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="hairline-gold" style="max-width:1140px;margin:0 0 0 2rem;"></div>
 
 
 
@@ -2222,7 +2128,18 @@
     line-height: 1.75;
   }
 </style>
-<section id="faq" style="padding:7rem 2rem;max-width:1040px;margin:0 auto 0 0;">
+<section id="faq" style="position:relative;padding:7rem 2rem;overflow:hidden;">
+  <!-- Mountain background — the same misty open country as the hero, so Questions reads
+       on-brand rather than as stock decoration. Low opacity + edge fades dissolve it
+       into the ink sections above and below. -->
+  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center 55%;opacity:0.06;filter:saturate(0.2) brightness(0.9);"></div>
+  <!-- forest depth + a faint gold wash keeps it intentional -->
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 85% at 88% 0%, rgba(194,160,74,0.06), transparent 55%), radial-gradient(110% 90% at 0% 100%, rgba(12,16,13,0.5), transparent 60%);"></div>
+  <!-- Edge fades into the ink sections above and below -->
+  <div style="position:absolute;left:0;right:0;top:0;height:200px;pointer-events:none;background:linear-gradient(to bottom, var(--ink) 0%, rgba(20,24,21,0.55) 40%, transparent 100%);"></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:200px;pointer-events:none;background:linear-gradient(to top, var(--ink) 0%, rgba(20,24,21,0.55) 40%, transparent 100%);"></div>
+
+  <div style="position:relative;z-index:1;max-width:1040px;margin:0 auto 0 0;">
   <div class="reveal" style="margin-bottom:3rem;">
     <div class="section-label">Questions</div>
     <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.5rem);font-weight:400;font-style:italic;color:#EDE8DA;">
@@ -2268,6 +2185,7 @@
       <div class="faq-a">Toronto, Canada. We work with clients across North America.</div>
     </details>
   </div>
+  </div>
 </section>
 
 
@@ -2300,7 +2218,6 @@
         <nav style="display:flex;flex-direction:column;gap:0.75rem;">
           <a href="#approach"   class="nav-link" style="font-size:0.88rem;">Approach</a>
           <a href="#clientele"  class="nav-link" style="font-size:0.88rem;">Who We Serve</a>
-          <a href="#apart"      class="nav-link" style="font-size:0.88rem;">What Sets Us Apart</a>
           <a href="#calculator" class="nav-link" style="font-size:0.88rem;">ROI Calculator</a>
           <a href="#faq"        class="nav-link" style="font-size:0.88rem;">FAQ</a>
           <a href="#contact"    class="nav-link" style="font-size:0.88rem;">Contact</a>
@@ -2311,10 +2228,11 @@
       <div>
         <div class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.35);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;">Contact</div>
         <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;">
-          <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">Greater Toronto Area, Ontario</p>
-          <a href="mailto:hello@foxandsetter.com" class="nav-link" style="font-size:0.88rem;">hello@foxandsetter.com</a>
+          <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">K.Tunks</p>
+          <a href="mailto:contact@foxandsetter.com" class="nav-link" style="font-size:0.88rem;">contact@foxandsetter.com</a>
+          <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">Greater Toronto Area, Canada</p>
         </div>
-        <a href="mailto:hello@foxandsetter.com" class="btn-primary" style="display:inline-flex;"><span>Book a Free Consult</span></a>
+        <a href="mailto:contact@foxandsetter.com" class="btn-primary" style="display:inline-flex;"><span>Book a Free Consult</span></a>
       </div>
     </div>
 
@@ -2455,89 +2373,6 @@
     });
   });
 
-
-  // ── 4. What Sets Us Apart — AI differentiator widget ────
-  (function () {
-    const tabs   = Array.from(document.querySelectorAll('.apart-tab'));
-    const typeEl = document.getElementById('apart-type');
-    const tagEl  = document.getElementById('apart-tag');
-    const widget = document.getElementById('apart-widget');
-    if (!tabs.length || !typeEl || !tagEl) return;
-
-    const DATA = [
-      { answer: "Most agencies sell you more strangers. More ads, more cold outreach, more noise. We don't. We reactivate the clients already in your database: the cold enquiry, the unfollowed quote, the name that went quiet. Your most valuable client is one you've already met.",
-        tag: "Up to 34 clients reactivated in 60 days" },
-      { answer: "Generic AI sounds like a robot in a nicer font. Ours is trained only on your brand: your tone, your offers, your standards. Your clients can't tell it isn't your best concierge. Because, in every way that matters, it is.",
-        tag: "Trained on your voice, nothing else" },
-      { answer: "We take a single brand per category, per market. When we learn how you win, we never turn around and hand that edge to your competitor. The ground you own stays yours alone.",
-        tag: "Exclusive by design" },
-      { answer: "You approve the voice; we handle everything behind it: design, training, integration, tuning. Most engagements are live within 14 days, without changing a thing in your day-to-day operations.",
-        tag: "Live in 14 days" },
-      { answer: "Private, end-to-end encrypted infrastructure. No shared models trained on your data. No client logos paraded across a homepage. For a luxury clientele, quiet is the whole point.",
-        tag: "Private & encrypted" }
-    ];
-
-    const SPEED = 16, HOLD = 2600;
-    let active = -1, typeTimer = null, advanceTimer = null;
-
-    function startProg(tab, ms) {
-      const bar = tab.querySelector('.apart-prog');
-      if (!bar) return;
-      bar.style.transition = 'none';
-      bar.style.width = '0%';
-      // force reflow, then animate to full over the item's lifetime
-      void bar.offsetWidth;
-      bar.style.transition = 'width ' + ms + 'ms linear';
-      bar.style.width = '100%';
-    }
-    function clearProg(tab) {
-      const bar = tab.querySelector('.apart-prog');
-      if (!bar) return;
-      bar.style.transition = 'none';
-      bar.style.width = '0%';
-    }
-
-    function activate(i) {
-      if (i === active) return;
-      clearTimeout(typeTimer); clearTimeout(advanceTimer);
-      active = i;
-      tabs.forEach((t, idx) => {
-        t.setAttribute('aria-selected', idx === i ? 'true' : 'false');
-        if (idx !== i) clearProg(t);
-      });
-
-      const text = DATA[i].answer;
-      const typingTime = text.length * SPEED;
-      typeEl.textContent = '';
-      tagEl.textContent = DATA[i].tag;
-      tagEl.classList.remove('show');
-      startProg(tabs[i], typingTime + HOLD);
-
-      let c = 0;
-      (function type() {
-        if (c <= text.length) {
-          typeEl.textContent = text.slice(0, c);
-          c++;
-          typeTimer = setTimeout(type, SPEED);
-        } else {
-          tagEl.classList.add('show');
-        }
-      })();
-
-      advanceTimer = setTimeout(() => activate((i + 1) % DATA.length), typingTime + HOLD);
-    }
-
-    tabs.forEach((t) => t.addEventListener('click', () => activate(+t.dataset.i)));
-
-    // Start the cycle when the widget first scrolls into view
-    let started = false;
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !started) { started = true; activate(0); obs.disconnect(); }
-      });
-    }, { threshold: 0.3 });
-    obs.observe(widget || tabs[0]);
-  })();
 
   // ── 6. Scroll reveal (generic) ──────────────────────────
   const revealEls = document.querySelectorAll('.reveal');
@@ -2702,5 +2537,8 @@
 </script>
 
 <script>(function(){function go(){document.body.classList.add('loaded');}if(document.readyState==='complete')go();else window.addEventListener('load',go);})();</script>
+
+<!-- buildmyagent.io — Fox & Setter AI agent widget -->
+<script src="https://buildmyagent.io/widget/6a3db10f7d9e5d93ac686151/widget-professional.js?widgetId=6a3db10f7d9e5d93ac686151"></script>
 </body>
 </html>
