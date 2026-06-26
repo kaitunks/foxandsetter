@@ -1,0 +1,9 @@
+{
+  "name": "foxandsetter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fox & Setter site + booking API",
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}

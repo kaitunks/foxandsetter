@@ -996,7 +996,7 @@
 
   <!-- CTA + Mobile toggle -->
   <div class="flex items-center gap-3" style="flex-shrink:0;">
-    <a href="#contact" class="nav-cta"><span>Book a Free Consult</span></a>
+    <a href="#book" class="nav-cta"><span>Book a Free Consult</span></a>
     <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
       <span class="block w-5 h-px bg-bone/70"></span>
       <span class="block w-5 h-px bg-bone/70"></span>
@@ -1011,7 +1011,7 @@
   <a href="#clientele" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Portfolio</a>
   <a href="#calculator" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Calculator</a>
   <a href="#faq"       class="nav-link text-base py-2" onclick="this.closest('#mobile-menu').classList.add('hidden')">FAQ</a>
-  <a href="#contact"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
+  <a href="#book"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
 </div>
 
 
@@ -1038,7 +1038,7 @@
 
     <!-- CTA row -->
     <div id="hero-cta" class="flex flex-wrap items-center gap-4">
-      <a href="#contact" class="btn-primary">
+      <a href="#book" class="btn-primary">
         <span>Book a Free Consult</span>
         <span style="font-size:1rem;">→</span>
       </a>
@@ -2190,6 +2190,313 @@
 
 
 <!-- ══════════════════════════════════════════════
+     BOOK — interactive calendar (Google Calendar connected)
+══════════════════════════════════════════════ -->
+<style>
+  #book .bk-card {
+    background: var(--pine);
+    border: 1px solid rgba(30,58,45,0.5);
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  }
+  /* Date rail — the next 14 days (the 2-week window) */
+  .bk-dates {
+    display: flex; gap: 0.6rem; overflow-x: auto;
+    padding: 1.4rem 1.5rem;
+    border-bottom: 1px solid rgba(30,58,45,0.5);
+    scrollbar-width: thin; scrollbar-color: rgba(194,160,74,0.4) transparent;
+  }
+  .bk-dates::-webkit-scrollbar { height: 5px; }
+  .bk-dates::-webkit-scrollbar-thumb { background: rgba(194,160,74,0.4); border-radius: 3px; }
+  .bk-day {
+    flex: 0 0 auto; min-width: 66px;
+    display: flex; flex-direction: column; align-items: center; gap: 0.18rem;
+    padding: 0.7rem 0.8rem; border-radius: 1rem;
+    border: 1px solid rgba(237,232,218,0.12); background: rgba(12,16,13,0.3);
+    cursor: pointer; transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .bk-day:hover { border-color: rgba(194,160,74,0.55); transform: translateY(-2px); }
+  .bk-day .dow  { font-family:'IBM Plex Mono',monospace; font-size:0.64rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(237,232,218,0.5); }
+  .bk-day .dnum { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.55rem; line-height:1; color:var(--bone); }
+  .bk-day .dmon { font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(237,232,218,0.4); }
+  .bk-day.sel { background: var(--gold); border-color: var(--gold); }
+  .bk-day.sel .dow, .bk-day.sel .dnum, .bk-day.sel .dmon { color: var(--ink); }
+  .bk-day:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+
+  .bk-body { display: grid; grid-template-columns: 1.05fr 1fr; }
+  .bk-times-pane { padding: 1.75rem; border-right: 1px solid rgba(30,58,45,0.5); }
+  .bk-pane-label {
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--gold);
+    margin-bottom:1.1rem; display:flex; gap:0.5rem; align-items:baseline; flex-wrap:wrap;
+  }
+  .bk-pane-label .bk-date-label { color:rgba(237,232,218,0.5); letter-spacing:0.03em; text-transform:none; font-size:0.8rem; }
+  .bk-times {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+    gap: 0.5rem; max-height: 318px; overflow-y: auto; padding-right: 0.2rem;
+  }
+  .bk-slot {
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--bone);
+    background: rgba(12,16,13,0.4); border:1px solid rgba(237,232,218,0.14);
+    border-radius:0.6rem; padding:0.6rem 0.35rem; cursor:pointer; text-align:center;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .bk-slot:hover:not(:disabled) { border-color:var(--gold); color:var(--gold); }
+  .bk-slot.sel { background:var(--gold); color:var(--ink); border-color:var(--gold); font-weight:600; }
+  .bk-slot:disabled { opacity:0.22; cursor:not-allowed; text-decoration:line-through; }
+  .bk-empty { grid-column:1/-1; color:rgba(237,232,218,0.5); font-size:0.92rem; padding:1.25rem 0; line-height:1.6; }
+
+  .bk-form { padding: 1.75rem; display:flex; flex-direction:column; gap:0.85rem; }
+  .bk-summary {
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; letter-spacing:0.04em;
+    color:rgba(237,232,218,0.55); padding:0.85rem 1rem; margin-bottom:0.4rem;
+    border:1px dashed rgba(194,160,74,0.4); border-radius:0.75rem; line-height:1.5;
+  }
+  .bk-summary b { color:var(--gold); font-weight:600; }
+  .bk-field label {
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:0.66rem;
+    letter-spacing:0.12em; text-transform:uppercase; color:rgba(237,232,218,0.55); margin-bottom:0.35rem;
+  }
+  .bk-input {
+    width:100%; background:rgba(12,16,13,0.45); border:1px solid rgba(237,232,218,0.16);
+    border-radius:0.6rem; padding:0.7rem 0.85rem; color:var(--bone);
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:0.92rem; transition:border-color 0.2s ease;
+  }
+  .bk-input::placeholder { color:rgba(237,232,218,0.3); }
+  .bk-input:focus { outline:none; border-color:var(--gold); }
+  textarea.bk-input { resize:vertical; min-height:62px; }
+  .bk-submit { width:100%; justify-content:center; cursor:pointer; border:none; margin-top:0.3rem; }
+  .bk-submit:disabled { opacity:0.45; cursor:not-allowed; }
+  .bk-msg { font-size:0.84rem; line-height:1.5; min-height:1.1rem; }
+  .bk-msg.err { color:#E4988F; }
+  .bk-msg.ok  { color:#8FC09C; }
+  .bk-done { padding:3.5rem 1.75rem; text-align:center; }
+  .bk-done .bk-check {
+    width:54px; height:54px; border-radius:50%; margin:0 auto 1.25rem;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(143,192,156,0.14); border:1px solid rgba(143,192,156,0.5);
+    color:#8FC09C; font-size:1.6rem;
+  }
+  .bk-done h3 { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.9rem; color:var(--bone); margin-bottom:0.6rem; }
+  .bk-done p { color:rgba(237,232,218,0.62); font-size:0.95rem; line-height:1.6; max-width:32ch; margin:0 auto; }
+  .bk-done p b { color:var(--gold); font-weight:600; }
+
+  @media (max-width: 760px) {
+    .bk-body { grid-template-columns: 1fr; }
+    .bk-times-pane { border-right:none; border-bottom:1px solid rgba(30,58,45,0.5); }
+    #book { padding-left:1.25rem !important; padding-right:1.25rem !important; }
+    .bk-times-pane, .bk-form { padding:1.4rem; }
+    .bk-dates { padding:1.1rem 1.25rem; }
+  }
+</style>
+<section id="book" style="padding:clamp(4rem,7vw,7rem) 2rem; max-width:1320px; margin:0 auto 0 0; position:relative; z-index:2;">
+  <div class="reveal" style="max-width:680px; margin-bottom:2.75rem;">
+    <div class="section-label">Book a Consultation</div>
+    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.4rem); font-weight:400; font-style:italic; color:#EDE8DA; line-height:1.1; margin-bottom:1rem; text-wrap:balance;">
+      Reserve a time to talk.
+    </h2>
+    <p style="font-size:1rem; color:rgba(237,232,218,0.62); line-height:1.7;">
+      Pick a slot that suits you — 15 minutes, no obligation. All times shown in
+      <strong style="color:rgba(237,232,218,0.85);font-weight:600;">Eastern Time (Toronto)</strong>.
+    </p>
+  </div>
+
+  <div class="bk-card reveal">
+    <!-- Step 1 · choose a day (next 2 weeks) -->
+    <div class="bk-dates" id="bk-dates" role="group" aria-label="Choose a day"></div>
+
+    <div class="bk-body">
+      <!-- Step 2 · choose a time -->
+      <div class="bk-times-pane">
+        <div class="bk-pane-label">Available times <span class="bk-date-label" id="bk-date-label"></span></div>
+        <div class="bk-times" id="bk-times" role="group" aria-label="Available times"></div>
+      </div>
+
+      <!-- Step 3 · your details -->
+      <div id="bk-form-pane">
+        <form class="bk-form" id="bk-form" novalidate>
+          <div class="bk-summary" id="bk-summary">Select a day and time to continue.</div>
+          <div class="bk-field"><label for="bk-name">Name</label><input class="bk-input" id="bk-name" type="text" autocomplete="name" placeholder="Your name" required></div>
+          <div class="bk-field"><label for="bk-email">Email</label><input class="bk-input" id="bk-email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+          <div class="bk-field"><label for="bk-phone">Phone <span style="opacity:0.5;">(optional)</span></label><input class="bk-input" id="bk-phone" type="tel" autocomplete="tel" placeholder="(416) 000-0000"></div>
+          <div class="bk-field"><label for="bk-notes">What would you like to talk about? <span style="opacity:0.5;">(optional)</span></label><textarea class="bk-input" id="bk-notes" placeholder="A sentence or two helps us prepare."></textarea></div>
+          <button type="submit" class="btn-primary bk-submit" id="bk-submit" disabled><span>Confirm booking</span></button>
+          <div class="bk-msg" id="bk-msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var TZ = 'America/Toronto';
+    var datesEl  = document.getElementById('bk-dates');
+    var timesEl  = document.getElementById('bk-times');
+    var dateLbl  = document.getElementById('bk-date-label');
+    var form     = document.getElementById('bk-form');
+    var summary  = document.getElementById('bk-summary');
+    var submit   = document.getElementById('bk-submit');
+    var msg      = document.getElementById('bk-msg');
+    var nameEl   = document.getElementById('bk-name');
+    var emailEl  = document.getElementById('bk-email');
+    var phoneEl  = document.getElementById('bk-phone');
+    var notesEl  = document.getElementById('bk-notes');
+    if (!datesEl) return;
+
+    var fmtTime = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit', hour12: true });
+    var fmtDayShort = function (dt, opt) { return new Intl.DateTimeFormat('en-US', Object.assign({ timeZone: TZ }, opt)).format(dt); };
+
+    var selectedDate = null, selectedStart = null, selectedDayBtn = null;
+
+    function etTodayParts() {
+      var s = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      var p = s.split('-').map(Number);
+      return { y: p[0], m: p[1], d: p[2] };
+    }
+
+    function buildDates() {
+      var t = etTodayParts();
+      var base = Date.UTC(t.y, t.m - 1, t.d, 12, 0, 0); // noon UTC keeps each ET date stable
+      for (var i = 0; i < 14; i++) {
+        var dt = new Date(base + i * 86400000);
+        var ymd = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(dt);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'bk-day';
+        btn.setAttribute('data-date', ymd);
+        btn.innerHTML =
+          '<span class="dow">' + (i === 0 ? 'Today' : fmtDayShort(dt, { weekday: 'short' })) + '</span>' +
+          '<span class="dnum">' + fmtDayShort(dt, { day: 'numeric' }) + '</span>' +
+          '<span class="dmon">' + fmtDayShort(dt, { month: 'short' }) + '</span>';
+        (function (ymd, btn) {
+          btn.addEventListener('click', function () { selectDate(ymd, btn); });
+        })(ymd, btn);
+        datesEl.appendChild(btn);
+      }
+      var first = datesEl.querySelector('.bk-day');
+      if (first) selectDate(first.getAttribute('data-date'), first);
+    }
+
+    function labelForDate(ymd) {
+      var dt = new Date(ymd + 'T12:00:00Z');
+      return fmtDayShort(dt, { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+
+    function selectDate(ymd, btn) {
+      selectedDate = ymd; selectedStart = null;
+      if (selectedDayBtn) selectedDayBtn.classList.remove('sel');
+      selectedDayBtn = btn; btn.classList.add('sel');
+      dateLbl.textContent = '· ' + labelForDate(ymd);
+      refreshSummary();
+      timesEl.innerHTML = '<div class="bk-empty">Loading times…</div>';
+      fetch('/api/availability?date=' + ymd)
+        .then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })
+        .then(function (data) { renderTimes(data.slots || []); })
+        .catch(function () {
+          timesEl.innerHTML = '<div class="bk-empty">Couldn’t load times right now. Email <a href="mailto:contact@foxandsetter.com" style="color:var(--gold);">contact@foxandsetter.com</a> and we’ll book you in.</div>';
+        });
+    }
+
+    function renderTimes(slots) {
+      timesEl.innerHTML = '';
+      var anyFree = slots.some(function (s) { return s.available; });
+      if (!slots.length) { timesEl.innerHTML = '<div class="bk-empty">No availability on this day.</div>'; return; }
+      if (!anyFree) { timesEl.innerHTML = '<div class="bk-empty">Fully booked — please try another day.</div>'; return; }
+      slots.forEach(function (s) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'bk-slot';
+        b.textContent = fmtTime.format(new Date(s.start));
+        b.disabled = !s.available;
+        b.setAttribute('data-start', s.start);
+        if (s.available) {
+          b.addEventListener('click', function () {
+            selectedStart = s.start;
+            var prev = timesEl.querySelector('.bk-slot.sel');
+            if (prev) prev.classList.remove('sel');
+            b.classList.add('sel');
+            refreshSummary();
+          });
+        }
+        timesEl.appendChild(b);
+      });
+    }
+
+    function refreshSummary() {
+      if (selectedStart) {
+        summary.innerHTML = 'Selected: <b>' + labelForDate(selectedDate) + '</b> at <b>' +
+          fmtTime.format(new Date(selectedStart)) + '</b> ET · 15 min';
+      } else {
+        summary.textContent = 'Pick a time above to continue.';
+      }
+      validate();
+    }
+
+    function validate() {
+      var ok = !!selectedStart && nameEl.value.trim() && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailEl.value.trim());
+      submit.disabled = !ok;
+    }
+    [nameEl, emailEl].forEach(function (el) { el.addEventListener('input', validate); });
+
+    function showMsg(text, kind) { msg.textContent = text; msg.className = 'bk-msg ' + (kind || ''); }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!selectedStart) { showMsg('Please pick a time first.', 'err'); return; }
+      submit.disabled = true;
+      submit.querySelector('span').textContent = 'Booking…';
+      showMsg('');
+      fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          start: selectedStart,
+          name: nameEl.value.trim(),
+          email: emailEl.value.trim(),
+          phone: phoneEl.value.trim(),
+          notes: notesEl.value.trim()
+        })
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.d.ok) {
+            showSuccess();
+          } else {
+            showMsg(res.d.error || 'Could not book that time. Please try again.', 'err');
+            submit.querySelector('span').textContent = 'Confirm booking';
+            submit.disabled = false;
+            if (res.status === 409 && selectedDayBtn) selectDate(selectedDate, selectedDayBtn); // refresh slots
+          }
+        })
+        .catch(function () {
+          showMsg('Network error — please try again.', 'err');
+          submit.querySelector('span').textContent = 'Confirm booking';
+          submit.disabled = false;
+        });
+    });
+
+    function showSuccess() {
+      var when = labelForDate(selectedDate) + ' at ' + fmtTime.format(new Date(selectedStart)) + ' ET';
+      var card = document.querySelector('#book .bk-card');
+      card.innerHTML =
+        '<div class="bk-done">' +
+          '<div class="bk-check">✓</div>' +
+          '<h3>You’re booked in.</h3>' +
+          '<p>We’ve reserved <b>' + when + '</b>. A confirmation is on its way — we look forward to speaking with you.</p>' +
+        '</div>';
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    buildDates();
+  })();
+</script>
+
+
+<!-- ══════════════════════════════════════════════
      FOOTER / CONTACT
 ══════════════════════════════════════════════ -->
 <footer id="contact" style="margin-top:4rem;padding:5rem 2rem 3rem;">
@@ -2232,7 +2539,7 @@
           <a href="mailto:contact@foxandsetter.com" class="nav-link" style="font-size:0.88rem;">contact@foxandsetter.com</a>
           <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">Greater Toronto Area, Canada</p>
         </div>
-        <a href="mailto:contact@foxandsetter.com" class="btn-primary" style="display:inline-flex;"><span>Book a Free Consult</span></a>
+        <a href="#book" class="btn-primary" style="display:inline-flex;"><span>Book a Free Consult</span></a>
       </div>
     </div>
 
