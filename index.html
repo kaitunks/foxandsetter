@@ -2252,10 +2252,48 @@
   </div>
 </footer>
 
-<!-- Mobile footer grid fix -->
+<!-- ══════════════════════════════════════════════
+     MOBILE POLISH — tighter, cleaner layout on phones.
+     Many sections set their padding inline, so these overrides use
+     #id + !important to win over the inline styles.
+══════════════════════════════════════════════ -->
 <style>
   @media(max-width:768px){
     .footer-grid { grid-template-columns:1fr !important; gap:2.5rem !important; }
+
+    /* Pull the big inline side-padding (2rem) in so content isn't crammed into
+       a narrow centre column. */
+    #why-now,
+    #calculator,
+    #faq,
+    #clientele,
+    #contact   { padding-left:1.25rem !important; padding-right:1.25rem !important; }
+    #approach  { padding:3.5vh 1.25rem 2.5rem !important; }
+
+    /* Trim the tall vertical gaps so the page doesn't feel over-padded. */
+    #why-now    { padding-top:2rem !important;   padding-bottom:4.5rem !important; }
+    #calculator { padding-top:2.5rem !important; padding-bottom:4.5rem !important; }
+    #faq        { padding-top:4rem !important;   padding-bottom:4rem !important; }
+    #contact    { padding-top:3.5rem !important; padding-bottom:2.5rem !important; }
+
+    /* Hero: tighter gutter + lower top-padding so the headline and CTAs sit
+       comfortably in view on short screens (hero clips overflow). */
+    .hero-content { padding:clamp(7rem,20vh,10rem) 1.25rem 2rem !important; }
+
+    /* ROI calculator: the inner panels carry their own 2.5rem padding which,
+       stacked inside the section gutter, left the sliders almost no width. */
+    .calc-panel, .calc-results { padding:1.5rem !important; }
+    .calc-grid { gap:1.25rem !important; }
+
+    /* Recovery toggle: three labels in one row overflow at phone widths. */
+    .calc-seg button { font-size:0.64rem; padding:0.65rem 0.3rem; letter-spacing:0; }
+  }
+
+  @media(max-width:420px){
+    /* Narrowest phones: stack the recovery toggle so labels stay legible. */
+    .calc-seg { flex-direction:column; border-radius:1rem; }
+    .calc-seg button { border-left:none; border-top:1px solid rgba(30,58,45,0.5); padding:0.7rem; font-size:0.74rem; }
+    .calc-seg button:first-child { border-top:none; }
   }
 </style>
 
