@@ -6,9 +6,19 @@
   <title>Fox &amp; Setter — Bespoke AI Integration</title>
   <meta name="description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area. We reactivate dormant leads, generate qualified enquiries, and deliver booked appointments.">
   <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Social share preview (link unfurls in iMessage, LinkedIn, WhatsApp, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fox &amp; Setter — Bespoke AI Integration">
+  <meta property="og:description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area. We reactivate dormant leads, generate qualified enquiries, and deliver booked appointments.">
+  <meta property="og:image" content="https://foxandsetter.com/fox-setter-logo.png">
+  <meta property="og:url" content="https://foxandsetter.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fox &amp; Setter — Bespoke AI Integration">
+  <meta name="twitter:description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area.">
+  <meta name="twitter:image" content="https://foxandsetter.com/fox-setter-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -819,7 +829,7 @@
       box-shadow: 0 24px 70px rgba(0,0,0,0.4);
     }
         .calc-headline-fig {
-      font-family: 'Sora', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: clamp(1.8rem, 3.3vw, 2.4rem);
       font-weight: 500;
       font-style: normal;
@@ -848,7 +858,7 @@
     }
     .calc-pain-cap::before { content: '\25BC'; font-size: 0.72em; line-height: 1; }
     .calc-pain-fig {
-      font-family: 'Sora', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
       font-weight: 500; font-style: normal; color: #E4988F; line-height: 1; letter-spacing: -0.02em;
       font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
     }
@@ -861,7 +871,7 @@
       border-top: 1px solid rgba(237,232,218,0.12);
     }
         .calc-substat-fig {
-      font-family: 'Sora', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.5rem;
       font-weight: 500;
       color: var(--bone);
@@ -949,7 +959,7 @@
       text-align: center;
     }
         .calc-stat-fig {
-      font-family: 'Sora', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.4rem;
       font-weight: 500;
       color: var(--bone);
@@ -989,7 +999,7 @@
   <div class="nav-links-desktop hidden md:flex items-center">
     <a href="#why-now"    class="nav-link">Why Now?</a>
     <a href="#approach"   class="nav-link">Our Approach</a>
-    <a href="#clientele"  class="nav-link">Portfolio</a>
+    <a href="#clientele"  class="nav-link">Who We Serve</a>
     <a href="#calculator" class="nav-link">Calculator</a>
     <a href="#faq"        class="nav-link">FAQ</a>
   </div>
@@ -1008,7 +1018,7 @@
 <div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-[998] rounded-3xl p-6 flex flex-col gap-4" style="background:rgba(22,39,30,0.97);backdrop-filter:blur(24px);border:1px solid rgba(30,58,45,0.5);">
   <a href="#why-now"   class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Why Now?</a>
   <a href="#approach"  class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Our Approach</a>
-  <a href="#clientele" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Portfolio</a>
+  <a href="#clientele" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Who We Serve</a>
   <a href="#calculator" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Calculator</a>
   <a href="#faq"       class="nav-link text-base py-2" onclick="this.closest('#mobile-menu').classList.add('hidden')">FAQ</a>
   <a href="#book"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
@@ -1042,7 +1052,7 @@
         <span>Book a Free Consult</span>
         <span style="font-size:1rem;">→</span>
       </a>
-      <a href="#approach" class="btn-outline">
+      <a href="portfolio.html" class="btn-outline">
         <span>Our Portfolio</span>
       </a>
     </div>
@@ -1065,7 +1075,10 @@
       width: 100vw;
       z-index: -1;
       pointer-events: none;
-      background: radial-gradient(90% 70% at 50% 38%, rgba(30,58,45,0.30), transparent 70%);
+      /* centred vertically with the glow fully transparent before the top & bottom
+         edges, so the section meets the hero (above) and approach (below) on pure
+         ink with no green seam */
+      background: radial-gradient(90% 60% at 50% 50%, rgba(30,58,45,0.30), transparent 68%);
     }
     .wn-standfirst {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -2300,10 +2313,6 @@
       <p class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.25);letter-spacing:0.08em;">
         © 2026 Fox &amp; Setter. All rights reserved.
       </p>
-      <div style="display:flex;gap:1.5rem;">
-        <a href="#" class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.25);letter-spacing:0.08em;text-decoration:none;">Privacy</a>
-        <a href="#" class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.25);letter-spacing:0.08em;text-decoration:none;">Terms</a>
-      </div>
     </div>
   </div>
 </footer>
@@ -2404,44 +2413,64 @@
   // animals, so it looks like they literally uncover the section.
   const approachW = () => (document.getElementById('approach').offsetWidth);
   const STAGE_OFFSET = 96;  // ~half the running pair, to centre them on the edge
-  // Respect reduced-motion: skip the pinned scroll-reveal (pinning / scroll-jacking
-  // can trigger motion sickness). The Approach is fully visible by default, so we
-  // only need to hide the runners and leave the section un-wiped.
-  const chaseReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (chaseReduced) {
-    gsap.set('#chase', { opacity: 0 });
-  } else {
-  const chaseTl = gsap.timeline({
-    scrollTrigger: {
-      // Tie the reveal to the boxes scrolling into view (no pin). The pair sweep
-      // across and wipe the cards open from the moment the section enters the
-      // viewport, so the boxes start appearing the instant you scroll — no pin
-      // jump and no empty dead zone waiting for the wipe to begin.
-      trigger: '#approach-reveal', start: 'top 92%', end: 'top 28%',
-      scrub: 1, invalidateOnRefresh: true
-    }
+  // The fox/setter wipe is a DESKTOP flourish only. It uses clip-path to uncover
+  // the cards, which misbehaves at narrow widths and on resize (the section below
+  // could appear to cut off the cards). So we gate it behind a min-width via
+  // gsap.matchMedia: when the window is narrowed (or reduced-motion is on), GSAP
+  // automatically reverts the timeline and CLEARS the clip-path, leaving every
+  // card fully visible. The wipe only runs once the cards are laid out 3-up.
+  const chaseMM = gsap.matchMedia();
+
+  // Wide screens, motion allowed → run the running pair + wipe reveal.
+  chaseMM.add('(min-width: 940px) and (prefers-reduced-motion: no-preference)', () => {
+    const chaseTl = gsap.timeline({
+      scrollTrigger: {
+        // Tie the reveal to the cards scrolling into view (no pin). The pair sweep
+        // across and wipe the cards open as the section enters the viewport.
+        // Finishes high up (top 45%) so it's fully open before the cards are
+        // centred — otherwise the rightmost (Retrieve) card can be left clipped.
+        trigger: '#approach-reveal', start: 'top 92%', end: 'top 45%',
+        scrub: 0.6, invalidateOnRefresh: true,
+        // Once you've scrolled past the reveal zone (or back above it), force the
+        // section fully open so a card can NEVER be left clipped by an unfinished wipe.
+        onLeave:     () => gsap.set('#approach-reveal', { clipPath: 'none', webkitClipPath: 'none' }),
+        onLeaveBack: () => gsap.set('#approach-reveal', { clipPath: 'none', webkitClipPath: 'none' })
+      }
+    });
+    chaseTl
+      // the pair tracks the reveal edge from the left edge to the right edge
+      .fromTo('.chase-stage',
+        { x: () => -STAGE_OFFSET - 120 },
+        { x: () => approachW() - STAGE_OFFSET + 40, ease: 'none', duration: 1 }, 0)
+      // fox runs right beside the setter — overlapping, side by side
+      .fromTo('.fox-wrap',
+        { x: -6 },
+        { x: 30, ease: 'power1.in', duration: 1 }, 0)
+      // the build steps are wiped open left → right, in lockstep with the run
+      .fromTo('#approach-reveal',
+        { clipPath: 'inset(0 100% 0 0)', webkitClipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)',  webkitClipPath: 'inset(0 0% 0 0)', ease: 'none', duration: 1 }, 0)
+      // animals fade in, stay through the run, then fade as they exit right.
+      .fromTo('#chase',
+        { opacity: 0 },
+        { opacity: 0.85, ease: 'sine.inOut', duration: 0.16 }, 0)
+      .to('#chase',
+        { opacity: 0, ease: 'sine.inOut', duration: 0.14 }, 0.86);
+
+    // Cleanup when the query stops matching (window narrowed / reduced-motion):
+    // hide the runners and guarantee the section is left fully visible.
+    return () => {
+      gsap.set('#chase', { opacity: 0 });
+      gsap.set('#approach-reveal', { clipPath: 'none', webkitClipPath: 'none' });
+    };
   });
-  chaseTl
-    // the pair tracks the reveal edge from the left edge to the right edge
-    .fromTo('.chase-stage',
-      { x: () => -STAGE_OFFSET - 120 },
-      { x: () => approachW() - STAGE_OFFSET + 40, ease: 'none', duration: 1 }, 0)
-    // fox runs right beside the setter — overlapping, side by side
-    .fromTo('.fox-wrap',
-      { x: -6 },
-      { x: 30, ease: 'power1.in', duration: 1 }, 0)
-    // the build steps are wiped open left → right, in lockstep with the run
-    // (the heading + run-line stay visible; only the content below is uncovered)
-    .fromTo('#approach-reveal',
-      { clipPath: 'inset(0 100% 0 0)', webkitClipPath: 'inset(0 100% 0 0)' },
-      { clipPath: 'inset(0 0% 0 0)',  webkitClipPath: 'inset(0 0% 0 0)', ease: 'none', duration: 1 }, 0)
-    // animals fade in, stay through the run, then fade as they exit right.
-    .fromTo('#chase',
-      { opacity: 0 },
-      { opacity: 0.85, ease: 'sine.inOut', duration: 0.16 }, 0)
-    .to('#chase',
-      { opacity: 0, ease: 'sine.inOut', duration: 0.14 }, 0.86);
-  }
+
+  // Narrow screens or reduced-motion → no wipe at all. Cards are simply visible,
+  // runners hidden. Nothing can clip or overlap them.
+  chaseMM.add('(max-width: 939px), (prefers-reduced-motion: reduce)', () => {
+    gsap.set('#chase', { opacity: 0 });
+    gsap.set('#approach-reveal', { clipPath: 'none', webkitClipPath: 'none' });
+  });
 
   // ── 3. Feature cards — deal out from a stacked deck ─────
   const dealMM = gsap.matchMedia();
@@ -2627,6 +2656,14 @@
     y:28, opacity:0, stagger:0.12, duration:0.85, ease:'power3.out',
     scrollTrigger:{ trigger:'footer', start:'top 80%' }
   });
+
+  // ── 12. Recalc scroll positions after late content ──────
+  // The booking iframe and chat widget load and resize AFTER window load, which
+  // can shift every ScrollTrigger's start/end and leave the Approach reveal
+  // stuck mid-wipe. Refresh once everything has settled.
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  setTimeout(() => ScrollTrigger.refresh(), 1500);
+  setTimeout(() => ScrollTrigger.refresh(), 3500);
 
 </script>
 
