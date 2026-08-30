@@ -796,29 +796,35 @@
     .wg-open:hover { opacity: 0.7; }
     .wg-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
 
-    /* The stage is one browser-viewport tall; each shot is two viewports stacked,
-       so panning to -50% scrolls exactly one screen down the real page. */
+    /* The stage is one browser-viewport tall. Three pages sit side by side on a
+       track: each scrolls itself down one screen, then the track slides across
+       to the next — the site, the build page, the agent. */
     .wg-stage { position: relative; width: 100%; aspect-ratio: 1500 / 752; background: #0F1411; overflow: hidden; }
+    .wg-track {
+      display: flex; width: 100%; height: 100%;
+      transition: transform 0.95s cubic-bezier(0.66, 0, 0.28, 1);
+    }
+    .wg-slide { position: relative; flex: 0 0 100%; height: 100%; overflow: hidden; }
     .wg-shot {
       position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block;
-      opacity: 0; transform: translateY(0);
-      transition: opacity 0.55s ease;
+      transform: translateY(0);
     }
-    .wg-shot.is-active { opacity: 1; }
-    .wg.is-playing .wg-shot.is-active { animation: wg-pan var(--wg-dur) ease-in-out forwards; }
-    .wg.is-paused  .wg-shot.is-active { animation-play-state: paused; }
+    /* each capture is two viewports stacked, so panning to -50% scrolls exactly
+       one screen down the real page */
+    .wg.is-playing .wg-slide.is-active .wg-shot { animation: wg-pan var(--wg-dur) ease-in-out forwards; }
+    .wg.is-paused  .wg-slide.is-active .wg-shot { animation-play-state: paused; }
     @keyframes wg-pan {
-      0%, 10%   { transform: translateY(0); }
-      90%, 100% { transform: translateY(-50%); }
+      0%, 14%   { transform: translateY(0); }
+      92%, 100% { transform: translateY(-50%); }
     }
     /* The agent capture is one viewport tall, not two, so the -50% translate
        would pan it off the stage. Cover the frame and drift the crop instead —
        this holds whatever dimensions the source image happens to have. */
     .wg-shot--cover { width: 100%; height: 100%; object-fit: cover; object-position: 50% 19%; }
-    .wg.is-playing .wg-shot--cover.is-active { animation: wg-pan-cover var(--wg-dur) ease-in-out forwards; }
+    .wg.is-playing .wg-slide.is-active .wg-shot--cover { animation: wg-pan-cover var(--wg-dur) ease-in-out forwards; }
     @keyframes wg-pan-cover {
-      0%, 10%   { object-position: 50% 19%; }
-      90%, 100% { object-position: 50% 44%; }
+      0%, 14%   { object-position: 50% 19%; }
+      92%, 100% { object-position: 50% 44%; }
     }
 
     /* time-to-next indicator */
@@ -856,31 +862,9 @@
       color: rgba(237,232,218,0.4); flex-shrink: 0;
     }
 
-    .wg-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
-    @media (min-width: 780px) { .wg-thumbs { grid-template-columns: repeat(7, 1fr); } }
-    .wg-thumb {
-      display: block; padding: 0; cursor: pointer; background: transparent;
-      border: 1px solid rgba(30,58,45,0.8); border-radius: 8px; overflow: hidden;
-      transition: border-color 0.25s ease, transform 0.25s ease;
-    }
-    /* thumbs show only the top viewport of each strip */
-    .wg-thumb .wg-thumb-crop { position: relative; width: 100%; aspect-ratio: 1500 / 752; overflow: hidden; }
-    .wg-thumb .wg-thumb-crop img { position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: 0.42; transition: opacity 0.25s ease; }
-    .wg-thumb span {
-      display: block; padding: 0.45rem 0.3rem;
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(237,232,218,0.5); transition: color 0.25s ease;
-    }
-    .wg-thumb:hover { border-color: rgba(194,160,74,0.5); transform: translateY(-2px); }
-    .wg-thumb:hover .wg-thumb-crop img { opacity: 0.75; }
-    .wg-thumb.is-active { border-color: var(--gold); }
-    .wg-thumb.is-active .wg-thumb-crop img { opacity: 1; }
-    .wg-thumb.is-active span { color: var(--gold); }
-    .wg-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-
     @media (prefers-reduced-motion: reduce) {
-      .wg-shot, .wg-thumb, .wg-thumb .wg-thumb-crop img, .wg-nav { transition: none; }
-      .wg.is-playing .wg-shot.is-active,
+      .wg-track, .wg-nav { transition: none; }
+      .wg.is-playing .wg-slide.is-active .wg-shot,
       .wg.is-playing .wg-progress i { animation: none; }
       .wg-progress { display: none; }
     }
@@ -904,7 +888,6 @@
 
     @media (max-width: 640px) {
       .wg-url { font-size: 0.6rem; }
-      .wg-thumb span { font-size: 0.52rem; letter-spacing: 0.08em; }
     }
   </style>
 
@@ -928,13 +911,17 @@
       </div>
 
       <div class="wg-stage" id="wg-stage" role="group" aria-roledescription="carousel" aria-label="Pages from a Fox &amp; Setter build">
-        <img class="wg-shot is-active" src="work-shots/01-home.jpg"         alt="Homepage of a custom sauna company site, with a full-bleed photograph and a single call to action.">
-        <img class="wg-shot wg-shot--cover" src="work-shots/07-agent.jpg"     alt="The site's AI agent open over the build page, offering starter questions about ceiling height, heater sizing and permits.">
-        <img class="wg-shot"           src="work-shots/02-products.jpg"     alt="Product range page listing each sauna build type." loading="lazy">
-        <img class="wg-shot"           src="work-shots/03-build.jpg"        alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
-        <img class="wg-shot"           src="work-shots/04-gallery.jpg"      alt="Project gallery page showing completed builds." loading="lazy">
-        <img class="wg-shot"           src="work-shots/05-service-area.jpg" alt="Service-area landing page for a nearby town." loading="lazy">
-        <img class="wg-shot"           src="work-shots/06-faq.jpg"          alt="FAQ page answering cost, permit and electrical questions." loading="lazy">
+        <div class="wg-track" id="wg-track">
+          <div class="wg-slide is-active">
+            <img class="wg-shot" src="work-shots/01-home.jpg" alt="Homepage of a client build, with a full-bleed photograph and a single call to action.">
+          </div>
+          <div class="wg-slide">
+            <img class="wg-shot" src="work-shots/03-build.jpg" alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
+          </div>
+          <div class="wg-slide">
+            <img class="wg-shot wg-shot--cover" src="work-shots/07-agent.jpg" alt="The site's AI agent open over the configurator, offering starter questions about sizing, specification and permits." loading="lazy">
+          </div>
+        </div>
         <button class="wg-nav wg-prev" id="wg-prev" aria-label="Previous page"><span aria-hidden="true">←</span></button>
         <button class="wg-nav wg-next" id="wg-next" aria-label="Next page"><span aria-hidden="true">→</span></button>
         <div class="wg-progress" aria-hidden="true"><i></i></div>
@@ -942,18 +929,8 @@
     </div>
 
     <div class="wg-meta">
-      <p class="wg-caption" id="wg-cap" aria-live="polite">The homepage — one promise, and a single way to start a conversation.</p>
-      <div class="wg-count" id="wg-count">01 / 06</div>
-    </div>
-
-    <div class="wg-thumbs" role="tablist" aria-label="Choose a page">
-      <button class="wg-thumb is-active" data-i="0" role="tab" aria-selected="true"><span class="wg-thumb-crop"><img src="work-shots/01-home.jpg" alt=""></span><span>Home</span></button>
-      <button class="wg-thumb" data-i="1" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/07-agent.jpg" alt=""></span><span>The Agent</span></button>
-      <button class="wg-thumb" data-i="2" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/02-products.jpg" alt="" loading="lazy"></span><span>Products</span></button>
-      <button class="wg-thumb" data-i="3" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/03-build.jpg" alt="" loading="lazy"></span><span>Build</span></button>
-      <button class="wg-thumb" data-i="4" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/04-gallery.jpg" alt="" loading="lazy"></span><span>Gallery</span></button>
-      <button class="wg-thumb" data-i="5" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/05-service-area.jpg" alt="" loading="lazy"></span><span>Service Area</span></button>
-      <button class="wg-thumb" data-i="6" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/06-faq.jpg" alt="" loading="lazy"></span><span>FAQ</span></button>
+      <p class="wg-caption" id="wg-cap" aria-live="polite">The site itself — the range, the proof and one way to start a conversation.</p>
+      <div class="wg-count" id="wg-count">01 / 03</div>
     </div>
   </div>
 
@@ -1986,54 +1963,51 @@
   }, { threshold: 0.08 });
   revealEls.forEach(el => revObs.observe(el));
 
-  // ── Work gallery ───────────────────────────────────────
-  // Each slide is a two-viewport-tall capture of a real page. It pans down one
-  // viewport, then advances. Hovering pauses; any manual input restarts the slide.
+  // ── Work gallery ─────────────────────────────────────
+  // Three pages on a track. Each one scrolls itself down a screen, then the
+  // track slides across to the next. Hovering holds; any input restarts.
   (function () {
     var wrap = document.querySelector('.wg');
     if (!wrap) return;
     var stage  = document.getElementById('wg-stage');
-    var shots  = stage.querySelectorAll('.wg-shot');
-    var thumbs = document.querySelectorAll('.wg-thumb');
+    var track  = document.getElementById('wg-track');
+    var slides = track.querySelectorAll('.wg-slide');
     var urlEl  = document.getElementById('wg-url');
     var capEl  = document.getElementById('wg-cap');
     var cntEl  = document.getElementById('wg-count');
     var PAGES = [
-      { url: 'sixth-line-sauna.vercel.app',                        cap: 'The homepage — the full product range, each build with its own spec, straight after the hero.' },
-      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'The agent — trained on their own specs, not the open internet. It sizes a room, talks cedar and permits, and hands to a person rather than quote a price.' },
-      { url: 'sixth-line-sauna.vercel.app/saunas',                 cap: 'Product pages — temperature, humidity, heat-up time and electrical load for every build type.' },
-      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'A build configurator — footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
-      { url: 'sixth-line-sauna.vercel.app/projects',               cap: 'Project gallery — finished work, shot properly, with dimensions on every job.' },
-      { url: 'sixth-line-sauna.vercel.app/service-area/kingston',  cap: 'Service-area pages — one per town, down to which conservation authority approves the build.' },
-      { url: 'sixth-line-sauna.vercel.app/faq',                    cap: 'FAQ — cost, permits, electrical and winter use answered before they stall the sale.' }
+      { url: 'sixth-line-sauna.vercel.app',       dur: 11000,
+        cap: 'The site itself \u2014 the range, the proof and one way to start a conversation.' },
+      { url: 'sixth-line-sauna.vercel.app/build', dur: 9000,
+        cap: 'The build page \u2014 footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
+      { url: 'sixth-line-sauna.vercel.app/build', dur: 9000,
+        cap: 'The agent \u2014 trained on the client\'s own specifications. It answers the technical questions and hands to a person rather than quote a price.' }
     ];
-    var DUR = 9000;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var i = 0, timer = null;
 
-    function schedule() {
+    function schedule(dur) {
       clearTimeout(timer);
       if (reduce) return;
-      timer = setTimeout(function () { show(i + 1); }, DUR);
+      timer = setTimeout(function () { show(i + 1); }, dur);
     }
 
     function show(n) {
-      i = (n + shots.length) % shots.length;
-      shots.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-      thumbs.forEach(function (t, k) {
-        t.classList.toggle('is-active', k === i);
-        t.setAttribute('aria-selected', k === i ? 'true' : 'false');
-      });
-      if (PAGES[i]) { urlEl.textContent = PAGES[i].url; capEl.textContent = PAGES[i].cap; }
-      cntEl.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + shots.length).slice(-2);
-      // restart the pan + progress animations from the top
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+      slides.forEach(function (sl, k) { sl.classList.toggle('is-active', k === i); });
+      var page = PAGES[i] || {};
+      var dur  = page.dur || 9000;
+      if (page.url) { urlEl.textContent = page.url; capEl.textContent = page.cap; }
+      cntEl.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + slides.length).slice(-2);
+      // restart the pan + progress animations from the top of the page
+      wrap.style.setProperty('--wg-dur', dur + 'ms');
       wrap.classList.remove('is-playing');
       void wrap.offsetWidth;
       wrap.classList.add('is-playing');
-      schedule();
+      schedule(dur);
     }
 
-    thumbs.forEach(function (t) { t.addEventListener('click', function () { show(+t.dataset.i); }); });
     document.getElementById('wg-prev').addEventListener('click', function () { show(i - 1); });
     document.getElementById('wg-next').addEventListener('click', function () { show(i + 1); });
     stage.addEventListener('keydown', function (e) {
@@ -2057,23 +2031,6 @@
 
     show(0);
   })();
-
-  // ── 6c. Section hand-off ────────────────────────────────
-  // A short scrubbed lift as each section enters, so the page eases between
-  // blocks instead of stepping. Transform only — no opacity, so nothing can be
-  // left dimmed if a trigger never fires. #approach is excluded: it drives the
-  // fox & setter chase reveal and has its own timeline.
-  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced) {
-    ['#work', '#why-now', '#book'].forEach(function (sel) {
-      var el = document.querySelector(sel);
-      if (!el) return;
-      gsap.fromTo(el.children, { y: 34 }, {
-        y: 0, ease: 'none', stagger: 0.02,
-        scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 55%', scrub: 0.7 }
-      });
-    });
-  }
 
   // ── 7. Card Shuffler ────────────────────────────────────
   const reactivationCards = [
