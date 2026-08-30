@@ -60,7 +60,7 @@
     .sec-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
                  color: var(--gold); display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.5rem; }
     .sec-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
-    h2.sec { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.03em;
+    h2.sec, h1.sec { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.03em;
              font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.12; color: var(--bone);
              margin-bottom: 1.25rem; max-width: 24ch; }
     .body { font-size: 1rem; line-height: 1.75; color: rgba(237,232,218,0.7); max-width: 62ch; }
@@ -392,20 +392,10 @@
     </div>
   </div>
 
-  <header class="pagehead wrap">
-    <div class="kicker">The Tiers</div>
-    <h1 class="title">Three tiers. Each one builds on the last.</h1>
-    <p class="lede">
-      A website, an AI agent that knows your products, and a follow-up system that doesn't forget anyone.
-    </p>
-  </header>
-
-  <div class="wrap"><div class="rule"></div></div>
-
-  <!-- ── RESEARCH METHOD ── -->
-  <section class="blk wrap" id="method">
+  <!-- ── RESEARCH METHOD ── the page now opens here, so this heading is the h1 -->
+  <section class="blk wrap" id="method" style="padding-top:clamp(3.5rem,8vw,6rem);">
     <div class="sec-label">What Makes Us Different</div>
-    <h2 class="sec">We research the trade before we build for it.</h2>
+    <h1 class="sec">We research the trade before we build for it.</h1>
     <p class="body">
       Most AI work in this space is the same handful of prompts wrapped in a new logo. It knows
       nothing about your product, and buyers can tell within two questions.
