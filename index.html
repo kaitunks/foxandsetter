@@ -809,11 +809,11 @@
     /* The agent capture is one viewport tall, not two, so the -50% translate
        would pan it off the stage. Cover the frame and drift the crop instead —
        this holds whatever dimensions the source image happens to have. */
-    .wg-shot--cover { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; }
+    .wg-shot--cover { width: 100%; height: 100%; object-fit: cover; object-position: 50% 19%; }
     .wg.is-playing .wg-shot--cover.is-active { animation: wg-pan-cover var(--wg-dur) ease-in-out forwards; }
     @keyframes wg-pan-cover {
-      0%, 10%   { object-position: 50% 0%; }
-      90%, 100% { object-position: 50% 40%; }
+      0%, 10%   { object-position: 50% 19%; }
+      90%, 100% { object-position: 50% 44%; }
     }
 
     /* time-to-next indicator */
@@ -955,19 +955,19 @@
   <div class="reveal work-specs">
     <div>
       <div class="work-spec-label">The Research</div>
-      <div class="work-spec-body">The electrical rules, heater sizing, permit thresholds, and how the season moves buyers.</div>
+      <div class="work-spec-body">We learn the trade, the customer, the sales process, and the details that matter before we build anything.</div>
     </div>
     <div>
       <div class="work-spec-label">The Site</div>
-      <div class="work-spec-body">Built around the client's own range and photography. No template, nothing borrowed.</div>
+      <div class="work-spec-body">Built around the business, its work, and its positioning. No templates. Nothing borrowed.</div>
     </div>
     <div>
       <div class="work-spec-label">The Agent</div>
-      <div class="work-spec-body">Trained on the client's specs, not the open internet. Answers on heaters and lead times; refuses to quote a price.</div>
+      <div class="work-spec-body">Trained on the company's services, process, and specifications so it can answer real customer questions accurately.</div>
     </div>
     <div>
       <div class="work-spec-label">The Backend</div>
-      <div class="work-spec-body">Enquiries land in the CRM qualified, bookings hit the calendar, follow-up runs on its own.</div>
+      <div class="work-spec-body">Enquiries land in the CRM qualified, bookings hit the calendar, and follow-up runs automatically behind the scenes.</div>
     </div>
   </div>
 
