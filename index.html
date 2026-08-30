@@ -924,12 +924,12 @@
 
       <div class="wg-stage" id="wg-stage" role="group" aria-roledescription="carousel" aria-label="Pages from a Fox &amp; Setter build">
         <img class="wg-shot is-active" src="work-shots/01-home.jpg"         alt="Homepage of a custom sauna company site, with a full-bleed photograph and a single call to action.">
+        <img class="wg-shot wg-shot--cover" src="work-shots/07-agent.jpg"     alt="The site's AI agent open over the build page, offering starter questions about ceiling height, heater sizing and permits.">
         <img class="wg-shot"           src="work-shots/02-products.jpg"     alt="Product range page listing each sauna build type." loading="lazy">
         <img class="wg-shot"           src="work-shots/03-build.jpg"        alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
         <img class="wg-shot"           src="work-shots/04-gallery.jpg"      alt="Project gallery page showing completed builds." loading="lazy">
         <img class="wg-shot"           src="work-shots/05-service-area.jpg" alt="Service-area landing page for a nearby town." loading="lazy">
         <img class="wg-shot"           src="work-shots/06-faq.jpg"          alt="FAQ page answering cost, permit and electrical questions." loading="lazy">
-        <img class="wg-shot wg-shot--cover" src="work-shots/07-agent.jpg"     alt="The site's AI agent open over the build page, offering starter questions about ceiling height, heater sizing and permits." loading="lazy">
         <button class="wg-nav wg-prev" id="wg-prev" aria-label="Previous page"><span aria-hidden="true">←</span></button>
         <button class="wg-nav wg-next" id="wg-next" aria-label="Next page"><span aria-hidden="true">→</span></button>
         <div class="wg-progress" aria-hidden="true"><i></i></div>
@@ -943,12 +943,12 @@
 
     <div class="wg-thumbs" role="tablist" aria-label="Choose a page">
       <button class="wg-thumb is-active" data-i="0" role="tab" aria-selected="true"><span class="wg-thumb-crop"><img src="work-shots/01-home.jpg" alt=""></span><span>Home</span></button>
-      <button class="wg-thumb" data-i="1" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/02-products.jpg" alt="" loading="lazy"></span><span>Products</span></button>
-      <button class="wg-thumb" data-i="2" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/03-build.jpg" alt="" loading="lazy"></span><span>Build</span></button>
-      <button class="wg-thumb" data-i="3" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/04-gallery.jpg" alt="" loading="lazy"></span><span>Gallery</span></button>
-      <button class="wg-thumb" data-i="4" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/05-service-area.jpg" alt="" loading="lazy"></span><span>Service Area</span></button>
-      <button class="wg-thumb" data-i="5" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/06-faq.jpg" alt="" loading="lazy"></span><span>FAQ</span></button>
-      <button class="wg-thumb" data-i="6" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/07-agent.jpg" alt="" loading="lazy"></span><span>The Agent</span></button>
+      <button class="wg-thumb" data-i="1" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/07-agent.jpg" alt=""></span><span>The Agent</span></button>
+      <button class="wg-thumb" data-i="2" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/02-products.jpg" alt="" loading="lazy"></span><span>Products</span></button>
+      <button class="wg-thumb" data-i="3" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/03-build.jpg" alt="" loading="lazy"></span><span>Build</span></button>
+      <button class="wg-thumb" data-i="4" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/04-gallery.jpg" alt="" loading="lazy"></span><span>Gallery</span></button>
+      <button class="wg-thumb" data-i="5" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/05-service-area.jpg" alt="" loading="lazy"></span><span>Service Area</span></button>
+      <button class="wg-thumb" data-i="6" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/06-faq.jpg" alt="" loading="lazy"></span><span>FAQ</span></button>
     </div>
   </div>
 
@@ -977,7 +977,7 @@
       <span style="font-size:1rem;">→</span>
     </a>
     <a href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener" class="btn-outline">
-      <span>Open the live site</span>
+      <span>Open the demo site live</span>
     </a>
   </div>
 
@@ -1985,12 +1985,12 @@
     var cntEl  = document.getElementById('wg-count');
     var PAGES = [
       { url: 'sixth-line-sauna.vercel.app',                        cap: 'The homepage — the full product range, each build with its own spec, straight after the hero.' },
+      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'The agent — trained on their own specs, not the open internet. It sizes a room, talks cedar and permits, and hands to a person rather than quote a price.' },
       { url: 'sixth-line-sauna.vercel.app/saunas',                 cap: 'Product pages — temperature, humidity, heat-up time and electrical load for every build type.' },
       { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'A build configurator — footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
       { url: 'sixth-line-sauna.vercel.app/projects',               cap: 'Project gallery — finished work, shot properly, with dimensions on every job.' },
       { url: 'sixth-line-sauna.vercel.app/service-area/kingston',  cap: 'Service-area pages — one per town, down to which conservation authority approves the build.' },
-      { url: 'sixth-line-sauna.vercel.app/faq',                    cap: 'FAQ — cost, permits, electrical and winter use answered before they stall the sale.' },
-      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'The agent — trained on their own specs, not the open internet. It sizes a room, talks cedar and permits, and hands to a person rather than quote a price.' }
+      { url: 'sixth-line-sauna.vercel.app/faq',                    cap: 'FAQ — cost, permits, electrical and winter use answered before they stall the sale.' }
     ];
     var DUR = 9000;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
