@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What We Build — Fox &amp; Setter</title>
+  <meta name="description" content="What a Fox & Setter build is: industry research, a custom site, an agent trained on your products, and the follow-up system behind them — shown running live.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What We Build — Fox &amp; Setter">
+  <meta property="og:description" content="Site, on-page agent, intake and booking — built as one system, after we learned the trade.">
+  <meta property="og:image" content="https://foxandsetter.com/fox-setter-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#141815; --pine:#16271E; --forest:#1E3A2D; --bone:#EDE8DA; --gold:#C2A04A; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--bone); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 300px 300px;
+    }
+    .font-display { font-family: 'Schibsted Grotesk', sans-serif; }
+    ::selection { background: var(--forest); color: var(--bone); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 2px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    .wrap { max-width: 1500px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+
+    /* ── top bar ── */
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 1500px; margin: 0 auto; padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem); }
+    .back {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(237,232,218,0.7); transition: color 0.25s ease, gap 0.25s ease;
+    }
+    .back:hover { color: var(--gold); gap: 0.8rem; }
+    .back:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+    .topbar-links { display: flex; align-items: center; gap: clamp(1rem,2.5vw,1.8rem); }
+    .topbar-links a {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(237,232,218,0.55); transition: color 0.25s ease;
+    }
+    .topbar-links a:hover { color: var(--gold); }
+
+    /* ── header ── */
+    header.pagehead { padding-top: clamp(2.5rem, 7vw, 5rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+    .kicker {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem;
+    }
+    .kicker::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+    h1.title {
+      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500;
+      font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.04; color: var(--bone);
+      letter-spacing: -0.035em; margin-bottom: 1.4rem; max-width: 26ch;
+    }
+    .lede { font-size: clamp(1.02rem, 1.5vw, 1.22rem); color: rgba(237,232,218,0.7); line-height: 1.7; max-width: 60ch; }
+
+    .facts { display: flex; flex-wrap: wrap; gap: 0.6rem 2.2rem; margin-top: 2.25rem; }
+    .fact-k { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(237,232,218,0.4); margin-bottom: 0.3rem; }
+    .fact-v { font-size: 0.92rem; color: rgba(237,232,218,0.85); }
+
+    .rule { height: 1px; background: linear-gradient(90deg, var(--gold), rgba(237,232,218,0.05)); margin: clamp(2.5rem,5vw,3.5rem) 0; }
+
+    /* ── section scaffolding ── */
+    /* vertical only — the shorthand would out-specify .wrap and kill its side gutter */
+    section.blk { padding-top: clamp(3rem, 6vw, 4.75rem); padding-bottom: clamp(3rem, 6vw, 4.75rem); }
+    .sec-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.5rem;
+    }
+    .sec-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    h2.sec {
+      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.03em;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.12; color: var(--bone);
+      margin-bottom: 1.25rem; max-width: 22ch;
+    }
+    .body { font-size: 1rem; line-height: 1.75; color: rgba(237,232,218,0.7); max-width: 62ch; }
+    .body + .body { margin-top: 1.1rem; }
+
+    /* ── Work gallery — each slide slowly pans down a real page, then advances ── */
+    .wg { --wg-dur: 9s; }
+    .wg-frame {
+      position: relative; border-radius: 14px; overflow: hidden; background: #0F1411;
+      border: 1px solid rgba(30,58,45,0.85);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(194,160,74,0.07);
+    }
+    .wg-chrome {
+      display: flex; align-items: center; gap: 0.85rem; padding: 0.72rem 1rem;
+      background: rgba(22,39,30,0.9); border-bottom: 1px solid rgba(30,58,45,0.8);
+    }
+    .wg-dots { display: flex; gap: 0.4rem; flex-shrink: 0; }
+    .wg-dots span { width: 9px; height: 9px; border-radius: 50%; background: rgba(237,232,218,0.16); }
+    .wg-url {
+      flex: 1; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      color: rgba(237,232,218,0.5); background: rgba(12,16,13,0.6);
+      border: 1px solid rgba(30,58,45,0.7); border-radius: 6px; padding: 0.32rem 0.7rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wg-open {
+      flex-shrink: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      text-decoration: none; transition: opacity 0.25s ease;
+    }
+    .wg-open:hover { opacity: 0.7; }
+    .wg-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+
+    /* The stage is one browser-viewport tall; each shot is two viewports stacked,
+       so panning to -50% scrolls exactly one screen down the real page. */
+    .wg-stage { position: relative; width: 100%; aspect-ratio: 1500 / 752; background: #0F1411; overflow: hidden; }
+    .wg-shot {
+      position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block;
+      opacity: 0; transform: translateY(0);
+      transition: opacity 0.55s ease;
+    }
+    .wg-shot.is-active { opacity: 1; }
+    .wg.is-playing .wg-shot.is-active { animation: wg-pan var(--wg-dur) ease-in-out forwards; }
+    .wg.is-paused  .wg-shot.is-active { animation-play-state: paused; }
+    @keyframes wg-pan {
+      0%, 10%   { transform: translateY(0); }
+      90%, 100% { transform: translateY(-50%); }
+    }
+
+    /* time-to-next indicator */
+    .wg-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(237,232,218,0.1); z-index: 3; }
+    .wg-progress i { display: block; height: 100%; width: 0; background: var(--gold); }
+    .wg.is-playing .wg-progress i { animation: wg-fill var(--wg-dur) linear forwards; }
+    .wg.is-paused  .wg-progress i { animation-play-state: paused; }
+    @keyframes wg-fill { to { width: 100%; } }
+
+    .wg-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(12,16,13,0.72); color: var(--bone);
+      border: 1px solid rgba(237,232,218,0.22);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      font-size: 1rem; line-height: 1;
+      transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+      opacity: 0; z-index: 4;
+    }
+    .wg-frame:hover .wg-nav, .wg-nav:focus-visible { opacity: 1; }
+    .wg-nav:hover { background: rgba(12,16,13,0.92); border-color: var(--gold); }
+    .wg-nav:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .wg-prev { left: 0.9rem; }
+    .wg-next { right: 0.9rem; }
+    @media (hover: none) { .wg-nav { opacity: 1; } }
+
+    .wg-meta {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+      gap: 0.5rem 1.5rem; margin-top: 1.25rem;
+    }
+    .wg-caption { font-size: 0.95rem; line-height: 1.6; color: rgba(237,232,218,0.72); max-width: 62ch; }
+    .wg-count {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em;
+      color: rgba(237,232,218,0.4); flex-shrink: 0;
+    }
+
+    .wg-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+    @media (min-width: 780px) { .wg-thumbs { grid-template-columns: repeat(6, 1fr); } }
+    .wg-thumb {
+      display: block; padding: 0; cursor: pointer; background: transparent;
+      border: 1px solid rgba(30,58,45,0.8); border-radius: 8px; overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    /* thumbs show only the top viewport of each strip */
+    .wg-thumb .wg-thumb-crop { position: relative; width: 100%; aspect-ratio: 1500 / 752; overflow: hidden; }
+    .wg-thumb .wg-thumb-crop img { position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: 0.42; transition: opacity 0.25s ease; }
+    .wg-thumb span {
+      display: block; padding: 0.45rem 0.3rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(237,232,218,0.5); transition: color 0.25s ease;
+    }
+    .wg-thumb:hover { border-color: rgba(194,160,74,0.5); transform: translateY(-2px); }
+    .wg-thumb:hover .wg-thumb-crop img { opacity: 0.75; }
+    .wg-thumb.is-active { border-color: var(--gold); }
+    .wg-thumb.is-active .wg-thumb-crop img { opacity: 1; }
+    .wg-thumb.is-active span { color: var(--gold); }
+    .wg-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wg-shot, .wg-thumb, .wg-thumb .wg-thumb-crop img, .wg-nav { transition: none; }
+      .wg.is-playing .wg-shot.is-active,
+      .wg.is-playing .wg-progress i { animation: none; }
+      .wg-progress { display: none; }
+    }
+
+    /* ── research findings ── */
+    .find-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-top: 2.25rem; }
+    @media (min-width: 780px) { .find-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+    .find { background: var(--pine); border: 1px solid rgba(30,58,45,0.7); border-radius: 1.15rem; padding: 1.6rem 1.7rem; }
+    .find h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.17em;
+               text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.7rem; }
+    .find p { font-size: 0.93rem; line-height: 1.65; color: rgba(237,232,218,0.74); }
+
+    /* ── build list ── */
+    .built { margin-top: 2.25rem; border-top: 1px solid rgba(30,58,45,0.6); }
+    .built-row { display: grid; grid-template-columns: 1fr; gap: 0.5rem; padding: 1.6rem 0; border-bottom: 1px solid rgba(30,58,45,0.6); }
+    @media (min-width: 780px) { .built-row { grid-template-columns: 190px 1fr; gap: 2rem; align-items: baseline; } }
+    .built-k { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bone); }
+    .built-v { font-size: 0.96rem; line-height: 1.7; color: rgba(237,232,218,0.7); }
+
+    /* ── pull quote ── */
+    .pull { border-left: 2px solid var(--gold); padding: 0.3rem 0 0.3rem 1.6rem; margin: 2.25rem 0; max-width: 54ch; }
+    .pull p { font-family: 'Schibsted Grotesk', sans-serif; letter-spacing: -0.02em; font-size: clamp(1.1rem, 2vw, 1.45rem);
+              line-height: 1.45; color: rgba(237,232,218,0.9); }
+
+    /* ── cta ── */
+    .cta-band { background: var(--pine); border: 1px solid rgba(30,58,45,0.7); border-radius: 1.75rem;
+                padding: clamp(2.25rem, 5vw, 3.5rem); margin: clamp(2.5rem,5vw,4rem) 0 clamp(3rem,6vw,5rem); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.65rem;
+      font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em;
+      background: var(--gold); color: var(--ink);
+      border-radius: 9999px; padding: 0.95rem 1.9rem;
+      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,0.45); }
+    .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .btn-ghost { background: transparent; color: var(--bone); border: 1px solid rgba(194,160,74,0.5); }
+    .btn-ghost:hover { border-color: var(--gold); }
+
+    footer.foot { border-top: 1px solid rgba(30,58,45,0.6); padding-top: 2.5rem; padding-bottom: 3.5rem; }
+    .foot-in { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+               font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em;
+               text-transform: uppercase; color: rgba(237,232,218,0.4); }
+
+    /* ── reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .btn, .back { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back" href="index.html"><span aria-hidden="true">←</span><span>Fox &amp; Setter</span></a>
+    <div class="topbar-links">
+      <a href="services.html">Tiers</a>
+      <a href="index.html#book">Book a Consult</a>
+    </div>
+  </div>
+
+  <header class="pagehead wrap">
+    <div class="kicker">Our Work</div>
+    <h1 class="title">What We Build</h1>
+    <p class="lede">
+      Built for a custom sauna and cold plunge company in Prince Edward County, Ontario. Running live below.
+    </p>
+    <div class="facts">
+      <div><div class="fact-k">Example Trade</div><div class="fact-v">Sauna &amp; cold plunge install</div></div>
+      <div><div class="fact-k">Where</div><div class="fact-v">Prince Edward County, ON</div></div>
+      <div><div class="fact-k">Scope</div><div class="fact-v">Site · Agent · Intake · Booking</div></div>
+    </div>
+  </header>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ── LIVE EMBED ── -->
+  <section class="blk wrap" id="live">
+    <div class="sec-label">The Pages</div>
+    <h2 class="sec">See what we can build for you.</h2>
+    <p class="body" style="margin-bottom:2rem;">
+      Six pages from one build, each one shaped by something we found while researching the trade.
+    </p>
+
+  <div class="reveal wg is-playing">
+    <div class="wg-frame">
+      <div class="wg-chrome">
+        <div class="wg-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="wg-url" id="wg-url">sixth-line-sauna.vercel.app</div>
+        <a class="wg-open" href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener">Open live <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="wg-stage" id="wg-stage" role="group" aria-roledescription="carousel" aria-label="Pages from a Fox &amp; Setter build">
+        <img class="wg-shot is-active" src="work-shots/01-home.jpg"         alt="Homepage of a custom sauna company site, with a full-bleed photograph and a single call to action.">
+        <img class="wg-shot"           src="work-shots/02-products.jpg"     alt="Product range page listing each sauna build type." loading="lazy">
+        <img class="wg-shot"           src="work-shots/03-build.jpg"        alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
+        <img class="wg-shot"           src="work-shots/04-gallery.jpg"      alt="Project gallery page showing completed builds." loading="lazy">
+        <img class="wg-shot"           src="work-shots/05-service-area.jpg" alt="Service-area landing page for a nearby town." loading="lazy">
+        <img class="wg-shot"           src="work-shots/06-faq.jpg"          alt="FAQ page answering cost, permit and electrical questions." loading="lazy">
+        <button class="wg-nav wg-prev" id="wg-prev" aria-label="Previous page"><span aria-hidden="true">←</span></button>
+        <button class="wg-nav wg-next" id="wg-next" aria-label="Next page"><span aria-hidden="true">→</span></button>
+        <div class="wg-progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+
+    <div class="wg-meta">
+      <p class="wg-caption" id="wg-cap" aria-live="polite">The homepage — one promise, and a single way to start a conversation.</p>
+      <div class="wg-count" id="wg-count">01 / 06</div>
+    </div>
+
+    <div class="wg-thumbs" role="tablist" aria-label="Choose a page">
+      <button class="wg-thumb is-active" data-i="0" role="tab" aria-selected="true"><span class="wg-thumb-crop"><img src="work-shots/01-home.jpg" alt=""></span><span>Home</span></button>
+      <button class="wg-thumb" data-i="1" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/02-products.jpg" alt="" loading="lazy"></span><span>Products</span></button>
+      <button class="wg-thumb" data-i="2" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/03-build.jpg" alt="" loading="lazy"></span><span>Build</span></button>
+      <button class="wg-thumb" data-i="3" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/04-gallery.jpg" alt="" loading="lazy"></span><span>Gallery</span></button>
+      <button class="wg-thumb" data-i="4" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/05-service-area.jpg" alt="" loading="lazy"></span><span>Service Area</span></button>
+      <button class="wg-thumb" data-i="5" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/06-faq.jpg" alt="" loading="lazy"></span><span>FAQ</span></button>
+    </div>
+  </div>
+
+    <div style="margin-top:1.5rem;">
+      <a class="btn btn-ghost" href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener">
+        <span>Open it in a new tab</span><span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ── RESEARCH ── -->
+  <section class="blk wrap" id="research">
+    <div class="sec-label">Step One — The Research</div>
+    <h2 class="sec">We learn the trade before we build for it.</h2>
+    <p class="body">
+      Before design started we learned how saunas are sold and installed in Canada: the electrical
+      rules, the heater maths, when a permit is triggered, and how the season moves demand.
+    </p>
+
+    <div class="find-grid">
+      <div class="reveal find">
+        <h3>Electrical is the hidden blocker</h3>
+        <p>The panel is where a lot of projects quietly die. The site raises it early, not at quote stage.</p>
+      </div>
+      <div class="reveal find">
+        <h3>Heater sizing drives the whole spec</h3>
+        <p>Volume, glass and bench layout decide the heater, which decides the price. The intake asks up front.</p>
+      </div>
+      <div class="reveal find">
+        <h3>Permits vary by municipality</h3>
+        <p>The honest answer is "it depends where you are." The agent says that, then routes to a human.</p>
+      </div>
+      <div class="reveal find">
+        <h3>Buyers research for months</h3>
+        <p>The follow-up is built for a long window, so a spring enquiry is still warm in autumn.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ── BUILD ── -->
+  <section class="blk wrap" id="build">
+    <div class="sec-label">Step Two — The Build</div>
+    <h2 class="sec">Then we build around what we found.</h2>
+    <p class="body">
+      Everything below exists because of something in the research above.
+    </p>
+
+    <div class="built">
+      <div class="reveal built-row">
+        <div class="built-k">The Site</div>
+        <div class="built-v">
+          Built from scratch around their own products and photography, each range with its own page.
+          No template, nothing borrowed.
+        </div>
+      </div>
+      <div class="reveal built-row">
+        <div class="built-k">The Agent</div>
+        <div class="built-v">
+          Trained on their specs, not the open internet. It talks cedar, heaters and lead times the way
+          the owner would, and holds firm lines: no price, no permit promise, no health claim.
+        </div>
+      </div>
+      <div class="reveal built-row">
+        <div class="built-k">The Intake</div>
+        <div class="built-v">
+          Property type, dimensions and postal code captured before the enquiry is sent. Enquiries
+          arrive already qualified.
+        </div>
+      </div>
+      <div class="reveal built-row">
+        <div class="built-k">The Backend</div>
+        <div class="built-v">
+          Enquiries land in the CRM, consults on the calendar, and follow-up runs on its own.
+        </div>
+      </div>
+      <div class="reveal built-row">
+        <div class="built-k">Deliberately Absent</div>
+        <div class="built-v">
+          No prices on the page. Every job is specified differently, and a number without a spec
+          later has to move.
+        </div>
+      </div>
+    </div>
+
+    <div class="pull">
+      <p>The research doesn't show up on the page. It shows up in the questions the site already knows how to answer.</p>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- ── CTA ── -->
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="sec-label">Your Trade Next</div>
+      <h2 class="sec" style="max-width:24ch;">Saunas are one trade. Yours works differently.</h2>
+      <p class="body" style="margin-bottom:2rem;">
+        Cinemas, golf simulators, wine cellars, pools, landscape: each sells on a different objection.
+        We'd research yours the same way.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a class="btn" href="index.html#book"><span>Book a free consult</span><span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="services.html"><span>See the tiers</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>© 2026 Fox &amp; Setter</div>
+      <div><a href="mailto:contact@foxandsetter.com">contact@foxandsetter.com</a></div>
+    </div>
+  </footer>
+
+<script>
+  // ── Work gallery ───────────────────────────────────────
+  // Each slide is a two-viewport-tall capture of a real page. It pans down one
+  // viewport, then advances. Hovering pauses; any manual input restarts the slide.
+  (function () {
+    var wrap = document.querySelector('.wg');
+    if (!wrap) return;
+    var stage  = document.getElementById('wg-stage');
+    var shots  = stage.querySelectorAll('.wg-shot');
+    var thumbs = document.querySelectorAll('.wg-thumb');
+    var urlEl  = document.getElementById('wg-url');
+    var capEl  = document.getElementById('wg-cap');
+    var cntEl  = document.getElementById('wg-count');
+    var PAGES = [
+      { url: 'sixth-line-sauna.vercel.app',                        cap: 'The homepage — the full product range, each build with its own spec, straight after the hero.' },
+      { url: 'sixth-line-sauna.vercel.app/saunas',                 cap: 'Product pages — temperature, humidity, heat-up time and electrical load for every build type.' },
+      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'A build configurator — footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
+      { url: 'sixth-line-sauna.vercel.app/projects',               cap: 'Project gallery — finished work, shot properly, with dimensions on every job.' },
+      { url: 'sixth-line-sauna.vercel.app/service-area/kingston',  cap: 'Service-area pages — one per town, down to which conservation authority approves the build.' },
+      { url: 'sixth-line-sauna.vercel.app/faq',                    cap: 'FAQ — cost, permits, electrical and winter use answered before they stall the sale.' }
+    ];
+    var DUR = 9000;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var i = 0, timer = null;
+
+    function schedule() {
+      clearTimeout(timer);
+      if (reduce) return;
+      timer = setTimeout(function () { show(i + 1); }, DUR);
+    }
+
+    function show(n) {
+      i = (n + shots.length) % shots.length;
+      shots.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      thumbs.forEach(function (t, k) {
+        t.classList.toggle('is-active', k === i);
+        t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+      if (PAGES[i]) { urlEl.textContent = PAGES[i].url; capEl.textContent = PAGES[i].cap; }
+      cntEl.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + shots.length).slice(-2);
+      // restart the pan + progress animations from the top
+      wrap.classList.remove('is-playing');
+      void wrap.offsetWidth;
+      wrap.classList.add('is-playing');
+      schedule();
+    }
+
+    thumbs.forEach(function (t) { t.addEventListener('click', function () { show(+t.dataset.i); }); });
+    document.getElementById('wg-prev').addEventListener('click', function () { show(i - 1); });
+    document.getElementById('wg-next').addEventListener('click', function () { show(i + 1); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { show(i - 1); }
+      if (e.key === 'ArrowRight') { show(i + 1); }
+    });
+
+    // hover holds the current slide so it can actually be read
+    wrap.addEventListener('mouseenter', function () { wrap.classList.add('is-paused'); clearTimeout(timer); });
+    wrap.addEventListener('mouseleave', function () { wrap.classList.remove('is-paused'); show(i); });
+
+    // don't animate offscreen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { if (!wrap.classList.contains('is-paused')) show(i); }
+          else { clearTimeout(timer); wrap.classList.remove('is-playing'); }
+        });
+      }, { threshold: 0.25 }).observe(wrap);
+    }
+
+    show(0);
+  })();
+
+  // Scroll reveal
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          setTimeout(function () { entry.target.classList.add('in'); }, i * 70);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+</body>
+</html>

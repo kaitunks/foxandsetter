@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fox &amp; Setter — Bespoke AI Integration</title>
-  <meta name="description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area. We reactivate dormant leads, generate qualified enquiries, and deliver booked appointments.">
+  <title>Fox &amp; Setter — Websites &amp; AI Systems for Luxury Home-Install Trades</title>
+  <meta name="description" content="We build websites, AI agents and follow-up systems for luxury home-install businesses — saunas, cinemas, golf simulators, wine cellars and pools. We research your trade first, so nothing we build is cookie-cutter.">
   <link rel="icon" type="image/png" href="favicon.png">
   <!-- Social share preview (link unfurls in iMessage, LinkedIn, WhatsApp, etc.) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fox &amp; Setter — Bespoke AI Integration">
-  <meta property="og:description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area. We reactivate dormant leads, generate qualified enquiries, and deliver booked appointments.">
+  <meta property="og:title" content="Fox &amp; Setter — Websites &amp; AI Systems for Luxury Home-Install Trades">
+  <meta property="og:description" content="We build websites, AI agents and follow-up systems for luxury home-install businesses — saunas, cinemas, golf simulators, wine cellars and pools. We research your trade first, so nothing we build is cookie-cutter.">
   <meta property="og:image" content="https://foxandsetter.com/fox-setter-logo.png">
   <meta property="og:url" content="https://foxandsetter.com">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Fox &amp; Setter — Bespoke AI Integration">
-  <meta name="twitter:description" content="A bespoke AI integration agency for luxury brands in the Greater Toronto Area.">
+  <meta name="twitter:title" content="Fox &amp; Setter — Websites &amp; AI Systems for Luxury Home-Install Trades">
+  <meta name="twitter:description" content="We build websites, AI agents and follow-up systems for luxury home-install businesses — saunas, cinemas, golf simulators, wine cellars and pools. We research your trade first, so nothing we build is cookie-cutter.">
   <meta name="twitter:image" content="https://foxandsetter.com/fox-setter-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -70,7 +70,7 @@
     }
 
     /* Typography */
-    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .font-display { font-family: 'Schibsted Grotesk', sans-serif; }
     .font-mono  { font-family: 'IBM Plex Mono', monospace; }
 
     /* Scrollbar */
@@ -271,10 +271,10 @@
       position: absolute;
       right: 1%; top: 50%;
       transform: translateY(-50%);
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Schibsted Grotesk', sans-serif;
       font-weight: 600;
-      font-style: italic;
-      font-size: clamp(7rem, 17vw, 15rem);
+      letter-spacing: -0.04em;
+      font-size: clamp(5rem, 12vw, 10rem);
       line-height: 0.8;
       color: rgba(237,232,218,0.05);
       pointer-events: none;
@@ -313,11 +313,11 @@
     .step-title-wrap { overflow: hidden; padding-bottom: 0.12em; }
     .step-title {
       display: inline-block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.3rem, 5vw, 3.6rem);
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1;
+      font-family: 'Schibsted Grotesk', sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.04;
       color: var(--bone);
       will-change: transform;
     }
@@ -630,8 +630,6 @@
       80% { stroke-dashoffset: 0; opacity:1; }
       100%{ stroke-dashoffset: -650; opacity:0; }
     }
-    .compass-outer { animation: spin-slow 22s linear infinite; transform-origin: 60px 60px; }
-    .compass-mid   { animation: spin-rev 15s linear infinite; transform-origin: 60px 60px; }
     .scan-line     { animation: scan-laser 3.5s ease-in-out infinite; }
     .ekg-path      {
       stroke-dasharray: 650;
@@ -639,71 +637,6 @@
       animation: ekg-draw 3s ease-in-out infinite;
     }
 
-    /* ─── Membership ─── */
-    .membership-card {
-      border-radius: 2rem;
-      border: 1px solid rgba(30,58,45,0.4);
-      background: var(--pine);
-      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
-    }
-    .membership-card:hover { transform: translateY(-6px); }
-    .membership-featured {
-      background: var(--pine);
-      border: 1px solid rgba(194,160,74,0.3);
-      box-shadow: 0 0 0 1px rgba(194,160,74,0.1), 0 24px 64px rgba(0,0,0,0.4);
-      transform: scale(1.03);
-    }
-    .membership-featured:hover { transform: scale(1.03) translateY(-6px); }
-
-    /* ─── Packages ─── */
-    .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
-    .pkg-mod {
-      background: var(--pine);
-      border: 1px solid rgba(30,58,45,0.5);
-      border-radius: 1.5rem;
-      padding: clamp(1.75rem, 3vw, 2.25rem);
-      display: flex; flex-direction: column;
-      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease, border-color 0.3s ease;
-    }
-    .pkg-mod:hover { transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.5); border-color: rgba(30,58,45,0.85); }
-    .pkg-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2rem, 3.4vw, 2.6rem); line-height: 1; color: var(--bone); margin-bottom: 0.25rem; }
-    .pkg-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(237,232,218,0.4); margin-bottom: 1.1rem; }
-    .pkg-sum { color: rgba(237,232,218,0.58); font-size: 0.9rem; line-height: 1.55; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(30,58,45,0.5); }
-    .pkg-incl { list-style: none; margin: 1.2rem 0 1.6rem; flex: 1; display: flex; flex-direction: column; gap: 0.7rem; }
-    .pkg-incl li { position: relative; padding-left: 20px; font-size: 0.85rem; color: rgba(237,232,218,0.82); line-height: 1.5; }
-    .pkg-incl li::before { content: ''; position: absolute; left: 0; top: 9px; width: 9px; height: 1px; background: var(--gold); }
-    .pkg-invest { margin-top: auto; }
-    .pkg-invest .lab { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,232,218,0.4); }
-    .pkg-invest .val { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: rgba(237,232,218,0.72); margin: 0.25rem 0 1rem; }
-
-    /* The Pack · flagship */
-    .pkg-pack {
-      position: relative;
-      margin-top: 1.25rem;
-      background: linear-gradient(155deg, #1E3A2D 0%, #16271E 60%, #11201A 100%);
-      border: 1px solid rgba(194,160,74,0.3);
-      border-radius: 1.5rem;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: clamp(1.75rem, 5vw, 3.5rem);
-      padding: clamp(2rem, 4vw, 3rem);
-      box-shadow: 0 0 0 1px rgba(194,160,74,0.1), 0 24px 64px rgba(0,0,0,0.4);
-    }
-    .pkg-pack > div:first-child { display: flex; flex-direction: column; }
-    .pkg-pack::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
-    .pkg-badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .pkg-pack-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 0.95; color: var(--bone); margin-bottom: 1rem; }
-    .pkg-pack-sum { color: rgba(237,232,218,0.65); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem; max-width: 34ch; }
-    .pkg-pack-note { font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(237,232,218,0.45); font-size: 0.98rem; margin-bottom: 1.5rem; }
-    .pkg-pack-incl { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; align-self: center; }
-    .pkg-pack-incl li { position: relative; padding-left: 22px; font-size: 0.9rem; color: rgba(237,232,218,0.82); line-height: 1.5; }
-    .pkg-pack-incl li::before { content: ''; position: absolute; left: 0; top: 10px; width: 11px; height: 1px; background: var(--gold); }
-    .pkg-pack-incl li.lead { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: rgba(237,232,218,0.6); }
-    @media (max-width: 820px) {
-      .pkg-grid { grid-template-columns: 1fr; }
-      .pkg-pack { grid-template-columns: 1fr; }
-    }
 
     /* ─── Footer ─── */
     footer { background: var(--ink); border-top-left-radius: 4rem; border-top-right-radius: 4rem; }
@@ -742,242 +675,6 @@
     a { transition: transform 0.2s ease; }
     a:hover { transform: translateY(-1px); }
 
-    /* ─── ROI Calculator ─── */
-    .calc-grid {
-      display: grid;
-      grid-template-columns: 1fr 0.85fr;
-      gap: 2.5rem;
-      align-items: stretch;
-    }
-    @media(max-width:860px){ .calc-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
-
-    .calc-panel {
-      background: var(--pine);
-      border: 1px solid rgba(30,58,45,0.45);
-      border-radius: 2rem;
-      padding: 2.5rem;
-    }
-    .calc-field { margin-bottom: 2rem; }
-    .calc-field:last-child { margin-bottom: 0; }
-    .calc-field-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.9rem;
-    }
-    .calc-label {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--bone);
-      letter-spacing: 0.01em;
-    }
-        .calc-value {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: rgba(237,232,218,0.82);
-      white-space: nowrap;
-      font-variant-numeric: lining-nums tabular-nums;
-      font-feature-settings: "lnum" 1, "tnum" 1;
-    }
-
-    /* Range slider */
-    .calc-range {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 3px;
-      border-radius: 9999px;
-      background: rgba(237,232,218,0.15);
-      outline: none;
-      cursor: pointer;
-    }
-    .calc-range::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: 3px solid var(--pine);
-      box-shadow: 0 0 0 1px rgba(194,160,74,0.6), 0 4px 14px rgba(0,0,0,0.45);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .calc-range::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 0 0 1px var(--gold), 0 6px 18px rgba(194,160,74,0.4); }
-    .calc-range::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: 3px solid var(--pine);
-      box-shadow: 0 0 0 1px rgba(194,160,74,0.6);
-      cursor: pointer;
-    }
-    .calc-range::-moz-range-track { height: 3px; border-radius: 9999px; background: rgba(237,232,218,0.15); }
-
-    /* Results card */
-    .calc-results {
-      background: linear-gradient(155deg, #1E3A2D 0%, #16271E 60%, #11201A 100%);
-      border: 1px solid rgba(194,160,74,0.28);
-      border-radius: 2rem;
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 24px 70px rgba(0,0,0,0.4);
-    }
-        .calc-headline-fig {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.8rem, 3.3vw, 2.4rem);
-      font-weight: 500;
-      font-style: normal;
-      color: var(--gold);
-      line-height: 0.98;
-      letter-spacing: -0.02em;
-      text-shadow: 0 2px 26px rgba(194,160,74,0.28);
-      font-variant-numeric: lining-nums tabular-nums;
-      font-feature-settings: "lnum" 1, "tnum" 1;
-    }
-        .calc-headline-cap {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(194,160,74,0.92);
-      margin-bottom: 0.55rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .calc-headline-cap::before { content: '\25B2'; font-size: 0.72em; line-height: 1; }
-    .calc-pain { margin-bottom: 1.6rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(237,232,218,0.12); }
-    .calc-pain-cap {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(228,152,145,0.95); margin-bottom: 0.5rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .calc-pain-cap::before { content: '\25BC'; font-size: 0.72em; line-height: 1; }
-    .calc-pain-fig {
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-      font-weight: 500; font-style: normal; color: #E4988F; line-height: 1; letter-spacing: -0.02em;
-      font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
-    }
-    .calc-substat-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(237,232,218,0.12);
-    }
-        .calc-substat-fig {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--bone);
-      line-height: 1;
-      margin-bottom: 0.35rem;
-      letter-spacing: -0.02em;
-      font-variant-numeric: lining-nums tabular-nums;
-      font-feature-settings: "lnum" 1, "tnum" 1;
-    }
-        .calc-substat-lbl {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: rgba(237,232,218,0.72);
-      line-height: 1.3;
-    }
-    .calc-assumptions {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.02rem;
-      color: rgba(237,232,218,0.5);
-      margin-top: 1.75rem;
-      line-height: 1.55;
-    }
-
-    /* Recovery-assumption segmented control */
-    .calc-seg-wrap {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(237,232,218,0.1);
-    }
-        .calc-seg-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: clamp(0.58rem, 0.85vw, 0.7rem);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(237,232,218,0.55);
-      line-height: 1.8;
-      white-space: nowrap;
-      margin-bottom: 1rem;
-    }
-    .calc-seg {
-      display: flex;
-      border: 1px solid rgba(30,58,45,0.6);
-      border-radius: 9999px;
-      overflow: hidden;
-      background: rgba(12,16,13,0.35);
-    }
-    .calc-seg button {
-      flex: 1;
-      background: transparent;
-      border: none;
-      border-left: 1px solid rgba(30,58,45,0.5);
-      color: rgba(237,232,218,0.55);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: 0.7rem 0.4rem;
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease;
-      white-space: nowrap;
-    }
-    .calc-seg button:first-child { border-left: none; }
-    .calc-seg button[aria-pressed="true"] {
-      background: var(--gold);
-      color: var(--ink);
-      font-weight: 600;
-    }
-    .calc-seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
-
-    /* 2×2 stat grid inside results card */
-    .calc-statgrid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: rgba(194,160,74,0.2);
-      border: 1px solid rgba(194,160,74,0.2);
-      border-radius: 1rem;
-      overflow: hidden;
-      margin-top: 1.75rem;
-    }
-    .calc-stat {
-      background: rgba(11,15,12,0.6);
-      padding: 1.5rem 1.1rem;
-      text-align: center;
-    }
-        .calc-stat-fig {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--bone);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-      letter-spacing: -0.02em;
-      font-variant-numeric: lining-nums tabular-nums;
-      font-feature-settings: "lnum" 1, "tnum" 1;
-    }
-    .calc-stat-fig.gold { color: var(--gold); }
-        .calc-stat-lbl {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(237,232,218,0.82);
-      line-height: 1.35;
-    }
   </style>
 </head>
 
@@ -997,11 +694,10 @@
 
   <!-- Desktop nav links (centered, fluid spacing) -->
   <div class="nav-links-desktop hidden md:flex items-center">
-    <a href="#why-now"    class="nav-link">Why Now?</a>
-    <a href="#approach"   class="nav-link">Our Approach</a>
-    <a href="#clientele"  class="nav-link">Who We Serve</a>
-    <a href="#calculator" class="nav-link">Calculator</a>
-    <a href="#faq"        class="nav-link">FAQ</a>
+    <a href="work.html"     class="nav-link">What We Build</a>
+    <a href="#approach"     class="nav-link">Approach</a>
+    <a href="services.html" class="nav-link">Tiers</a>
+    <a href="faq.html"      class="nav-link">FAQ</a>
   </div>
 
   <!-- CTA + Mobile toggle -->
@@ -1016,11 +712,10 @@
 
 <!-- Mobile dropdown menu -->
 <div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-[998] rounded-3xl p-6 flex flex-col gap-4" style="background:rgba(22,39,30,0.97);backdrop-filter:blur(24px);border:1px solid rgba(30,58,45,0.5);">
-  <a href="#why-now"   class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Why Now?</a>
-  <a href="#approach"  class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Our Approach</a>
-  <a href="#clientele" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Who We Serve</a>
-  <a href="#calculator" class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Calculator</a>
-  <a href="#faq"       class="nav-link text-base py-2" onclick="this.closest('#mobile-menu').classList.add('hidden')">FAQ</a>
+  <a href="work.html"     class="nav-link text-base py-2 border-b border-forest/20">What We Build</a>
+  <a href="#approach"     class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Approach</a>
+  <a href="services.html" class="nav-link text-base py-2 border-b border-forest/20">Tiers</a>
+  <a href="faq.html"      class="nav-link text-base py-2">FAQ</a>
   <a href="#book"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
 </div>
 
@@ -1033,18 +728,23 @@
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
-    <!-- Badge -->
-    <div id="hero-badge" class="section-label mb-6" style="margin-bottom:1.5rem;font-size:0.86rem;letter-spacing:0.13em;">
-      Custom AI Integration. Proudly Canadian.
+    <!-- Badge — the positioning statement -->
+    <div id="hero-badge" class="section-label" style="margin-bottom:1.5rem;font-size:0.78rem;letter-spacing:0.15em;">
+      Exceptional work deserves an exceptional sales system
     </div>
 
     <!-- Headline -->
     <p id="hero-line1" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.95rem,2.2vw,1.15rem);font-weight:500;color:rgba(237,232,218,0.75);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:0.75rem;">
       Hunt. Set. Retrieve.
     </p>
-    <h1 id="hero-line2" class="hero-line2 font-serif" style="font-size:clamp(3.5rem,5.5vw,6rem);font-weight:400;font-style:italic;line-height:0.98;color:#EDE8DA;margin-bottom:2.5rem;text-wrap:balance;margin-left:-0.2em;">
+    <h1 id="hero-line2" class="hero-line2 font-display" style="font-size:clamp(2.5rem,5vw,4.4rem);font-weight:500;letter-spacing:-0.035em;line-height:1.02;color:#EDE8DA;margin-bottom:1.6rem;text-wrap:balance;">
       <span style="display:inline-block;">The instinct to find.</span> <span style="display:inline-block;">The intelligence to close.</span>
     </h1>
+
+    <!-- Descriptor — sits under the headline it qualifies -->
+    <p id="hero-sub" style="font-size:clamp(0.98rem,1.4vw,1.1rem);line-height:1.65;color:rgba(237,232,218,0.68);max-width:54ch;margin-bottom:2.5rem;">
+      Websites &amp; AI systems for premium build and installation companies.
+    </p>
 
     <!-- CTA row -->
     <div id="hero-cta" class="flex flex-wrap items-center gap-4">
@@ -1052,10 +752,233 @@
         <span>Book a Free Consult</span>
         <span style="font-size:1rem;">→</span>
       </a>
-      <a href="portfolio.html" class="btn-outline">
-        <span>Our Portfolio</span>
-      </a>
     </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════
+     THE WORK — live embedded client build (Sixth Line Sauna Co.)
+     Proof sits directly under the hero: the first thing a visitor
+     sees after the promise is the thing itself, running.
+══════════════════════════════════════════════ -->
+<section id="work" style="padding:clamp(3rem,5vw,4.5rem) 2rem clamp(2.5rem,4vw,3.5rem);max-width:1500px;margin:0 auto;position:relative;z-index:2;">
+  <style>
+    /* ── Work gallery — each slide slowly pans down a real page, then advances ── */
+    .wg { --wg-dur: 9s; }
+    .wg-frame {
+      position: relative; border-radius: 14px; overflow: hidden; background: #0F1411;
+      border: 1px solid rgba(30,58,45,0.85);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(194,160,74,0.07);
+    }
+    .wg-chrome {
+      display: flex; align-items: center; gap: 0.85rem; padding: 0.72rem 1rem;
+      background: rgba(22,39,30,0.9); border-bottom: 1px solid rgba(30,58,45,0.8);
+    }
+    .wg-dots { display: flex; gap: 0.4rem; flex-shrink: 0; }
+    .wg-dots span { width: 9px; height: 9px; border-radius: 50%; background: rgba(237,232,218,0.16); }
+    .wg-url {
+      flex: 1; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      color: rgba(237,232,218,0.5); background: rgba(12,16,13,0.6);
+      border: 1px solid rgba(30,58,45,0.7); border-radius: 6px; padding: 0.32rem 0.7rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wg-open {
+      flex-shrink: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      text-decoration: none; transition: opacity 0.25s ease;
+    }
+    .wg-open:hover { opacity: 0.7; }
+    .wg-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 3px; }
+
+    /* The stage is one browser-viewport tall; each shot is two viewports stacked,
+       so panning to -50% scrolls exactly one screen down the real page. */
+    .wg-stage { position: relative; width: 100%; aspect-ratio: 1500 / 752; background: #0F1411; overflow: hidden; }
+    .wg-shot {
+      position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block;
+      opacity: 0; transform: translateY(0);
+      transition: opacity 0.55s ease;
+    }
+    .wg-shot.is-active { opacity: 1; }
+    .wg.is-playing .wg-shot.is-active { animation: wg-pan var(--wg-dur) ease-in-out forwards; }
+    .wg.is-paused  .wg-shot.is-active { animation-play-state: paused; }
+    @keyframes wg-pan {
+      0%, 10%   { transform: translateY(0); }
+      90%, 100% { transform: translateY(-50%); }
+    }
+    /* The agent capture is one viewport tall, not two, so the -50% translate
+       would pan it off the stage. Cover the frame and drift the crop instead —
+       this holds whatever dimensions the source image happens to have. */
+    .wg-shot--cover { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; }
+    .wg.is-playing .wg-shot--cover.is-active { animation: wg-pan-cover var(--wg-dur) ease-in-out forwards; }
+    @keyframes wg-pan-cover {
+      0%, 10%   { object-position: 50% 0%; }
+      90%, 100% { object-position: 50% 40%; }
+    }
+
+    /* time-to-next indicator */
+    .wg-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(237,232,218,0.1); z-index: 3; }
+    .wg-progress i { display: block; height: 100%; width: 0; background: var(--gold); }
+    .wg.is-playing .wg-progress i { animation: wg-fill var(--wg-dur) linear forwards; }
+    .wg.is-paused  .wg-progress i { animation-play-state: paused; }
+    @keyframes wg-fill { to { width: 100%; } }
+
+    .wg-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(12,16,13,0.72); color: var(--bone);
+      border: 1px solid rgba(237,232,218,0.22);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      font-size: 1rem; line-height: 1;
+      transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+      opacity: 0; z-index: 4;
+    }
+    .wg-frame:hover .wg-nav, .wg-nav:focus-visible { opacity: 1; }
+    .wg-nav:hover { background: rgba(12,16,13,0.92); border-color: var(--gold); }
+    .wg-nav:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .wg-prev { left: 0.9rem; }
+    .wg-next { right: 0.9rem; }
+    @media (hover: none) { .wg-nav { opacity: 1; } }
+
+    .wg-meta {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+      gap: 0.5rem 1.5rem; margin-top: 1.25rem;
+    }
+    .wg-caption { font-size: 0.95rem; line-height: 1.6; color: rgba(237,232,218,0.72); max-width: 62ch; }
+    .wg-count {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em;
+      color: rgba(237,232,218,0.4); flex-shrink: 0;
+    }
+
+    .wg-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+    @media (min-width: 780px) { .wg-thumbs { grid-template-columns: repeat(7, 1fr); } }
+    .wg-thumb {
+      display: block; padding: 0; cursor: pointer; background: transparent;
+      border: 1px solid rgba(30,58,45,0.8); border-radius: 8px; overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    /* thumbs show only the top viewport of each strip */
+    .wg-thumb .wg-thumb-crop { position: relative; width: 100%; aspect-ratio: 1500 / 752; overflow: hidden; }
+    .wg-thumb .wg-thumb-crop img { position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: 0.42; transition: opacity 0.25s ease; }
+    .wg-thumb span {
+      display: block; padding: 0.45rem 0.3rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(237,232,218,0.5); transition: color 0.25s ease;
+    }
+    .wg-thumb:hover { border-color: rgba(194,160,74,0.5); transform: translateY(-2px); }
+    .wg-thumb:hover .wg-thumb-crop img { opacity: 0.75; }
+    .wg-thumb.is-active { border-color: var(--gold); }
+    .wg-thumb.is-active .wg-thumb-crop img { opacity: 1; }
+    .wg-thumb.is-active span { color: var(--gold); }
+    .wg-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wg-shot, .wg-thumb, .wg-thumb .wg-thumb-crop img, .wg-nav { transition: none; }
+      .wg.is-playing .wg-shot.is-active,
+      .wg.is-playing .wg-progress i { animation: none; }
+      .wg-progress { display: none; }
+    }
+
+    /* ── Spec strip under the frame ── */
+    .work-specs {
+      display: grid; gap: 1.75rem;
+      grid-template-columns: 1fr;
+      margin-top: 2.75rem;
+      padding-top: 2.25rem;
+      border-top: 1px solid rgba(30,58,45,0.6);
+    }
+    @media (min-width: 720px)  { .work-specs { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1040px) { .work-specs { grid-template-columns: repeat(4, 1fr); } }
+    .work-spec-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .work-spec-body { font-size: 0.9rem; line-height: 1.6; color: rgba(237,232,218,0.68); }
+
+    @media (max-width: 640px) {
+      .wg-url { font-size: 0.6rem; }
+      .wg-thumb span { font-size: 0.52rem; letter-spacing: 0.08em; }
+    }
+  </style>
+
+  <div class="reveal" style="max-width:720px;margin-bottom:2.75rem;">
+    <div class="section-label" style="margin-bottom:1.1rem;">Our Work</div>
+    <h2 class="font-display" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:500;letter-spacing:-0.03em;line-height:1.1;color:#EDE8DA;margin-bottom:1.25rem;text-wrap:balance;">
+      Custom Built for Your Business
+    </h2>
+    <p style="font-size:1.02rem;line-height:1.7;color:rgba(237,232,218,0.72);max-width:58ch;">
+      We learn your trade, understand how your business works, and build everything from scratch
+      around it. <strong style="color:rgba(237,232,218,0.92);font-weight:600;">No templates. No one-size-fits-all systems.</strong>
+    </p>
+  </div>
+
+  <div class="reveal wg is-playing">
+    <div class="wg-frame">
+      <div class="wg-chrome">
+        <div class="wg-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="wg-url" id="wg-url">sixth-line-sauna.vercel.app</div>
+        <a class="wg-open" href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener">Open live <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="wg-stage" id="wg-stage" role="group" aria-roledescription="carousel" aria-label="Pages from a Fox &amp; Setter build">
+        <img class="wg-shot is-active" src="work-shots/01-home.jpg"         alt="Homepage of a custom sauna company site, with a full-bleed photograph and a single call to action.">
+        <img class="wg-shot"           src="work-shots/02-products.jpg"     alt="Product range page listing each sauna build type." loading="lazy">
+        <img class="wg-shot"           src="work-shots/03-build.jpg"        alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
+        <img class="wg-shot"           src="work-shots/04-gallery.jpg"      alt="Project gallery page showing completed builds." loading="lazy">
+        <img class="wg-shot"           src="work-shots/05-service-area.jpg" alt="Service-area landing page for a nearby town." loading="lazy">
+        <img class="wg-shot"           src="work-shots/06-faq.jpg"          alt="FAQ page answering cost, permit and electrical questions." loading="lazy">
+        <img class="wg-shot wg-shot--cover" src="work-shots/07-agent.jpg"     alt="The site's AI agent open over the build page, offering starter questions about ceiling height, heater sizing and permits." loading="lazy">
+        <button class="wg-nav wg-prev" id="wg-prev" aria-label="Previous page"><span aria-hidden="true">←</span></button>
+        <button class="wg-nav wg-next" id="wg-next" aria-label="Next page"><span aria-hidden="true">→</span></button>
+        <div class="wg-progress" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+
+    <div class="wg-meta">
+      <p class="wg-caption" id="wg-cap" aria-live="polite">The homepage — one promise, and a single way to start a conversation.</p>
+      <div class="wg-count" id="wg-count">01 / 06</div>
+    </div>
+
+    <div class="wg-thumbs" role="tablist" aria-label="Choose a page">
+      <button class="wg-thumb is-active" data-i="0" role="tab" aria-selected="true"><span class="wg-thumb-crop"><img src="work-shots/01-home.jpg" alt=""></span><span>Home</span></button>
+      <button class="wg-thumb" data-i="1" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/02-products.jpg" alt="" loading="lazy"></span><span>Products</span></button>
+      <button class="wg-thumb" data-i="2" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/03-build.jpg" alt="" loading="lazy"></span><span>Build</span></button>
+      <button class="wg-thumb" data-i="3" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/04-gallery.jpg" alt="" loading="lazy"></span><span>Gallery</span></button>
+      <button class="wg-thumb" data-i="4" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/05-service-area.jpg" alt="" loading="lazy"></span><span>Service Area</span></button>
+      <button class="wg-thumb" data-i="5" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/06-faq.jpg" alt="" loading="lazy"></span><span>FAQ</span></button>
+      <button class="wg-thumb" data-i="6" role="tab" aria-selected="false"><span class="wg-thumb-crop"><img src="work-shots/07-agent.jpg" alt="" loading="lazy"></span><span>The Agent</span></button>
+    </div>
+  </div>
+
+  <div class="reveal work-specs">
+    <div>
+      <div class="work-spec-label">The Research</div>
+      <div class="work-spec-body">The electrical rules, heater sizing, permit thresholds, and how the season moves buyers.</div>
+    </div>
+    <div>
+      <div class="work-spec-label">The Site</div>
+      <div class="work-spec-body">Built around the client's own range and photography. No template, nothing borrowed.</div>
+    </div>
+    <div>
+      <div class="work-spec-label">The Agent</div>
+      <div class="work-spec-body">Trained on the client's specs, not the open internet. Answers on heaters and lead times; refuses to quote a price.</div>
+    </div>
+    <div>
+      <div class="work-spec-label">The Backend</div>
+      <div class="work-spec-body">Enquiries land in the CRM qualified, bookings hit the calendar, follow-up runs on its own.</div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:2.75rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+    <a href="work.html" class="btn-primary">
+      <span>See the full build</span>
+      <span style="font-size:1rem;">→</span>
+    </a>
+    <a href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener" class="btn-outline">
+      <span>Open the live site</span>
+    </a>
   </div>
 
 </section>
@@ -1063,7 +986,7 @@
 <!-- ══════════════════════════════════════════════
      WHY NOW — AI-adoption waffle chart (2,500 squares)
 ══════════════════════════════════════════════ -->
-<section id="why-now" style="padding:3rem 2rem 7rem;max-width:1320px;margin:0 auto 0 0;position:relative;z-index:2;">
+<section id="why-now" style="padding:clamp(2.5rem,4vw,3.5rem) 2rem clamp(3rem,5vw,4.5rem);max-width:1500px;margin:0 auto;position:relative;z-index:2;">
   <style>
     /* full-bleed forest glow behind the waffle chart — fades to ink at the edges
        so the hero above still dissolves in with no seam */
@@ -1189,8 +1112,8 @@
     .wn-leg .wn-pct { color: rgba(237,232,218,0.42); }
 
     .wn-takeaway {
-      font-style: italic; font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-      color: rgba(237,232,218,0.82); line-height: 1.45; max-width: 1040px;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: rgba(237,232,218,0.82); line-height: 1.5; max-width: 1040px;
       margin: 0.5rem 0 2.5rem; text-wrap: balance;
       border-left: 2px solid rgba(194,160,74,0.5); padding-left: 1.5rem;
     }
@@ -1205,19 +1128,18 @@
 
   <div class="reveal" style="max-width:760px;margin-bottom:2.25rem;">
     <div class="section-label">AI: Why Now?</div>
-    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.4rem);font-style:italic;font-weight:400;color:#EDE8DA;line-height:1.12;margin-bottom:0;text-wrap:balance;">
+    <h2 class="font-display" style="font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:500;letter-spacing:-0.03em;color:#EDE8DA;line-height:1.14;margin-bottom:0;text-wrap:balance;">
       You're earlier than you think. Get ahead of the game.
     </h2>
   </div>
 
-  <p class="reveal wn-takeaway font-serif">
+  <p class="reveal wn-takeaway font-display">
     Out of 8.1Bn people, only 0.04% is building with AI. That <span style="color:#B5504A;">red</span> square is us.<br>
     <b>Build now</b>, and get ahead of your competition.
   </p>
 
   <p class="reveal wn-standfirst">
-    Each square represents ~3.2 million people.<br>
-    2,500 squares = 8.1 billion people in the world, <b style="color:rgba(237,232,218,0.85);font-weight:600;">shaded by their most advanced AI interaction.</b>
+    2,500 squares = 8.1 billion people, <b style="color:rgba(237,232,218,0.85);font-weight:600;">shaded by their most advanced AI interaction.</b>
   </p>
 
   <div class="reveal wn-stage">
@@ -1339,7 +1261,7 @@
      APPROACH + CHASE REVEAL — the pair runs across and unveils the section
 ══════════════════════════════════════════════ -->
 <div id="reveal">
-<section id="approach" style="margin:0;padding:3.5vh 2rem 2.5rem;">
+<section id="approach" style="max-width:1500px;margin:0 auto;padding:3.5vh 2rem 2.5rem;">
   <style>
     /* ─── Approach · Listen → Hunt → Set → Retrieve flow ─── */
     .flow-tagline {
@@ -1361,12 +1283,12 @@
     .flow-listen-kicker::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
     /* smaller than the "Then we build" label below, so focus sits on the steps */
     .flow-listen h3 {
-      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
-      font-size: clamp(1.45rem, 2.2vw, 1.85rem); line-height: 1.05; color: #EDE8DA; margin-bottom: 0.4rem;
+      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.025em;
+      font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.12; color: #EDE8DA; margin-bottom: 0.4rem;
     }
     .flow-listen-note {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(1rem, 1.4vw, 1.1rem); color: rgba(237,232,218,0.5);
+      font-family: 'Schibsted Grotesk', sans-serif;
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem); color: rgba(237,232,218,0.5);
       line-height: 1.5; margin-bottom: 1rem; max-width: 44ch;
     }
     .flow-listen-body {
@@ -1425,9 +1347,9 @@
 
     /* lead-in to the three build steps */
     .flow-build-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-weight: 400;
-      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-family: 'Schibsted Grotesk', sans-serif;
+      font-weight: 500; letter-spacing: -0.025em;
+      font-size: clamp(1.3rem, 2.6vw, 1.9rem);
       letter-spacing: 0; text-transform: none;
       color: var(--bone); line-height: 1.1;
       display: flex; align-items: baseline; gap: 1.25rem;
@@ -1455,8 +1377,8 @@
       .flow-steps { grid-template-columns: repeat(3, 1fr); }
       /* reserve consistent heights so the headline, "This is for", and the widget
          start on the same line across all three cards */
-      .flow-step-head { min-height: 4.3rem; }
-      .flow-step-if   { min-height: 6.6rem; }
+      .flow-step-head { min-height: 2.6rem; }
+      .flow-step-sub  { min-height: 4.4rem; }
     }
     .flow-step {
       background: linear-gradient(168deg, #2A4E3C 0%, #1C3528 55%, #15271E 100%) !important;
@@ -1486,29 +1408,12 @@
     }
     .flow-step--hunt .flow-step-kicker { color: #8FC09C; }
     .flow-step--set  .flow-step-kicker { color: #BCBE7E; }
-    .flow-step--hunt         .flow-step-if {
-      font-size: 0.9rem; color: rgba(237,232,218,0.72); line-height: 1.6;
-      border-left: 2px solid rgba(194,160,74,0.5); padding-left: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-    .flow-step--set  .flow-step-if { border-left-color: rgba(171,164,93,0.6); }
             .flow-step-head {
-      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 400;
-      font-size: 1.9rem; line-height: 1.1; color: #EDE8DA;
-      min-height: 3.5rem; margin-bottom: 0.4rem;
+      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.025em;
+      font-size: 1.6rem; line-height: 1.14; color: #EDE8DA;
+      margin-bottom: 0.4rem;
       display: flex; flex-direction: column; justify-content: flex-start;
     }
-    .flow-step-if {
-      font-size: 0.9rem; color: rgba(237,232,218,0.72); line-height: 1.6;
-      border-left: 2px solid rgba(194,160,74,0.5); padding-left: 0.95rem; margin-bottom: 1.5rem;
-    }
-        .flow-step-if b {
-      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
-      letter-spacing: 0.12em; text-transform: uppercase; color: #E6D192;
-      font-weight: 600; margin-bottom: 0.35rem;
-    }
-    .flow-step-if strong { font-weight: 700; color: #EDE8DA; }
-    .flow-step-desc { font-size: 0.9rem; color: rgba(237,232,218,0.78); line-height: 1.6; margin-bottom: 1.5rem; }
     /* widget sits right under the copy; fixed height so the "What we build"
        title below it starts on the same line across all three cards */
     .flow-step-widget { margin-top: 0; height: 190px; margin-bottom: 1.5rem; }
@@ -1518,6 +1423,23 @@
         .flow-step-deliv-label {
       font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em;
       text-transform: uppercase; color: #E6D192; margin-bottom: 0.4rem;
+    }
+    /* ── merged step + tier card ── */
+    .flow-step-topline { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.55rem; }
+    .flow-tier-badge {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(237,232,218,0.45);
+      border: 1px solid rgba(237,232,218,0.18); border-radius: 9999px; padding: 0.25rem 0.6rem; flex-shrink: 0;
+    }
+    .flow-step-sub { font-size: 0.93rem; line-height: 1.6; color: rgba(237,232,218,0.72); margin-bottom: 1.4rem; }
+    .flow-step-inherits {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--gold); line-height: 1.5; margin-bottom: 0.9rem;
+    }
+    .flow-step-foot {
+      margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px solid rgba(237,232,218,0.13);
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(237,232,218,0.42);
     }
     .flow-step-deliv ul { list-style: none; margin: 0; padding: 0; }
     .flow-step-deliv li {
@@ -1538,7 +1460,7 @@
   </style>
 
   <div class="reveal" style="margin-bottom:1.5rem;max-width:760px;">
-    <h2 class="font-serif" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:400;font-style:italic;line-height:1.05;color:#EDE8DA;">
+    <h2 class="font-display" style="font-size:clamp(1.9rem,3.8vw,3rem);font-weight:500;letter-spacing:-0.03em;line-height:1.08;color:#EDE8DA;">
       Listen. Hunt. Set. Retrieve.
     </h2>
   </div>
@@ -1552,27 +1474,27 @@
   <!-- LISTEN · a small separate callout, before the build steps -->
   <div class="flow-listen reveal">
     <div class="section-label" style="margin-bottom:1rem;">Our Approach</div>
-    <h3>We listen first.</h3>
+    <h3>We learn your trade first.</h3>
     <p class="flow-listen-body">
-      We start by listening — to your brand, your vision, and the pain points in your business.
-      Then we build bespoke AI systems around what we learn, designed to support the way you already work.
+      Before we design a page, we learn how your industry is regulated, what an install costs, and
+      what buyers ask before they commit. Then we listen to you.
     </p>
     <div class="listen-promise"><span class="lp-label">Our promise</span><span class="lp-text">If you don't love it, you don't pay.<span class="lp-hl" aria-hidden="true"></span></span></div>
   </div>
 
   <!-- THEN WE BUILD · the three steps -->
-  <div class="flow-build-label reveal">We build systems, tailored to your brand.</div>
+  <div class="flow-build-label reveal">Then we build. Three tiers, each including the one before it.</div>
 
   <div class="grid flow-steps">
 
     <!-- STEP 01 · HUNT — Live feed (enquiries captured & qualified) -->
     <div class="feature-card deal-card flow-step flow-step--hunt">
-      <div class="flow-step-kicker">Hunt</div>
-      <h3 class="flow-step-head">Attract the right clients.</h3>
-      <div class="flow-step-if">
-        <b>This is for</b>
-        Businesses looking to <strong>attract new leads</strong> instead of waiting on referrals.
+      <div class="flow-step-topline">
+        <span class="flow-step-kicker">Hunt</span>
+        <span class="flow-tier-badge">Tier 01</span>
       </div>
+      <h3 class="flow-step-head">The Foundation</h3>
+      <p class="flow-step-sub">A site that shows the work properly and turns a visitor into an enquiry.</p>
       <!-- Live feed terminal -->
       <!-- Radar — scanning the field for new enquiries -->
       <div class="flow-step-widget">
@@ -1594,22 +1516,23 @@
       <div class="flow-step-deliv">
         <div class="flow-step-deliv-label">What we build</div>
         <ul>
-          <li>High-converting websites (no templates)</li>
-          <li>Custom interactive Q&amp;A agent widget</li>
-          <li>Fast enquiry routing</li>
-          <li>Smart client intake forms</li>
+          <li>Custom website — no generic template</li>
+          <li>Interactive widgets and configurator tools</li>
+          <li>Gallery, FAQ and service-area pages</li>
+          <li>Custom lead capture, straight to your inbox</li>
         </ul>
       </div>
+      <div class="flow-step-foot">By enquiry</div>
     </div>
 
     <!-- STEP 02 · SET — Cursor scheduler (books to calendar) -->
     <div class="feature-card deal-card flow-step flow-step--set">
-      <div class="flow-step-kicker">Set</div>
-      <h3 class="flow-step-head">They book.</h3>
-      <div class="flow-step-if">
-        <b>This is for</b>
-        Businesses that want to <strong>turn new enquiries into booked appointments</strong> before interest goes cold.
+      <div class="flow-step-topline">
+        <span class="flow-step-kicker">Set</span>
+        <span class="flow-tier-badge">Tier 02</span>
       </div>
+      <h3 class="flow-step-head">The Front Desk</h3>
+      <p class="flow-step-sub">They book themselves, while you're on a roof or in a van.</p>
       <!-- Cursor scheduler -->
       <div class="flow-step-widget">
         <div id="scheduler-card" style="position:relative;">
@@ -1644,14 +1567,13 @@
         </div>
       </div>
       <div class="flow-step-deliv">
-        <div class="flow-step-deliv-label">What we build</div>
+        <div class="flow-step-inherits">Everything in The Foundation, plus</div>
         <ul>
-          <li>Calendar booking systems</li>
-          <li>Automated reminder flows</li>
-          <li>After-hours responses</li>
-          <li>Call handling agents</li>
+          <li>24/7 chat concierge, trained on your products</li>
+          <li>Self-serve booking calendar with live availability</li>
         </ul>
       </div>
+      <div class="flow-step-foot">By enquiry</div>
     </div>
 
     <!-- STEP 03 · RETRIEVE — Shuffler (dormant → re-engaged → booked) -->
@@ -1698,12 +1620,12 @@
       }
     </style>
     <div class="feature-card deal-card flow-step flow-step--retrieve">
-      <div class="flow-step-kicker">Retrieve</div>
-      <h3 class="flow-step-head">They come back.</h3>
-      <div class="flow-step-if">
-        <b>This is for</b>
-        Businesses looking to <strong>re-engage and follow up with past leads and clients</strong>.
+      <div class="flow-step-topline">
+        <span class="flow-step-kicker">Retrieve</span>
+        <span class="flow-tier-badge">Tier 03</span>
       </div>
+      <h3 class="flow-step-head">The Growth Engine</h3>
+      <p class="flow-step-sub">Nothing goes cold. Follow-up happens whether anyone remembers it or not.</p>
       <!-- Shuffler stack — dormant → re-engaged → booked -->
       <div class="flow-step-widget">
         <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
@@ -1715,16 +1637,29 @@
         </div>
       </div>
       <div class="flow-step-deliv">
-        <div class="flow-step-deliv-label">What we build</div>
+        <div class="flow-step-inherits">Everything in The Front Desk, plus</div>
         <ul>
-          <li>Lead reactivation campaigns</li>
-          <li>Client testimonial follow-ups</li>
-          <li>Rebooking recurring appointments</li>
-          <li>Upsell / next-step prompts</li>
+          <li>CRM and pipeline, with your own dashboard</li>
+          <li>Automated follow-up and appointment reminders</li>
+          <li>Post-project follow-up and Google review requests</li>
+          <li>Reactivation for dormant enquiries</li>
         </ul>
       </div>
+      <div class="flow-step-foot">By enquiry</div>
     </div>
   </div>
+
+  <!-- tier CTA — sits with the cards now that steps and tiers are one section -->
+  <div class="reveal" style="margin-top:2.75rem;display:flex;flex-wrap:wrap;gap:1rem 1.75rem;align-items:center;">
+    <a href="services.html" class="btn-primary">
+      <span>Compare the tiers</span>
+      <span style="font-size:1rem;">→</span>
+    </a>
+    <p style="font-size:0.88rem;color:rgba(237,232,218,0.45);line-height:1.6;max-width:44ch;">
+      One-time setup, then monthly. Costs agreed up front. No long-term contract.
+    </p>
+  </div>
+
   </div>
 </section>
 
@@ -1738,468 +1673,13 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════════
-     WHO WE SERVE — clientele / social proof
-══════════════════════════════════════════════ -->
-<style>
-  /* ── Who We Serve · photographic field backdrop ─────────────────── */
-  #clientele { position: relative; isolation: isolate; }
-  /* full-bleed photo band — breaks out of the section's max-width */
-  .serve-bg {
-    position: absolute; z-index: 0; pointer-events: none;
-    top: 0; left: 50%; transform: translateX(-50%);
-    width: 100vw; height: 100%;
-    overflow: hidden;
-  }
-  /* the photo itself: soft editorial grade, slow Ken-Burns drift */
-  .serve-photo {
-    position: absolute; inset: -6% -4%;
-    background-image: url('https://images.unsplash.com/photo-1697653664649-936ed36b3c8c?auto=format&fit=crop&w=2000&q=80');
-    background-size: cover; background-position: center 38%;
-    filter: saturate(0.85) brightness(0.72) contrast(1.04);
-    transform: scale(1.04);
-    animation: servePan 44s ease-in-out infinite alternate;
-  }
-  /* fade to PURE ink at both edges — the top & bottom rows are solid
-     --ink, identical to the neighbouring sections, so the image
-     gradients seamlessly into the section above and below */
-  .serve-veil {
-    position: absolute; inset: 0;
-    background:
-      /* soft warm gold bloom, upper area */
-      radial-gradient(65% 50% at 80% 22%, rgba(194,160,74,0.16), transparent 62%),
-      /* gentle lower vignette for depth */
-      radial-gradient(120% 90% at 22% 100%, rgba(8,11,9,0.62), transparent 58%),
-      /* the seam-killer: vertical fade that holds solid --ink across the top
-         (so the photo dissolves up into the ink section above with no edge),
-         eases the image in gradually, then bottoms out fully at --ink again */
-      linear-gradient(to bottom,
-        var(--ink) 0%,
-        var(--ink) 12%,
-        rgba(20,24,21,0.92) 20%,
-        rgba(20,24,21,0.78) 30%,
-        rgba(20,24,21,0.62) 48%,
-        rgba(20,24,21,0.74) 68%,
-        rgba(20,24,21,0.94) 88%,
-        var(--ink) 97%,
-        var(--ink) 100%),
-      /* overall darkening tint so overlaid text stays legible */
-      linear-gradient(rgba(12,16,13,0.34), rgba(12,16,13,0.34)),
-      /* faint pine grade for brand cohesion */
-      linear-gradient(120deg, rgba(22,39,30,0.48) 0%, rgba(20,24,21,0.10) 55%, rgba(30,58,45,0.46) 100%);
-  }
-  /* fine film grain for an editorial, printed feel */
-  .serve-grain {
-    position: absolute; inset: 0; opacity: 0.10; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");
-  }
-  @keyframes servePan {
-    from { transform: scale(1.04) translate3d(0,0,0); }
-    to   { transform: scale(1.12) translate3d(-2.5%, -2%, 0); }
-  }
-  @media (prefers-reduced-motion: reduce) { .serve-photo { animation: none; } }
-</style>
-<section id="clientele" style="padding:clamp(4rem,7vw,7rem) clamp(1.5rem,4vw,3rem) clamp(4rem,7vw,7rem);max-width:1320px;margin:0 auto 0 0;">
-  <!-- photographic field backdrop -->
-  <div class="serve-bg" aria-hidden="true">
-    <div class="serve-photo"></div>
-    <div class="serve-veil"></div>
-    <div class="serve-grain"></div>
-  </div>
-
-  <div class="reveal" style="position:relative;z-index:1;margin-bottom:3.5rem;max-width:1000px;">
-    <div class="section-label">Who We Serve</div>
-    <!-- headline -->
-    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.4rem);font-style:italic;font-weight:400;color:#EDE8DA;line-height:1.18;margin-bottom:1.75rem;max-width:920px;text-wrap:balance;">
-      For businesses where the client experience starts before the first meeting.
-    </h2>
-    <!-- body -->
-    <p style="font-size:clamp(1.05rem,1.5vw,1.2rem);color:rgba(237,232,218,0.62);line-height:1.8;max-width:660px;">
-      We help relationship-driven businesses respond faster, follow up thoughtfully, and turn more leads into booked clients — <strong>without losing the personal touch their brand is known for.</strong>
-    </p>
-  </div>
-
-  <!-- Industry categories — each links to its portfolio / sample brand kit -->
-  <style>
-    .serve-prompt {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--gold);
-      display: flex; align-items: center; gap: 0.55rem; margin-bottom: 1.25rem;
-    }
-    .serve-prompt::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
-    .serve-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .serve-chip {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 600;
-      letter-spacing: 0.005em; color: rgba(237,232,218,0.96); text-decoration: none;
-      background: transparent; border: 1px solid rgba(194,160,74,0.5);
-      border-radius: 9999px; padding: 0.65rem 1.35rem;
-      cursor: default;
-      transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-    .serve-chip:hover {
-      border-color: rgba(194,160,74,0.9); background: rgba(194,160,74,0.07);
-      transform: translateY(-2px);
-    }
-
-    /* ── Portfolio CTA · refined gold-outline pill with slide-up fill ── */
-    .portfolio-cta {
-      display: inline-flex; align-items: center; gap: 0.7rem;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(0.9rem, 1.2vw, 1rem); font-weight: 600;
-      letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
-      background: var(--gold);
-      border: none; border-radius: 9999px; padding: 0.95rem clamp(1.6rem, 2.5vw, 2.1rem);
-      position: relative; overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease;
-    }
-    /* bone wash slides up on hover — same magnetic language as the site's other buttons */
-    .portfolio-cta::before {
-      content: ''; position: absolute; inset: 0; z-index: 0;
-      background: var(--bone); transform: translateY(101%);
-      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-    .portfolio-cta:hover::before { transform: translateY(0); }
-    .portfolio-cta .pc-label, .portfolio-cta .pc-arrow { position: relative; z-index: 1; }
-    .portfolio-cta .pc-arrow { font-size: 1.05em; transition: transform 0.3s ease; }
-    .portfolio-cta:hover { transform: scale(1.03) translateY(-1px); box-shadow: 0 12px 34px rgba(0,0,0,0.4); }
-    .portfolio-cta:hover .pc-arrow { transform: translateX(5px); }
-    .portfolio-cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-    .pc-sub {
-      margin-bottom: 1rem; max-width: 50ch; line-height: 1.6;
-      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400;
-      font-size: 0.88rem; color: rgba(237,232,218,0.5);
-    }
-    @media (prefers-reduced-motion: reduce) { .portfolio-cta { transition: none; } }
-  </style>
-  <div class="reveal" style="position:relative;z-index:1;margin-bottom:2.5rem;">
-    <div class="serve-grid">
-      <span class="serve-chip">Custom Home Builds</span>
-      <span class="serve-chip">Landscape Design</span>
-      <span class="serve-chip">Interiors &amp; Architecture</span>
-      <span class="serve-chip">Home Wellness Installations</span>
-      <span class="serve-chip">Medical Aesthetic Clinics &amp; Spas</span>
-      <span class="serve-chip">Golf Coaching &amp; Academies</span>
-      <span class="serve-chip">Private Aviation &amp; Yachting</span>
-      <span class="serve-chip">Automotive Restoration &amp; Detailing</span>
-    </div>
-  </div>
-
-  <!-- Single high-converting CTA → portfolio & testimonials page -->
-  <div class="reveal" style="position:relative;z-index:1;margin-bottom:2.5rem;">
-    <a class="portfolio-cta" href="portfolio.html">
-      <span class="pc-label">Click here to see our brand portfolio &amp; testimonials</span>
-      <span class="pc-arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-
-</section>
-
-
-<div class="hairline" style="max-width:1140px;margin:0 0 0 2rem;"></div>
 
 
 
-<!-- ══════════════════════════════════════════════
-     ROI CALCULATOR
-══════════════════════════════════════════════ -->
-<section id="calculator" style="padding:3.5rem 2rem 7rem;max-width:1320px;margin:0 auto 0 0;">
-  <div class="reveal" style="margin-bottom:3.5rem;max-width:640px;">
-    <div class="section-label">The True Cost</div>
-    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.5rem);font-weight:400;font-style:italic;color:#EDE8DA;margin-bottom:1rem;line-height:1.08;letter-spacing:-0.01em;text-wrap:balance;">
-      How much is slow follow-up costing you?
-    </h2>
-    <p style="font-size:1rem;color:rgba(237,232,218,0.6);line-height:1.6;">
-      At higher project values, it does not take many missed enquiries to make a real dent.
-      <strong style="color:rgba(237,232,218,0.88);font-weight:700;">Adjust the sliders</strong> to see what slow replies, missed follow-up, and cold leads could be quietly costing your business.
-    </p>
-  </div>
-
-  <div class="calc-grid reveal">
-    <!-- Inputs -->
-    <div class="calc-panel">
-      <div class="calc-field">
-        <div class="calc-field-head">
-          <label class="calc-label" for="calc-leads">Qualified enquiries / month</label>
-          <span class="calc-value" id="calc-leads-out">12</span>
-        </div>
-        <input class="calc-range" type="range" id="calc-leads" min="2" max="60" step="1" value="12" aria-label="Qualified enquiries per month">
-      </div>
-
-      <div class="calc-field">
-        <div class="calc-field-head">
-          <label class="calc-label" for="calc-value">Average project value</label>
-          <span class="calc-value" id="calc-value-out">$45,000</span>
-        </div>
-        <input class="calc-range" type="range" id="calc-value" min="0" max="1000" step="1" value="687" aria-label="Average project value">
-      </div>
-
-      <div class="calc-field">
-        <div class="calc-field-head">
-          <label class="calc-label" for="calc-close">Current close rate on existing leads</label>
-          <span class="calc-value" id="calc-close-out">25%</span>
-        </div>
-        <input class="calc-range" type="range" id="calc-close" min="5" max="100" step="1" value="25" aria-label="Current close rate">
-      </div>
-
-      <div class="calc-field">
-        <div class="calc-field-head">
-          <label class="calc-label" for="calc-lost">Estimated clients lost to slow reply / weak follow-up</label>
-          <span class="calc-value" id="calc-lost-out">30%</span>
-        </div>
-        <input class="calc-range" type="range" id="calc-lost" min="5" max="60" step="1" value="30" aria-label="Leads lost to slow follow-up">
-      </div>
-
-      <div class="calc-field">
-        <div class="calc-field-head">
-          <label class="calc-label" for="calc-fee">Your monthly investment in AI</label>
-          <span class="calc-value" id="calc-fee-out">$1,500</span>
-        </div>
-        <input class="calc-range" type="range" id="calc-fee" min="100" max="6000" step="100" value="1500" aria-label="Your monthly investment">
-      </div>
-
-      <!-- Recovery assumption -->
-      <div class="calc-seg-wrap">
-        <div class="calc-seg-label">The share of lost leads we bring back using automation</div>
-        <div class="calc-seg" role="group" aria-label="Recovery assumption">
-          <button type="button" data-r="0.30" aria-pressed="false">Conservative · 30%</button>
-          <button type="button" data-r="0.45" aria-pressed="true">Balanced · 45%</button>
-          <button type="button" data-r="0.60" aria-pressed="false">Optimistic · 60%</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Results -->
-    <div class="calc-results">
-      <div class="calc-pain">
-        <div class="calc-pain-cap">Lost to slow follow-up &middot; per year</div>
-        <div class="calc-pain-fig" id="calc-pain-fig">$0</div>
-      </div>
-      <div class="calc-headline-cap">Recovered with our system &middot; per year</div>
-      <div class="calc-headline-fig" id="calc-revenue">$0</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;color:rgba(237,232,218,0.45);margin-top:0.55rem;">net of your monthly investment</div>
-      <div class="calc-statgrid">
-        <div class="calc-stat">
-          <div class="calc-stat-fig" id="calc-deals">0</div>
-          <div class="calc-stat-lbl">Deals recovered / yr</div>
-        </div>
-        <div class="calc-stat">
-          <div class="calc-stat-fig" id="calc-roi">0×</div>
-          <div class="calc-stat-lbl">Return per $1 invested</div>
-        </div>
-        <div class="calc-stat">
-          <div class="calc-stat-fig" id="calc-net">$0</div>
-          <div class="calc-stat-lbl">Revenue recovered / yr</div>
-        </div>
-        <div class="calc-stat">
-          <div class="calc-stat-fig" id="calc-month">$0</div>
-          <div class="calc-stat-lbl">Recovered / month</div>
-        </div>
-      </div>
-      <p class="calc-assumptions">
-        Of the leads slipping away today, we assume we win back the share you selected, closing
-        at your existing rate, with no inflated conversion. A planning estimate, not a promise.
-      </p>
-    </div>
-  </div>
-
-</section>
-
-<script>
-  (function () {
-    var leads = document.getElementById('calc-leads');
-    var value = document.getElementById('calc-value');
-    var close = document.getElementById('calc-close');
-    var lost  = document.getElementById('calc-lost');
-    var fee   = document.getElementById('calc-fee');
-    if (!leads || !value || !close || !lost || !fee) return;
-
-    var leadsOut = document.getElementById('calc-leads-out');
-    var valueOut = document.getElementById('calc-value-out');
-    var closeOut = document.getElementById('calc-close-out');
-    var lostOut  = document.getElementById('calc-lost-out');
-    var feeOut   = document.getElementById('calc-fee-out');
-
-    var revOut   = document.getElementById('calc-revenue');
-    var dealsOut = document.getElementById('calc-deals');
-    var roiOut   = document.getElementById('calc-roi');
-    var netOut   = document.getElementById('calc-net');
-    var monthOut = document.getElementById('calc-month');
-    var painOut  = document.getElementById('calc-pain-fig');
-
-    var recovery = 0.45;   // share of lost leads won back (set by the toggle)
-
-    var nf  = new Intl.NumberFormat('en-US');
-    var usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-
-    function fillTrack(el) {
-      var pct = (el.value - el.min) / (el.max - el.min) * 100;
-      el.style.background = 'linear-gradient(90deg, rgba(237,232,218,0.5) 0%, rgba(237,232,218,0.5) ' + pct + '%, rgba(237,232,218,0.15) ' + pct + '%, rgba(237,232,218,0.15) 100%)';
-    }
-
-    // Animated count-up on the headline figure
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var revShown = 0, revRAF = null;
-    function setRevenue(target) {
-      if (reduceMotion) { revOut.textContent = usd.format(target); revShown = target; return; }
-      var start = revShown, t0 = null, dur = 520;
-      if (revRAF) cancelAnimationFrame(revRAF);
-      function step(ts) {
-        if (!t0) t0 = ts;
-        var p = Math.min((ts - t0) / dur, 1);
-        var e = 1 - Math.pow(1 - p, 3);
-        revOut.textContent = usd.format(start + (target - start) * e);
-        if (p < 1) revRAF = requestAnimationFrame(step); else revShown = target;
-      }
-      revRAF = requestAnimationFrame(step);
-    }
-
-    // Average project value uses a log scale so the low end gets fine control.
-    var VMIN = 50, VMAX = 1000000, LMIN = Math.log(VMIN), LSPAN = Math.log(VMAX) - LMIN;
-    function valueFromSlider(i) {
-      var v = Math.exp(LMIN + LSPAN * (i / 1000));
-      var mag = Math.pow(10, Math.floor(Math.log(v) / Math.LN10) - 1); // 2 significant figures
-      v = Math.round(v / mag) * mag;
-      return Math.min(VMAX, Math.max(VMIN, v));
-    }
-
-    function update() {
-      var nLeads = +leads.value;
-      var nValue = valueFromSlider(+value.value);
-      var nClose = +close.value / 100;
-      var nLost  = +lost.value / 100;
-      var nFee   = +fee.value;
-
-      leadsOut.textContent = nf.format(nLeads);
-      valueOut.textContent = usd.format(nValue);
-      closeOut.textContent = close.value + '%';
-      lostOut.textContent  = lost.value + '%';
-      feeOut.textContent   = usd.format(nFee);
-
-      var recoveredLeads = nLeads * 12 * nLost * recovery;  // lost leads won back / yr
-      var deals     = recoveredLeads * nClose;
-      var revenue   = deals * nValue;
-      var annualFee = nFee * 12;
-      var net       = revenue - annualFee;
-      var roi       = annualFee > 0 ? revenue / annualFee : 0;
-      var lostRevenue = nLeads * 12 * nLost * nClose * nValue;  // value of would-close deals lost today
-
-      setRevenue(net);
-      if (painOut) painOut.textContent = usd.format(lostRevenue);
-      dealsOut.textContent = deals.toFixed(1);
-      roiOut.textContent   = (roi >= 10 ? Math.round(roi) : roi.toFixed(1)) + '×';
-      netOut.textContent   = usd.format(revenue);
-      monthOut.textContent = usd.format(revenue / 12);
-
-      [leads, value, close, lost, fee].forEach(fillTrack);
-    }
-
-    [leads, value, close, lost, fee].forEach(function (el) { el.addEventListener('input', update); });
-
-    var segBtns = document.querySelectorAll('.calc-seg button');
-    segBtns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        recovery = +b.dataset.r;
-        segBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-        update();
-      });
-    });
-
-    update();
-  })();
-</script>
 
 
-<!-- ══════════════════════════════════════════════
-     FAQ — objection handling
-══════════════════════════════════════════════ -->
-<style>
-  .faq-item { border-top: 1px solid rgba(30,58,45,0.45); }
-  .faq-item:last-of-type { border-bottom: 1px solid rgba(30,58,45,0.45); }
-  .faq-item summary {
-    list-style: none;
-    cursor: pointer;
-    padding: 1.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(1rem, 2.2vw, 1.15rem);
-    font-weight: 600;
-    color: #EDE8DA;
-    transition: color 0.25s ease;
-  }
-  .faq-item summary:hover { color: var(--gold); }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-plus { color: var(--gold); font-size: 1.5rem; line-height: 1; flex-shrink: 0; transition: transform 0.3s ease; }
-  .faq-item[open] .faq-plus { transform: rotate(45deg); }
-  .faq-a {
-    padding: 0 0 1.6rem;
-    max-width: 760px;
-    font-size: 0.98rem;
-    color: rgba(237,232,218,0.6);
-    line-height: 1.75;
-  }
-</style>
-<section id="faq" style="position:relative;padding:7rem 2rem;overflow:hidden;">
-  <!-- Mountain background — the same misty open country as the hero, so Questions reads
-       on-brand rather than as stock decoration. Low opacity + edge fades dissolve it
-       into the ink sections above and below. -->
-  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=1920&q=80');background-size:cover;background-position:center 55%;opacity:0.06;filter:saturate(0.2) brightness(0.9);"></div>
-  <!-- forest depth + a faint gold wash keeps it intentional -->
-  <div style="position:absolute;inset:0;background:radial-gradient(120% 85% at 88% 0%, rgba(194,160,74,0.06), transparent 55%), radial-gradient(110% 90% at 0% 100%, rgba(12,16,13,0.5), transparent 60%);"></div>
-  <!-- Edge fades into the ink sections above and below -->
-  <div style="position:absolute;left:0;right:0;top:0;height:200px;pointer-events:none;background:linear-gradient(to bottom, var(--ink) 0%, rgba(20,24,21,0.55) 40%, transparent 100%);"></div>
-  <div style="position:absolute;left:0;right:0;bottom:0;height:200px;pointer-events:none;background:linear-gradient(to top, var(--ink) 0%, rgba(20,24,21,0.55) 40%, transparent 100%);"></div>
 
-  <div style="position:relative;z-index:1;max-width:1040px;margin:0 auto 0 0;">
-  <div class="reveal" style="margin-bottom:3rem;">
-    <div class="section-label">Questions</div>
-    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.5rem);font-weight:400;font-style:italic;color:#EDE8DA;">
-      The questions we get asked most.
-    </h2>
-  </div>
 
-  <div class="reveal">
-    <details class="faq-item" open>
-      <summary>Who owns all of this once it's built?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">The website and all the data behind it are yours to keep. The agents and booking flow run as part of your monthly service, and there's no lock-in — you can cancel any time, and you'll never be tied into a long-term contract.</div>
-    </details>
-    <details class="faq-item">
-      <summary>What happens when your voice agent gets a call it can't handle?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">It never guesses. If a caller asks something it isn't sure about, it passes them straight to your team instead of making it up.</div>
-    </details>
-    <details class="faq-item">
-      <summary>How do the intake forms work?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">They ask the right questions up front and drop qualified enquiries straight into your CRM, so your team only spends time on the ones worth chasing.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Do we have to change the way we already work?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">No. Your booking assistant and follow-up system plug into the CRM, calendar, and inbox you already use. Your team carries on exactly as they do now — except with a lot more time to focus on the tasks that actually matter.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Is our client data safe?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">Yes. Every agent runs on private, encrypted infrastructure, and we never feed your client data into shared models.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Once it's built, are we left on our own?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">No. The monthly fee covers the cost to keep your agents running and up to date.</div>
-    </details>
-    <details class="faq-item">
-      <summary>What does it cost?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">It depends on the service, but most projects are a one-time setup fee plus a monthly fee. The monthly fee covers the servers that run it and any hands-on adjustments along the way. All costs are known and agreed upon ahead of time.</div>
-    </details>
-    <details class="faq-item">
-      <summary>What if we're not happy with it?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">Our promise: we build it, and if you don't like it, you don't pay.</div>
-    </details>
-    <details class="faq-item">
-      <summary>Where are you based?<span class="faq-plus">+</span></summary>
-      <div class="faq-a">Toronto, Canada. We work with clients across North America.</div>
-    </details>
-  </div>
-  </div>
-</section>
 
 
 <!-- ══════════════════════════════════════════════
@@ -2231,16 +1711,15 @@
     #book .bk-embed { min-height: 760px; }
   }
 </style>
-<section id="book" style="padding:clamp(4rem,7vw,7rem) 2rem; max-width:1320px; margin:0 auto 0 0; position:relative; z-index:2;">
+<section id="book" style="padding:clamp(3rem,5vw,4.5rem) 2rem clamp(3.5rem,6vw,5rem); max-width:1500px; margin:0 auto; position:relative; z-index:2;">
   <div class="reveal" style="max-width:680px; margin-bottom:2.75rem;">
     <div class="section-label">Book a Consultation</div>
-    <h2 class="font-serif" style="font-size:clamp(2rem,4vw,3.4rem); font-weight:400; font-style:italic; color:#EDE8DA; line-height:1.1; margin-bottom:1rem; text-wrap:balance;">
+    <h2 class="font-display" style="font-size:clamp(1.7rem,3.3vw,2.6rem); font-weight:500; letter-spacing:-0.03em; color:#EDE8DA; line-height:1.14; margin-bottom:1rem; text-wrap:balance;">
       Questions? Talk to an expert for free.
     </h2>
     <p style="font-size:1rem; color:rgba(237,232,218,0.62); line-height:1.7;">
-      Pick a time slot from the calendar below. All times shown in
+      Pick a time below. All times
       <strong style="color:rgba(237,232,218,0.85);font-weight:600;">EST (Toronto)</strong>.
-      We look forward to speaking with you.
     </p>
   </div>
 
@@ -2262,7 +1741,7 @@
      FOOTER / CONTACT
 ══════════════════════════════════════════════ -->
 <footer id="contact" style="margin-top:4rem;padding:5rem 2rem 3rem;">
-  <div id="footer-content" style="max-width:1320px;margin:0 auto 0 0;">
+  <div id="footer-content" style="max-width:1500px;margin:0 auto;">
     <!-- Top row -->
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;" class="footer-grid">
       <!-- Brand column -->
@@ -2271,7 +1750,7 @@
         <div style="margin-bottom:1.5rem;">
           <img src="fox-setter-logo.png" alt="Fox & Setter — Bespoke AI Integration" style="height:42px;width:auto;">
         </div>
-        <p class="font-serif" style="font-size:0.95rem;font-style:italic;color:rgba(237,232,218,0.45);line-height:1.6;max-width:220px;margin-bottom:1.5rem;">
+        <p class="font-display" style="font-size:0.92rem;color:rgba(237,232,218,0.45);line-height:1.6;max-width:220px;margin-bottom:1.5rem;">
           Quiet intelligence for estates of taste.
         </p>
         <!-- Status badge -->
@@ -2286,9 +1765,9 @@
         <div class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.35);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;">Navigate</div>
         <nav style="display:flex;flex-direction:column;gap:0.75rem;">
           <a href="#approach"   class="nav-link" style="font-size:0.88rem;">Approach</a>
-          <a href="#clientele"  class="nav-link" style="font-size:0.88rem;">Who We Serve</a>
-          <a href="#calculator" class="nav-link" style="font-size:0.88rem;">ROI Calculator</a>
-          <a href="#faq"        class="nav-link" style="font-size:0.88rem;">FAQ</a>
+          <a href="work.html"     class="nav-link" style="font-size:0.88rem;">What We Build</a>
+          <a href="services.html" class="nav-link" style="font-size:0.88rem;">Tiers</a>
+          <a href="faq.html"     class="nav-link" style="font-size:0.88rem;">FAQ</a>
           <a href="#contact"    class="nav-link" style="font-size:0.88rem;">Contact</a>
         </nav>
       </div>
@@ -2297,9 +1776,9 @@
       <div>
         <div class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.35);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;">Contact</div>
         <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;">
-          <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">K.Tunks</p>
+          <p class="font-display" style="font-size:0.9rem;color:rgba(237,232,218,0.5);">K.Tunks</p>
           <a href="mailto:contact@foxandsetter.com" class="nav-link" style="font-size:0.88rem;">contact@foxandsetter.com</a>
-          <p class="font-serif" style="font-size:0.9rem;font-style:italic;color:rgba(237,232,218,0.5);">Greater Toronto Area, Canada</p>
+          <p class="font-display" style="font-size:0.9rem;color:rgba(237,232,218,0.5);">Greater Toronto Area, Canada</p>
         </div>
         <a href="#book" class="btn-primary" style="display:inline-flex;"><span>Book a Free Consult</span></a>
       </div>
@@ -2329,36 +1808,18 @@
     /* Pull the big inline side-padding (2rem) in so content isn't crammed into
        a narrow centre column. */
     #why-now,
-    #calculator,
-    #faq,
-    #clientele,
+    #work,
     #contact   { padding-left:1.25rem !important; padding-right:1.25rem !important; }
     #approach  { padding:3.5vh 1.25rem 2.5rem !important; }
 
     /* Trim the tall vertical gaps so the page doesn't feel over-padded. */
-    #why-now    { padding-top:2rem !important;   padding-bottom:4.5rem !important; }
-    #calculator { padding-top:2.5rem !important; padding-bottom:4.5rem !important; }
-    #faq        { padding-top:4rem !important;   padding-bottom:4rem !important; }
+    #why-now    { padding-top:2rem !important;   padding-bottom:2.5rem !important; }
+    #work       { padding-top:2rem !important;   padding-bottom:2rem !important; }
     #contact    { padding-top:3.5rem !important; padding-bottom:2.5rem !important; }
 
     /* Hero: tighter gutter + lower top-padding so the headline and CTAs sit
        comfortably in view on short screens (hero clips overflow). */
     .hero-content { padding:clamp(7rem,20vh,10rem) 1.25rem 2rem !important; }
-
-    /* ROI calculator: the inner panels carry their own 2.5rem padding which,
-       stacked inside the section gutter, left the sliders almost no width. */
-    .calc-panel, .calc-results { padding:1.5rem !important; }
-    .calc-grid { gap:1.25rem !important; }
-
-    /* Recovery toggle: three labels in one row overflow at phone widths. */
-    .calc-seg button { font-size:0.64rem; padding:0.65rem 0.3rem; letter-spacing:0; }
-  }
-
-  @media(max-width:420px){
-    /* Narrowest phones: stack the recovery toggle so labels stay legible. */
-    .calc-seg { flex-direction:column; border-radius:1rem; }
-    .calc-seg button { border-left:none; border-top:1px solid rgba(30,58,45,0.5); padding:0.7rem; font-size:0.74rem; }
-    .calc-seg button:first-child { border-top:none; }
   }
 </style>
 
@@ -2381,7 +1842,8 @@
   gsap.from('#hero-badge', { y:18, opacity:0, duration:0.8, ease:'power3.out', delay:0.2 });
   gsap.from('#hero-line1', { y:36, opacity:0, duration:1,   ease:'power3.out', delay:0.38 });
   gsap.from('#hero-line2', { y:48, opacity:0, duration:1.1, ease:'power3.out', delay:0.55 });
-  gsap.from('#hero-cta',   { y:28, opacity:0, duration:0.9, ease:'power3.out', delay:0.78 });
+  gsap.from('#hero-sub',   { y:30, opacity:0, duration:0.95,ease:'power3.out', delay:0.72 });
+  gsap.from('#hero-cta',   { y:28, opacity:0, duration:0.9, ease:'power3.out', delay:0.9  });
 
   // ── 2b. Chase transition (fox & setter) ────────────────
   // The whole top section dissolves the moment you start scrolling, so by
@@ -2508,6 +1970,95 @@
     });
   }, { threshold: 0.08 });
   revealEls.forEach(el => revObs.observe(el));
+
+  // ── Work gallery ───────────────────────────────────────
+  // Each slide is a two-viewport-tall capture of a real page. It pans down one
+  // viewport, then advances. Hovering pauses; any manual input restarts the slide.
+  (function () {
+    var wrap = document.querySelector('.wg');
+    if (!wrap) return;
+    var stage  = document.getElementById('wg-stage');
+    var shots  = stage.querySelectorAll('.wg-shot');
+    var thumbs = document.querySelectorAll('.wg-thumb');
+    var urlEl  = document.getElementById('wg-url');
+    var capEl  = document.getElementById('wg-cap');
+    var cntEl  = document.getElementById('wg-count');
+    var PAGES = [
+      { url: 'sixth-line-sauna.vercel.app',                        cap: 'The homepage — the full product range, each build with its own spec, straight after the hero.' },
+      { url: 'sixth-line-sauna.vercel.app/saunas',                 cap: 'Product pages — temperature, humidity, heat-up time and electrical load for every build type.' },
+      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'A build configurator — footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
+      { url: 'sixth-line-sauna.vercel.app/projects',               cap: 'Project gallery — finished work, shot properly, with dimensions on every job.' },
+      { url: 'sixth-line-sauna.vercel.app/service-area/kingston',  cap: 'Service-area pages — one per town, down to which conservation authority approves the build.' },
+      { url: 'sixth-line-sauna.vercel.app/faq',                    cap: 'FAQ — cost, permits, electrical and winter use answered before they stall the sale.' },
+      { url: 'sixth-line-sauna.vercel.app/build',                  cap: 'The agent — trained on their own specs, not the open internet. It sizes a room, talks cedar and permits, and hands to a person rather than quote a price.' }
+    ];
+    var DUR = 9000;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var i = 0, timer = null;
+
+    function schedule() {
+      clearTimeout(timer);
+      if (reduce) return;
+      timer = setTimeout(function () { show(i + 1); }, DUR);
+    }
+
+    function show(n) {
+      i = (n + shots.length) % shots.length;
+      shots.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      thumbs.forEach(function (t, k) {
+        t.classList.toggle('is-active', k === i);
+        t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+      if (PAGES[i]) { urlEl.textContent = PAGES[i].url; capEl.textContent = PAGES[i].cap; }
+      cntEl.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + shots.length).slice(-2);
+      // restart the pan + progress animations from the top
+      wrap.classList.remove('is-playing');
+      void wrap.offsetWidth;
+      wrap.classList.add('is-playing');
+      schedule();
+    }
+
+    thumbs.forEach(function (t) { t.addEventListener('click', function () { show(+t.dataset.i); }); });
+    document.getElementById('wg-prev').addEventListener('click', function () { show(i - 1); });
+    document.getElementById('wg-next').addEventListener('click', function () { show(i + 1); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { show(i - 1); }
+      if (e.key === 'ArrowRight') { show(i + 1); }
+    });
+
+    // hover holds the current slide so it can actually be read
+    wrap.addEventListener('mouseenter', function () { wrap.classList.add('is-paused'); clearTimeout(timer); });
+    wrap.addEventListener('mouseleave', function () { wrap.classList.remove('is-paused'); show(i); });
+
+    // don't animate offscreen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { if (!wrap.classList.contains('is-paused')) show(i); }
+          else { clearTimeout(timer); wrap.classList.remove('is-playing'); }
+        });
+      }, { threshold: 0.25 }).observe(wrap);
+    }
+
+    show(0);
+  })();
+
+  // ── 6c. Section hand-off ────────────────────────────────
+  // A short scrubbed lift as each section enters, so the page eases between
+  // blocks instead of stepping. Transform only — no opacity, so nothing can be
+  // left dimmed if a trigger never fires. #approach is excluded: it drives the
+  // fox & setter chase reveal and has its own timeline.
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    ['#work', '#why-now', '#book'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (!el) return;
+      gsap.fromTo(el.children, { y: 34 }, {
+        y: 0, ease: 'none', stagger: 0.02,
+        scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 55%', scrub: 0.7 }
+      });
+    });
+  }
 
   // ── 7. Card Shuffler ────────────────────────────────────
   const reactivationCards = [

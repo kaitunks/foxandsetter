@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Fox &amp; Setter</title>
+  <meta name="description" content="The questions we get asked most — what it costs, what you own, what happens to your data, and what we do when the agent is not sure.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FAQ — Fox &amp; Setter">
+  <meta property="og:description" content="The questions we get asked most about a Fox &amp; Setter build.">
+  <meta property="og:image" content="https://foxandsetter.com/fox-setter-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#141815; --pine:#16271E; --forest:#1E3A2D; --bone:#EDE8DA; --gold:#C2A04A; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--ink); color: var(--bone); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; line-height: 1.6; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 300px 300px;
+    }
+    .font-display { font-family: 'Schibsted Grotesk', sans-serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    ::selection { background: var(--forest); color: var(--bone); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--forest); border-radius: 2px; }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap { max-width: 1500px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 1500px; margin: 0 auto; padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem); }
+    .back { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(237,232,218,0.7);
+            transition: color 0.25s ease, gap 0.25s ease; }
+    .back:hover { color: var(--gold); gap: 0.8rem; }
+    .back:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+    .topbar-links { display: flex; align-items: center; gap: clamp(1rem,2.5vw,1.8rem); }
+    .topbar-links a { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em;
+                      text-transform: uppercase; color: rgba(237,232,218,0.55); transition: color 0.25s ease; }
+    .topbar-links a:hover { color: var(--gold); }
+
+    header.pagehead { padding-top: clamp(2.5rem, 7vw, 5rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+    .kicker { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+              color: var(--gold); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem; }
+    .kicker::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+    h1.title { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500;
+               font-size: clamp(2.1rem, 5vw, 3.8rem); line-height: 1.04; color: var(--bone);
+               letter-spacing: -0.035em; margin-bottom: 1.4rem; max-width: 26ch; }
+    .lede { font-size: clamp(1.02rem, 1.5vw, 1.22rem); color: rgba(237,232,218,0.7); line-height: 1.7; max-width: 60ch; }
+
+    .rule { height: 1px; background: linear-gradient(90deg, var(--gold), rgba(237,232,218,0.05)); margin: clamp(2.5rem,5vw,3.5rem) 0; }
+
+    /* vertical only — the shorthand would out-specify .wrap and kill its side gutter */
+    section.blk { padding-top: clamp(3rem, 6vw, 4.75rem); padding-bottom: clamp(3rem, 6vw, 4.75rem); }
+    .sec-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+                 color: var(--gold); display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.5rem; }
+    .sec-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    h2.sec { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.03em;
+             font-size: clamp(1.6rem, 3.2vw, 2.4rem); line-height: 1.12; color: var(--bone);
+             margin-bottom: 1.25rem; max-width: 24ch; }
+    .body { font-size: 1rem; line-height: 1.75; color: rgba(237,232,218,0.7); max-width: 62ch; }
+    .body + .body { margin-top: 1.1rem; }
+
+    /* ── research steps ── */
+    .steps { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-top: 2.5rem; counter-reset: s; }
+    @media (min-width: 860px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+    .step { position: relative; background: var(--pine); border: 1px solid rgba(30,58,45,0.7);
+            border-radius: 1.15rem; padding: 1.7rem 1.6rem; }
+    .step-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.18em;
+              text-transform: uppercase; color: var(--gold); margin-bottom: 0.85rem; }
+    .step h3 { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; font-size: 1.3rem;
+               letter-spacing: -0.02em; line-height: 1.2; color: var(--bone); margin-bottom: 0.65rem; }
+    .step p { font-size: 0.9rem; line-height: 1.62; color: rgba(237,232,218,0.7); }
+
+    /* ── tier comparison table ── */
+    .table-scroll { overflow-x: auto; margin-top: 2.5rem; border-radius: 1.15rem;
+                    border: 1px solid rgba(30,58,45,0.7); -webkit-overflow-scrolling: touch; }
+    table.tiers { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--pine); }
+    table.tiers th, table.tiers td { text-align: left; padding: 1rem 1.15rem; vertical-align: middle;
+                                     border-bottom: 1px solid rgba(30,58,45,0.65); }
+    table.tiers thead th { background: rgba(12,16,13,0.65); vertical-align: bottom; }
+    .th-name { font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; font-size: 1.2rem;
+               letter-spacing: -0.02em; line-height: 1.15; color: var(--bone); display: block; margin-bottom: 0.3rem; }
+    .th-tier { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em;
+               text-transform: uppercase; color: var(--gold); }
+    .th-inc { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em;
+              text-transform: uppercase; color: rgba(237,232,218,0.55); font-weight: 500; }
+    table.tiers td.feat { font-size: 0.93rem; line-height: 1.55; color: rgba(237,232,218,0.85); min-width: 300px; }
+    table.tiers td.mark { text-align: center; width: 130px; }
+    .yes { color: var(--gold); font-size: 1.05rem; }
+    .no  { color: rgba(237,232,218,0.22); }
+    table.tiers tbody tr:last-child th, table.tiers tbody tr:last-child td { border-bottom: none; }
+    table.tiers tbody tr:hover td { background: rgba(30,58,45,0.22); }
+    .tbl-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.13em;
+                text-transform: uppercase; color: rgba(237,232,218,0.4); margin-top: 1.1rem; }
+
+    /* ── engagement ── */
+    .eng { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.25rem; }
+    @media (min-width: 780px) { .eng { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; } }
+    .eng h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.17em;
+              text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.7rem; }
+    .eng p { font-size: 0.93rem; line-height: 1.65; color: rgba(237,232,218,0.72); }
+
+    .cta-band { background: var(--pine); border: 1px solid rgba(30,58,45,0.7); border-radius: 1.75rem;
+                padding: clamp(2.25rem, 5vw, 3.5rem); margin: clamp(2.5rem,5vw,4rem) 0 clamp(3rem,6vw,5rem); }
+    .btn { display: inline-flex; align-items: center; gap: 0.65rem; font-size: 0.95rem; font-weight: 600;
+           background: var(--gold); color: var(--ink); border-radius: 9999px; padding: 0.95rem 1.9rem;
+           transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,0.45); }
+    .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .btn-ghost { background: transparent; color: var(--bone); border: 1px solid rgba(194,160,74,0.5); }
+    .btn-ghost:hover { border-color: var(--gold); }
+
+    footer.foot { border-top: 1px solid rgba(30,58,45,0.6); padding-top: 2.5rem; padding-bottom: 3.5rem; }
+    .foot-in { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+               font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em;
+               text-transform: uppercase; color: rgba(237,232,218,0.4); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .btn, .back { transition: none; }
+    }
+
+    /* ─── ROI Calculator ─── */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+    @media(max-width:860px){ .calc-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+    .calc-panel {
+      background: var(--pine);
+      border: 1px solid rgba(30,58,45,0.45);
+      border-radius: 2rem;
+      padding: 2.5rem;
+    }
+    .calc-field { margin-bottom: 2rem; }
+    .calc-field:last-child { margin-bottom: 0; }
+    .calc-field-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+    .calc-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--bone);
+      letter-spacing: 0.01em;
+    }
+        .calc-value {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(237,232,218,0.82);
+      white-space: nowrap;
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum" 1, "tnum" 1;
+    }
+
+    /* Range slider */
+    .calc-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 3px;
+      border-radius: 9999px;
+      background: rgba(237,232,218,0.15);
+      outline: none;
+      cursor: pointer;
+    }
+    .calc-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid var(--pine);
+      box-shadow: 0 0 0 1px rgba(194,160,74,0.6), 0 4px 14px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .calc-range::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 0 0 1px var(--gold), 0 6px 18px rgba(194,160,74,0.4); }
+    .calc-range::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid var(--pine);
+      box-shadow: 0 0 0 1px rgba(194,160,74,0.6);
+      cursor: pointer;
+    }
+    .calc-range::-moz-range-track { height: 3px; border-radius: 9999px; background: rgba(237,232,218,0.15); }
+
+    /* Results card */
+    .calc-results {
+      background: linear-gradient(155deg, #1E3A2D 0%, #16271E 60%, #11201A 100%);
+      border: 1px solid rgba(194,160,74,0.28);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+    }
+        .calc-headline-fig {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.8rem, 3.3vw, 2.4rem);
+      font-weight: 500;
+      font-style: normal;
+      color: var(--gold);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 26px rgba(194,160,74,0.28);
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum" 1, "tnum" 1;
+    }
+        .calc-headline-cap {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(194,160,74,0.92);
+      margin-bottom: 0.55rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .calc-headline-cap::before { content: '\25B2'; font-size: 0.72em; line-height: 1; }
+    .calc-pain { margin-bottom: 1.6rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(237,232,218,0.12); }
+    .calc-pain-cap {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(228,152,145,0.95); margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .calc-pain-cap::before { content: '\25BC'; font-size: 0.72em; line-height: 1; }
+    .calc-pain-fig {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 500; font-style: normal; color: #E4988F; line-height: 1; letter-spacing: -0.02em;
+      font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
+    }
+    .calc-substat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(237,232,218,0.12);
+    }
+        .calc-substat-fig {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--bone);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum" 1, "tnum" 1;
+    }
+        .calc-substat-lbl {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(237,232,218,0.72);
+      line-height: 1.3;
+    }
+    .calc-assumptions {
+      font-family: 'Schibsted Grotesk', sans-serif;
+      font-size: 0.92rem;
+      color: rgba(237,232,218,0.5);
+      margin-top: 1.75rem;
+      line-height: 1.55;
+    }
+
+    /* Recovery-assumption segmented control */
+    .calc-seg-wrap {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(237,232,218,0.1);
+    }
+        .calc-seg-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(237,232,218,0.55);
+      line-height: 1.8;
+      white-space: nowrap;
+      margin-bottom: 1rem;
+    }
+    .calc-seg {
+      display: flex;
+      border: 1px solid rgba(30,58,45,0.6);
+      border-radius: 9999px;
+      overflow: hidden;
+      background: rgba(12,16,13,0.35);
+    }
+    .calc-seg button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-left: 1px solid rgba(30,58,45,0.5);
+      color: rgba(237,232,218,0.55);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 0.7rem 0.4rem;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      white-space: nowrap;
+    }
+    .calc-seg button:first-child { border-left: none; }
+    .calc-seg button[aria-pressed="true"] {
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .calc-seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+    /* 2×2 stat grid inside results card */
+    .calc-statgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(194,160,74,0.2);
+      border: 1px solid rgba(194,160,74,0.2);
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-top: 1.75rem;
+    }
+    .calc-stat {
+      background: rgba(11,15,12,0.6);
+      padding: 1.5rem 1.1rem;
+      text-align: center;
+    }
+        .calc-stat-fig {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--bone);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: "lnum" 1, "tnum" 1;
+    }
+    .calc-stat-fig.gold { color: var(--gold); }
+        .calc-stat-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(237,232,218,0.82);
+      line-height: 1.35;
+    }
+
+  @media(max-width:768px){
+    /* ROI calculator: the inner panels carry their own 2.5rem padding which,
+       stacked inside the section gutter, left the sliders almost no width. */
+    .calc-panel, .calc-results { padding:1.5rem !important; }
+    .calc-grid { gap:1.25rem !important; }
+
+    /* Recovery toggle: three labels in one row overflow at phone widths. */
+    .calc-seg button { font-size:0.64rem; padding:0.65rem 0.3rem; letter-spacing:0; }
+  }
+
+  @media(max-width:420px){
+    /* Narrowest phones: stack the recovery toggle so labels stay legible. */
+    .calc-seg { flex-direction:column; border-radius:1rem; }
+    .calc-seg button { border-left:none; border-top:1px solid rgba(30,58,45,0.5); padding:0.7rem; font-size:0.74rem; }
+    .calc-seg button:first-child { border-top:none; }
+  }
+
+  .faq-item { border-top: 1px solid rgba(30,58,45,0.45); }
+  .faq-item:last-of-type { border-bottom: 1px solid rgba(30,58,45,0.45); }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    font-weight: 600;
+    color: #EDE8DA;
+    transition: color 0.25s ease;
+  }
+  .faq-item summary:hover { color: var(--gold); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-plus { color: var(--gold); font-size: 1.5rem; line-height: 1; flex-shrink: 0; transition: transform 0.3s ease; }
+  .faq-item[open] .faq-plus { transform: rotate(45deg); }
+  .faq-a {
+    padding: 0 0 1.6rem;
+    max-width: 760px;
+    font-size: 0.98rem;
+    color: rgba(237,232,218,0.6);
+    line-height: 1.75;
+  }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <a class="back" href="index.html"><span aria-hidden="true">&larr;</span><span>Fox &amp; Setter</span></a>
+    <div class="topbar-links">
+      <a href="work.html">What We Build</a>
+      <a href="services.html">Tiers</a>
+      <a href="index.html#book">Book a Consult</a>
+    </div>
+  </div>
+
+  <header class="pagehead wrap">
+    <div class="kicker">Questions</div>
+    <h1 class="title">The questions we get asked most.</h1>
+    <p class="lede">
+      What it costs, what you own, and what happens to your data. If yours isn't here, ask us on a call.
+    </p>
+  </header>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <section class="blk wrap" id="faq">
+      <div class="reveal">
+        <details class="faq-item" open>
+          <summary>Who owns all of this once it's built?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">The website and all its data are yours to keep. No lock-in, no long-term contract, cancel any time.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What happens when your voice agent gets a call it can't handle?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">It never guesses. If it isn't sure, it passes the caller straight to your team.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do the intake forms work?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">They ask the right questions up front and drop qualified enquiries straight into your CRM.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Do we have to change the way we already work?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">No. Everything plugs into the CRM, calendar and inbox you already use. Your team carries on as they do now.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is our client data safe?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">Yes. Every agent runs on private, encrypted infrastructure. Your data never goes into shared models.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Once it's built, are we left on our own?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">No. The monthly fee covers the cost to keep your agents running and up to date.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What does it cost?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">A one-time setup fee plus a monthly fee covering servers and adjustments. All costs agreed up front.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What if we're not happy with it?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">Our promise: we build it, and if you don't like it, you don't pay.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Where are you based?<span class="faq-plus">+</span></summary>
+          <div class="faq-a">Toronto, Canada. We work with clients across North America.</div>
+        </details>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="rule"></div></div>
+
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div class="sec-label">Still Wondering?</div>
+      <h2 class="sec">Ask us directly.</h2>
+      <p class="body" style="margin-bottom:2rem;">
+        A free consult, no pitch deck. We'll tell you honestly whether we're the right fit.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+        <a class="btn" href="index.html#book"><span>Book a free consult</span><span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="work.html"><span>See a full build</span></a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div>&copy; 2026 Fox &amp; Setter</div>
+      <div><a href="mailto:contact@foxandsetter.com">contact@foxandsetter.com</a></div>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          setTimeout(function () { entry.target.classList.add('in'); }, i * 70);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+</body>
+</html>
