@@ -596,6 +596,13 @@
       cursor: default;
       transition: all 0.35s ease;
     }
+    #booking-state {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem;
+      margin-top: 0.5rem; opacity: 0; transition: opacity 0.45s ease;
+    }
+    #booking-state.is-booked { opacity: 1; }
+    .bs-title { font-size: 0.8rem; font-weight: 600; color: var(--bone); line-height: 1.3; }
+    .bs-when  { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: rgba(237,232,218,0.45); white-space: nowrap; }
     #confirm-btn.confirmed {
       background: var(--forest);
       border-color: rgba(194,160,74,0.35);
@@ -694,7 +701,6 @@
 
   <!-- Desktop nav links (centered, fluid spacing) -->
   <div class="nav-links-desktop hidden md:flex items-center">
-    <a href="work.html"     class="nav-link">What We Build</a>
     <a href="#approach"     class="nav-link">Approach</a>
     <a href="services.html" class="nav-link">Tiers</a>
     <a href="faq.html"      class="nav-link">FAQ</a>
@@ -712,7 +718,6 @@
 
 <!-- Mobile dropdown menu -->
 <div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-[998] rounded-3xl p-6 flex flex-col gap-4" style="background:rgba(22,39,30,0.97);backdrop-filter:blur(24px);border:1px solid rgba(30,58,45,0.5);">
-  <a href="work.html"     class="nav-link text-base py-2 border-b border-forest/20">What We Build</a>
   <a href="#approach"     class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Approach</a>
   <a href="services.html" class="nav-link text-base py-2 border-b border-forest/20">Tiers</a>
   <a href="faq.html"      class="nav-link text-base py-2">FAQ</a>
@@ -909,8 +914,8 @@
       Custom Built for Your Business
     </h2>
     <p style="font-size:1.02rem;line-height:1.7;color:rgba(237,232,218,0.72);max-width:58ch;">
-      We learn your trade, understand how your business works, and build everything from scratch
-      around it. <strong style="color:rgba(237,232,218,0.92);font-weight:600;">No templates. No one-size-fits-all systems.</strong>
+      We learn your trade first, then build from scratch around
+      <strong style="color:rgba(237,232,218,0.92);font-weight:600;">how your business actually works.</strong>
     </p>
   </div>
 
@@ -972,12 +977,9 @@
   </div>
 
   <div class="reveal" style="margin-top:2.75rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
-    <a href="work.html" class="btn-primary">
-      <span>See the full build</span>
-      <span style="font-size:1rem;">→</span>
-    </a>
-    <a href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener" class="btn-outline">
+    <a href="https://sixth-line-sauna.vercel.app" target="_blank" rel="noopener" class="btn-primary">
       <span>Open the demo site live</span>
+      <span style="font-size:1rem;">→</span>
     </a>
   </div>
 
@@ -1378,8 +1380,9 @@
       /* reserve consistent heights so the headline, "This is for", and the widget
          start on the same line across all three cards */
       .flow-step-head { min-height: 2.6rem; }
-      .flow-step-sub  { min-height: 4.4rem; }
+      .flow-step-copy { min-height: 10.6rem; }
     }
+    @media (min-width: 1180px) { .flow-step-copy { min-height: 8.6rem; } }
     .flow-step {
       background: linear-gradient(168deg, #2A4E3C 0%, #1C3528 55%, #15271E 100%) !important;
       border-color: rgba(30,58,45,0.7) !important;
@@ -1431,7 +1434,9 @@
       text-transform: uppercase; color: rgba(237,232,218,0.45);
       border: 1px solid rgba(237,232,218,0.18); border-radius: 9999px; padding: 0.25rem 0.6rem; flex-shrink: 0;
     }
-    .flow-step-sub { font-size: 0.93rem; line-height: 1.6; color: rgba(237,232,218,0.72); margin-bottom: 1.4rem; }
+    .flow-step-copy { margin-bottom: 1.4rem; }
+    .flow-step-sub { font-size: 0.93rem; line-height: 1.6; color: rgba(237,232,218,0.72); margin-bottom: 0.55rem; }
+    .flow-step-note { font-size: 0.86rem; line-height: 1.55; color: rgba(237,232,218,0.5); margin: 0; }
     .flow-step-inherits {
       font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em;
       text-transform: uppercase; color: var(--gold); line-height: 1.5; margin-bottom: 0.9rem;
@@ -1494,13 +1499,16 @@
         <span class="flow-tier-badge">Tier 01</span>
       </div>
       <h3 class="flow-step-head">The Foundation</h3>
-      <p class="flow-step-sub">A site that shows the work properly and turns a visitor into an enquiry.</p>
+      <div class="flow-step-copy">
+        <p class="flow-step-sub">A custom digital presence built to turn attention into qualified enquiries.</p>
+        <p class="flow-step-note">We learn the business, understand the customer, and build the site from scratch around how you actually sell.</p>
+      </div>
       <!-- Live feed terminal -->
       <!-- Radar — scanning the field for new enquiries -->
       <div class="flow-step-widget">
-        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
           <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:#C2A04A;"></span>
-          <span><span style="color:#8FC09C;font-weight:600;">Hunt</span> · Finding new leads…</span>
+          <span><span style="color:#8FC09C;font-weight:600;">Hunt</span> · Attract. Explain. Capture.</span>
         </div>
         <div class="radar-wrap">
           <div class="radar" aria-hidden="true">
@@ -1516,13 +1524,12 @@
       <div class="flow-step-deliv">
         <div class="flow-step-deliv-label">What we build</div>
         <ul>
-          <li>Custom website — no generic template</li>
+          <li>Custom website — designed and written from scratch</li>
           <li>Interactive widgets and configurator tools</li>
           <li>Gallery, FAQ and service-area pages</li>
-          <li>Custom lead capture, straight to your inbox</li>
+          <li>Custom lead capture and enquiry forms</li>
         </ul>
       </div>
-      <div class="flow-step-foot">By enquiry</div>
     </div>
 
     <!-- STEP 02 · SET — Cursor scheduler (books to calendar) -->
@@ -1532,7 +1539,10 @@
         <span class="flow-tier-badge">Tier 02</span>
       </div>
       <h3 class="flow-step-head">The Front Desk</h3>
-      <p class="flow-step-sub">They book themselves, while you're on a roof or in a van.</p>
+      <div class="flow-step-copy">
+        <p class="flow-step-sub">Turn website traffic into conversations, qualified leads and booked appointments — automatically.</p>
+        <p class="flow-step-note">Your website does more than collect a form. It can answer questions, guide prospects and give qualified leads a direct path to book.</p>
+      </div>
       <!-- Cursor scheduler -->
       <div class="flow-step-widget">
         <div id="scheduler-card" style="position:relative;">
@@ -1541,9 +1551,9 @@
               <path d="M2 2L2 22L7 16L11.5 26L14 25L9.5 15L17 15Z" fill="#EDE8DA" stroke="#0C100D" stroke-width="0.8"/>
             </svg>
           </div>
-          <div class="font-mono" style="font-size:0.7rem;color:rgba(237,232,218,0.5);letter-spacing:0.12em;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
+          <div class="font-mono" style="font-size:0.7rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
             <div class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:#C2A04A;animation-delay:0.5s;"></div>
-            <span><span style="color:#BCBE7E;font-weight:600;">Set</span> · Week 24, June 2026</span>
+            <span><span style="color:#BCBE7E;font-weight:600;">Set</span> · Answer. Qualify. Book.</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;">
             <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">S</div>
@@ -1554,7 +1564,7 @@
             <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">F</div>
             <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">S</div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1.25rem;">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:0.75rem;">
             <div class="calendar-day" data-day="0">15</div>
             <div class="calendar-day" data-day="1">16</div>
             <div class="calendar-day" data-day="2">17</div>
@@ -1564,16 +1574,19 @@
             <div class="calendar-day" data-day="6">21</div>
           </div>
           <button id="confirm-btn">Confirm →</button>
+          <div id="booking-state" aria-hidden="true">
+            <span class="bs-title">Consultation booked</span>
+            <span class="bs-when">Thursday · 2:30 PM</span>
+          </div>
         </div>
       </div>
       <div class="flow-step-deliv">
         <div class="flow-step-inherits">Everything in The Foundation, plus</div>
         <ul>
-          <li>24/7 chat concierge, trained on your products</li>
+          <li>24/7 AI chat concierge, trained on your business</li>
           <li>Self-serve booking calendar with live availability</li>
         </ul>
       </div>
-      <div class="flow-step-foot">By enquiry</div>
     </div>
 
     <!-- STEP 03 · RETRIEVE — Shuffler (dormant → re-engaged → booked) -->
@@ -1625,12 +1638,15 @@
         <span class="flow-tier-badge">Tier 03</span>
       </div>
       <h3 class="flow-step-head">The Growth Engine</h3>
-      <p class="flow-step-sub">Nothing goes cold. Follow-up happens whether anyone remembers it or not.</p>
+      <div class="flow-step-copy">
+        <p class="flow-step-sub">Keep every opportunity moving — before, during and after the sale.</p>
+        <p class="flow-step-note">Leads are organized, follow-up happens automatically, past opportunities are re-engaged, and completed work turns into more reviews and referrals.</p>
+      </div>
       <!-- Shuffler stack — dormant → re-engaged → booked -->
       <div class="flow-step-widget">
-        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
           <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:#C2A04A;"></span>
-          <span><span style="color:#C2A04A;font-weight:600;">Retrieve</span> · Reactivation</span>
+          <span><span style="color:#C2A04A;font-weight:600;">Retrieve</span> · Follow up. Re-engage. Grow.</span>
         </div>
         <div style="position:relative;height:140px;">
           <div id="shuffler-stack" style="position:relative;height:100%;"></div>
@@ -1639,13 +1655,13 @@
       <div class="flow-step-deliv">
         <div class="flow-step-inherits">Everything in The Front Desk, plus</div>
         <ul>
-          <li>CRM and pipeline, with your own dashboard</li>
-          <li>Automated follow-up and appointment reminders</li>
-          <li>Post-project follow-up and Google review requests</li>
-          <li>Reactivation for dormant enquiries</li>
+          <li>CRM and sales pipeline with your own dashboard</li>
+          <li>Automated lead follow-up and appointment reminders</li>
+          <li>Post-project follow-up and Google review automation</li>
+          <li>Reactivation campaigns for past and dormant leads</li>
+          <li>AI voice agent</li>
         </ul>
       </div>
-      <div class="flow-step-foot">By enquiry</div>
     </div>
   </div>
 
@@ -1765,7 +1781,6 @@
         <div class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.35);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;">Navigate</div>
         <nav style="display:flex;flex-direction:column;gap:0.75rem;">
           <a href="#approach"   class="nav-link" style="font-size:0.88rem;">Approach</a>
-          <a href="work.html"     class="nav-link" style="font-size:0.88rem;">What We Build</a>
           <a href="services.html" class="nav-link" style="font-size:0.88rem;">Tiers</a>
           <a href="faq.html"     class="nav-link" style="font-size:0.88rem;">FAQ</a>
           <a href="#contact"    class="nav-link" style="font-size:0.88rem;">Contact</a>
@@ -2062,17 +2077,18 @@
 
   // ── 7. Card Shuffler ────────────────────────────────────
   const reactivationCards = [
-    { label:'Dormant',        duration:'14 mo', client:'Luxury Auto Group',     color:'rgba(237,232,218,0.4)' },
-    { label:'Re-engaged',     duration:'Day 3', client:'Premium Sauna Install', color:'#E6D192' },
-    { label:'Consult booked', duration:'✓',     client:'Toronto Yacht Club',    color:'#C2A04A' },
+    { label:'Past enquiry',        duration:'6 months', client:'No response',        color:'rgba(237,232,218,0.4)' },
+    { label:'Follow-up sent',      duration:'Day 1',    client:'Sent automatically', color:'#E6D192' },
+    { label:'Lead re-engaged',     duration:'Day 3',    client:'Replied',            color:'#BCBE7E' },
+    { label:'Consultation booked', duration:'✓',        client:'Confirmed',          color:'#C2A04A' },
   ];
-  let deckOrder = [0, 1, 2];
+  let deckOrder = [0, 1, 2, 3];
 
   function renderShuffler() {
     const container = document.getElementById('shuffler-stack');
     if (!container) return;
     container.innerHTML = '';
-    deckOrder.forEach((cardIdx, stackPos) => {
+    deckOrder.slice(0, 3).forEach((cardIdx, stackPos) => {
       const card = reactivationCards[cardIdx];
       const el = document.createElement('div');
       el.className = 'shuffler-card';
@@ -2157,8 +2173,9 @@
   function initScheduler() {
     const cursor     = document.getElementById('scheduler-cursor');
     const cardEl     = document.getElementById('scheduler-card');
-    const wedCell    = document.querySelector('.calendar-day[data-day="3"]');
+    const wedCell    = document.querySelector('.calendar-day[data-day="4"]');
     const confirmBtn = document.getElementById('confirm-btn');
+    const bookedEl   = document.getElementById('booking-state');
     if (!cursor || !cardEl || !wedCell || !confirmBtn) return;
 
     function relPos(el) {
@@ -2178,6 +2195,7 @@
         document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('active'));
         confirmBtn.classList.remove('confirmed');
         confirmBtn.textContent = 'Confirm →';
+        if (bookedEl) bookedEl.classList.remove('is-booked');
       }
     });
 
@@ -2188,7 +2206,10 @@
       .to(cursor, { scale:0.82, duration:0.08 })
       .to(cursor, { scale:1, duration:0.14 })
       .to(cursor, { x: confPos.x, y: confPos.y, duration:1, ease:'power2.inOut' }, '+=0.55')
-      .add(() => { confirmBtn.classList.add('confirmed'); confirmBtn.textContent = 'Confirmed ✓'; })
+      .add(() => {
+        confirmBtn.classList.add('confirmed'); confirmBtn.textContent = 'Confirmed ✓';
+        if (bookedEl) bookedEl.classList.add('is-booked');
+      })
       .to(cursor, { scale:0.82, duration:0.08 })
       .to(cursor, { scale:1, duration:0.14 })
       .to(cursor, { opacity:0, duration:0.38 }, '+=1.2');
