@@ -48,6 +48,9 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    /* The navbar is fixed, so anchored sections need to clear it when jumped to. */
+    section[id], #tiers { scroll-margin-top: 6.5rem; }
+    @media (max-width: 768px) { section[id], #tiers { scroll-margin-top: 5.5rem; } }
 
     body {
       background: var(--ink);
@@ -509,107 +512,6 @@
     .btn-outline:hover { transform: scale(1.03) translateY(-1px); border-color: var(--forest); }
     .btn-outline span { position: relative; z-index: 1; }
 
-    /* ─── Feature cards ─── */
-    .feature-card {
-      background: var(--pine);
-      border: 1px solid rgba(30,58,45,0.5);
-      border-radius: 2rem;
-      overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease, border-color 0.3s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(30,58,45,0.5);
-      border-color: rgba(30,58,45,0.8);
-    }
-    .feature-card-inverted {
-      background: var(--bone);
-      border-color: rgba(237,232,218,0.2);
-    }
-    .feature-card-inverted:hover {
-      box-shadow: 0 24px 64px rgba(0,0,0,0.3), 0 0 0 1px rgba(237,232,218,0.2);
-    }
-
-    /* ─── Shuffler stack ─── */
-    .shuffler-card {
-      position: absolute;
-      left: 0;
-      right: 0;
-      padding: 1rem 1.25rem;
-      border-radius: 1.25rem;
-      border: 1px solid rgba(30,58,45,0.5);
-      background: rgba(22,39,30,0.85);
-      transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.6s ease, box-shadow 0.6s ease;
-      will-change: transform;
-    }
-
-    /* ─── Typewriter cursor ─── */
-    .tw-cursor {
-      display: inline-block;
-      width: 7px;
-      height: 15px;
-      background: var(--gold);
-      margin-left: 2px;
-      vertical-align: middle;
-      border-radius: 1px;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ─── Calendar / Scheduler ─── */
-    #scheduler-cursor {
-      position: absolute;
-      pointer-events: none;
-      z-index: 20;
-      opacity: 0;
-      transform-origin: top left;
-    }
-    .calendar-day {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 2.25rem;
-      border-radius: 0.6rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: rgba(237,232,218,0.45);
-      cursor: default;
-      transition: background 0.3s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.3s ease;
-    }
-    .calendar-day.active {
-      background: var(--gold);
-      color: var(--ink);
-      font-weight: 600;
-      transform: scale(1.12);
-      box-shadow: 0 4px 16px rgba(194,160,74,0.35);
-    }
-    #confirm-btn {
-      width: 100%;
-      padding: 0.6rem 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(237,232,218,0.18);
-      background: transparent;
-      color: rgba(237,232,218,0.45);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
-      cursor: default;
-      transition: all 0.35s ease;
-    }
-    #booking-state {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem;
-      margin-top: 0.5rem; opacity: 0; transition: opacity 0.45s ease;
-    }
-    #booking-state.is-booked { opacity: 1; }
-    .bs-title { font-size: 0.8rem; font-weight: 600; color: var(--bone); line-height: 1.3; }
-    .bs-when  { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: rgba(237,232,218,0.45); white-space: nowrap; }
-    #confirm-btn.confirmed {
-      background: var(--forest);
-      border-color: rgba(194,160,74,0.35);
-      color: var(--bone);
-      box-shadow: 0 4px 24px rgba(30,58,45,0.4);
-    }
-
     /* ─── Protocol sticky ─── */
     .protocol-section { position: relative; height: 300vh; }
     .protocol-panel {
@@ -701,9 +603,10 @@
 
   <!-- Desktop nav links (centered, fluid spacing) -->
   <div class="nav-links-desktop hidden md:flex items-center">
+    <a href="#why-now"      class="nav-link">Why Now?</a>
     <a href="#approach"     class="nav-link">Approach</a>
-    <a href="services.html" class="nav-link">Tiers</a>
-    <a href="faq.html"      class="nav-link">FAQ</a>
+    <a href="#tiers" class="nav-link">Tiers</a>
+    <a href="#faq"      class="nav-link">FAQ</a>
   </div>
 
   <!-- CTA + Mobile toggle -->
@@ -717,11 +620,13 @@
 </nav>
 
 <!-- Mobile dropdown menu -->
-<div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-[998] rounded-3xl p-6 flex flex-col gap-4" style="background:rgba(22,39,30,0.97);backdrop-filter:blur(24px);border:1px solid rgba(30,58,45,0.5);">
-  <a href="#approach"     class="nav-link text-base py-2 border-b border-forest/20" onclick="this.closest('#mobile-menu').classList.add('hidden')">Approach</a>
-  <a href="services.html" class="nav-link text-base py-2 border-b border-forest/20">Tiers</a>
-  <a href="faq.html"      class="nav-link text-base py-2">FAQ</a>
-  <a href="#book"   class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
+<div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-[998] rounded-3xl p-6 flex flex-col gap-4"
+     onclick="if(event.target.closest('a')) this.classList.add('hidden')" style="background:rgba(22,39,30,0.97);backdrop-filter:blur(24px);border:1px solid rgba(30,58,45,0.5);">
+  <a href="#why-now"  class="nav-link text-base py-2 border-b border-forest/20">Why Now?</a>
+  <a href="#approach" class="nav-link text-base py-2 border-b border-forest/20">Approach</a>
+  <a href="#tiers"    class="nav-link text-base py-2 border-b border-forest/20">Tiers</a>
+  <a href="#faq"      class="nav-link text-base py-2">FAQ</a>
+  <a href="#book"     class="btn-primary mt-2 justify-center"><span>Book a Free Consult</span></a>
 </div>
 
 
@@ -770,9 +675,9 @@
 <section id="work" style="padding:clamp(3rem,5vw,4.5rem) 2rem clamp(2.5rem,4vw,3.5rem);max-width:1500px;margin:0 auto;position:relative;z-index:2;">
   <style>
     /* ── Work gallery — each slide slowly pans down a real page, then advances ── */
-    .wg { --wg-dur: 9s; }
+    .wg { --wg-dur: 7s; }
     .wg-frame {
-      position: relative; border-radius: 14px; overflow: hidden; background: #0F1411;
+      position: relative; border-radius: 14px; overflow: clip; background: #0F1411;
       border: 1px solid rgba(30,58,45,0.85);
       box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(194,160,74,0.07);
     }
@@ -799,23 +704,32 @@
     /* The stage is one browser-viewport tall. Three pages sit side by side on a
        track: each scrolls itself down one screen, then the track slides across
        to the next — the site, the build page, the agent. */
-    .wg-stage { position: relative; width: 100%; aspect-ratio: 1500 / 752; background: #0F1411; overflow: hidden; }
+    .wg-stage { position: relative; width: 100%; aspect-ratio: 1500 / 752; background: #0F1411; overflow: clip; }
     .wg-track {
       display: flex; width: 100%; height: 100%;
       transition: transform 0.95s cubic-bezier(0.66, 0, 0.28, 1);
     }
-    .wg-slide { position: relative; flex: 0 0 100%; height: 100%; overflow: hidden; }
+    .wg-slide { position: relative; flex: 0 0 100%; height: 100%; overflow: clip; }
     .wg-shot {
       position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block;
       transform: translateY(0);
     }
-    /* each capture is two viewports stacked, so panning to -50% scrolls exactly
-       one screen down the real page */
+    /* Captures are whole screens stacked, so each 25% / 50% step is exactly one
+       screen down the real page. The pan moves in steps with a beat between —
+       a page being scrolled, not a slow drift. */
     .wg.is-playing .wg-slide.is-active .wg-shot { animation: wg-pan var(--wg-dur) ease-in-out forwards; }
-    .wg.is-paused  .wg-slide.is-active .wg-shot { animation-play-state: paused; }
     @keyframes wg-pan {
-      0%, 14%   { transform: translateY(0); }
-      92%, 100% { transform: translateY(-50%); }
+      0%,   8%  { transform: translateY(0); }
+      44%, 56%  { transform: translateY(-25%); }
+      88%, 100% { transform: translateY(-50%); }
+    }
+    /* the homepage capture is four screens tall — three steps down the page */
+    .wg.is-playing .wg-slide--tall.is-active .wg-shot { animation-name: wg-pan-tall; }
+    @keyframes wg-pan-tall {
+      0%,   6%  { transform: translateY(0); }
+      20%, 32%  { transform: translateY(-25%); }
+      46%, 58%  { transform: translateY(-50%); }
+      72%, 100% { transform: translateY(-75%); }
     }
     /* The agent capture is one viewport tall, not two, so the -50% translate
        would pan it off the stage. Cover the frame and drift the crop instead —
@@ -823,15 +737,15 @@
     .wg-shot--cover { width: 100%; height: 100%; object-fit: cover; object-position: 50% 19%; }
     .wg.is-playing .wg-slide.is-active .wg-shot--cover { animation: wg-pan-cover var(--wg-dur) ease-in-out forwards; }
     @keyframes wg-pan-cover {
-      0%, 14%   { object-position: 50% 19%; }
-      92%, 100% { object-position: 50% 44%; }
+      0%,  10%  { object-position: 50% 19%; }
+      46%, 58%  { object-position: 50% 31%; }
+      90%, 100% { object-position: 50% 44%; }
     }
 
     /* time-to-next indicator */
     .wg-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(237,232,218,0.1); z-index: 3; }
     .wg-progress i { display: block; height: 100%; width: 0; background: var(--gold); }
     .wg.is-playing .wg-progress i { animation: wg-fill var(--wg-dur) linear forwards; }
-    .wg.is-paused  .wg-progress i { animation-play-state: paused; }
     @keyframes wg-fill { to { width: 100%; } }
 
     .wg-nav {
@@ -912,8 +826,8 @@
 
       <div class="wg-stage" id="wg-stage" role="group" aria-roledescription="carousel" aria-label="Pages from a Fox &amp; Setter build">
         <div class="wg-track" id="wg-track">
-          <div class="wg-slide is-active">
-            <img class="wg-shot" src="work-shots/01-home.jpg" alt="Homepage of a client build, with a full-bleed photograph and a single call to action.">
+          <div class="wg-slide wg-slide--tall is-active">
+            <img class="wg-shot" src="work-shots/01-home.jpg" alt="Homepage of a client build, scrolling from the hero through the enquiry form to the product range.">
           </div>
           <div class="wg-slide">
             <img class="wg-shot" src="work-shots/03-build.jpg" alt="Interactive build configurator with footprint options and a technical drawing." loading="lazy">
@@ -929,7 +843,7 @@
     </div>
 
     <div class="wg-meta">
-      <p class="wg-caption" id="wg-cap" aria-live="polite">The site itself — the range, the proof and one way to start a conversation.</p>
+      <p class="wg-caption" id="wg-cap" aria-live="polite">Our websites are custom built for you, your service, and the feel of your brand.</p>
       <div class="wg-count" id="wg-count">01 / 03</div>
     </div>
   </div>
@@ -1243,11 +1157,6 @@
 <section id="approach" style="max-width:1500px;margin:0 auto;padding:3.5vh 2rem 2.5rem;">
   <style>
     /* ─── Approach · Listen → Hunt → Set → Retrieve flow ─── */
-    .flow-tagline {
-      font-size: 1.05rem; color: rgba(237,232,218,0.62);
-      line-height: 1.7; max-width: 620px; margin-top: 1.1rem;
-    }
-
     /* Listen — a quiet intro blurb above the build steps (no card, no box) */
     .flow-listen {
       position: relative;
@@ -1340,100 +1249,44 @@
       background: linear-gradient(90deg, rgba(194,160,74,0.4), transparent);
     }
 
-    /* the three build-step cards */
-    /* Three build cards: follow the window width but never squish. Each card
-       holds a minimum width, so the row reflows 3-up → 2-up → 1-up instead of
-       compressing the calendar / feed / stack inside. min(280px,100%) keeps a
-       lone card from overflowing very narrow screens. */
-    .flow-steps {
-      display: grid;
-      grid-template-columns: 1fr;        /* narrow: stack vertically */
-      gap: 1.25rem;
-      align-items: stretch;              /* equal height so the rows line up across cards */
+    /* ─── Tier comparison table ─── */
+    .table-scroll {
+      overflow-x: auto; max-width: 1180px; border-radius: 1.15rem;
+      border: 1px solid rgba(30,58,45,0.7); -webkit-overflow-scrolling: touch;
     }
-    /* only go 3-up once there's room for three comfortable columns — never 2 + 1 */
-    @media (min-width: 940px) {
-      .flow-steps { grid-template-columns: repeat(3, 1fr); }
-      /* reserve consistent heights so the headline, "This is for", and the widget
-         start on the same line across all three cards */
-      .flow-step-head { min-height: 2.6rem; }
-      .flow-step-copy { min-height: 10.6rem; }
+    table.tiers { width: 100%; min-width: 760px; border-collapse: collapse; background: var(--pine); }
+    .tbl-caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    table.tiers th, table.tiers td {
+      text-align: left; padding: 1rem 1.15rem; vertical-align: middle;
+      border-bottom: 1px solid rgba(30,58,45,0.65);
     }
-    @media (min-width: 1180px) { .flow-step-copy { min-height: 8.6rem; } }
-    .flow-step {
-      background: linear-gradient(168deg, #2A4E3C 0%, #1C3528 55%, #15271E 100%) !important;
-      border-color: rgba(30,58,45,0.7) !important;
-      display: flex; flex-direction: column; position: relative; overflow: hidden;
-      padding: clamp(1.75rem, 2.4vw, 2.25rem) !important;
-      min-height: 0;
+    table.tiers thead th { background: rgba(12,16,13,0.65); vertical-align: bottom; }
+    .th-name {
+      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; font-size: 1.2rem;
+      letter-spacing: -0.02em; line-height: 1.15; color: var(--bone); display: block; margin-bottom: 0.3rem;
     }
-    /* Progression by colour, not numerals: one continuous green→gold gradient
-       swept across the three cards. Hunt is green (out in the field), Retrieve
-       is gold (the warm, valuable return); Set bridges the two. */
-    .flow-step::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      z-index: 1;
+    .th-tier {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
     }
-    .flow-step--hunt::before     { background: linear-gradient(90deg, #6FA37C, #88A573); }
-    .flow-step--set::before      { background: linear-gradient(90deg, #88A573, #ABA45D); }
-    .flow-step--retrieve::before { background: linear-gradient(90deg, #ABA45D, #C2A04A); }
-    /* each card warms a shade as the journey advances */
-    .flow-step--hunt     { background: linear-gradient(168deg, #284C3A 0%, #1B3326 55%, #15271E 100%) !important; }
-    .flow-step--set      { background: linear-gradient(168deg, #324E37 0%, #213426 55%, #172620 100%) !important; }
-    .flow-step--retrieve { background: linear-gradient(168deg, #3C4E30 0%, #283322 55%, #1B2519 100%) !important; }
-        .flow-step-kicker {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em;
-      text-transform: uppercase; color: #E6D192; margin-bottom: 0.7rem;
+    .th-inc {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(237,232,218,0.55); font-weight: 500;
     }
-    .flow-step--hunt .flow-step-kicker { color: #8FC09C; }
-    .flow-step--set  .flow-step-kicker { color: #BCBE7E; }
-            .flow-step-head {
-      font-family: 'Schibsted Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.025em;
-      font-size: 1.6rem; line-height: 1.14; color: #EDE8DA;
-      margin-bottom: 0.4rem;
-      display: flex; flex-direction: column; justify-content: flex-start;
-    }
-    /* widget sits right under the copy; fixed height so the "What we build"
-       title below it starts on the same line across all three cards */
-    .flow-step-widget { margin-top: 0; height: 190px; margin-bottom: 1.5rem; }
-    /* deliverables — sit directly under the equal-height widget (top-aligned)
-       so the "What we build" titles line up across all three cards */
-    .flow-step-deliv { margin-top: 0; }
-        .flow-step-deliv-label {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em;
-      text-transform: uppercase; color: #E6D192; margin-bottom: 0.4rem;
-    }
-    /* ── merged step + tier card ── */
-    .flow-step-topline { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.55rem; }
-    .flow-tier-badge {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(237,232,218,0.45);
-      border: 1px solid rgba(237,232,218,0.18); border-radius: 9999px; padding: 0.25rem 0.6rem; flex-shrink: 0;
-    }
-    .flow-step-copy { margin-bottom: 1.4rem; }
-    .flow-step-sub { font-size: 0.93rem; line-height: 1.6; color: rgba(237,232,218,0.72); margin-bottom: 0.55rem; }
-    .flow-step-note { font-size: 0.86rem; line-height: 1.55; color: rgba(237,232,218,0.5); margin: 0; }
-    .flow-step-inherits {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em;
-      text-transform: uppercase; color: var(--gold); line-height: 1.5; margin-bottom: 0.9rem;
-    }
-    .flow-step-foot {
-      margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px solid rgba(237,232,218,0.13);
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: rgba(237,232,218,0.42);
-    }
-    .flow-step-deliv ul { list-style: none; margin: 0; padding: 0; }
-    .flow-step-deliv li {
-      display: flex; align-items: center; gap: 0.8rem;
-      padding: 0.72rem 0;
-      border-top: 1px solid rgba(237,232,218,0.09);
-      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500;
-      font-size: 0.95rem; color: rgba(237,232,218,0.92); line-height: 1.2; letter-spacing: 0.005em;
-    }
-    .flow-step-deliv li::before {
-      content: ''; flex-shrink: 0; width: 6px; height: 6px;
-      background: var(--gold); transform: rotate(45deg);
+    table.tiers td.feat { font-size: 0.93rem; line-height: 1.55; color: rgba(237,232,218,0.85); }
+    table.tiers td.mark { text-align: center; }
+    /* Tier columns hold their name and kicker on one line each; the feature column
+       takes whatever is left. nowrap lets the column claim the width it needs
+       rather than breaking "The Growth Engine" across two lines. */
+    table.tiers th:not(.th-inc), table.tiers td.mark { width: 200px; }
+    .th-name, .th-tier { white-space: nowrap; }
+    .yes { color: var(--gold); font-size: 1.05rem; }
+    .no  { color: rgba(237,232,218,0.22); }
+    table.tiers tbody tr:last-child td { border-bottom: none; }
+    table.tiers tbody tr:hover td { background: rgba(30,58,45,0.22); }
+    .tbl-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.13em;
+      text-transform: uppercase; color: rgba(237,232,218,0.4); margin-top: 1.1rem;
     }
     @media (max-width: 820px) {
       .flow-listen { grid-template-columns: 1fr; }
@@ -1465,192 +1318,93 @@
   </div>
 
   <!-- THEN WE BUILD · the three steps -->
+  <div id="tiers">
   <div class="flow-build-label reveal">Then we build. Three tiers, each including the one before it.</div>
 
-  <div class="grid flow-steps">
-
-    <!-- STEP 01 · HUNT — Live feed (enquiries captured & qualified) -->
-    <div class="feature-card deal-card flow-step flow-step--hunt">
-      <div class="flow-step-topline">
-        <span class="flow-step-kicker">Hunt</span>
-        <span class="flow-tier-badge">Tier 01</span>
-      </div>
-      <h3 class="flow-step-head">The Foundation</h3>
-      <div class="flow-step-copy">
-        <p class="flow-step-sub">A custom digital presence built to turn attention into qualified enquiries.</p>
-        <p class="flow-step-note">We learn the business, understand the customer, and build the site from scratch around how you actually sell.</p>
-      </div>
-      <!-- Live feed terminal -->
-      <!-- Radar — scanning the field for new enquiries -->
-      <div class="flow-step-widget">
-        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
-          <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:#C2A04A;"></span>
-          <span><span style="color:#8FC09C;font-weight:600;">Hunt</span> · Attract. Explain. Capture.</span>
-        </div>
-        <div class="radar-wrap">
-          <div class="radar" aria-hidden="true">
-            <div class="radar-sweep"></div>
-            <span class="blip" style="top:28%;left:66%;animation-delay:0.6s;"></span>
-            <span class="blip" style="top:64%;left:71%;animation-delay:1.4s;"></span>
-            <span class="blip" style="top:71%;left:35%;animation-delay:2.3s;"></span>
-            <span class="blip" style="top:37%;left:29%;animation-delay:3.2s;"></span>
-            <div class="radar-core"></div>
-          </div>
-        </div>
-      </div>
-      <div class="flow-step-deliv">
-        <div class="flow-step-deliv-label">What we build</div>
-        <ul>
-          <li>Custom website — designed and written from scratch</li>
-          <li>Interactive widgets and configurator tools</li>
-          <li>Gallery, FAQ and service-area pages</li>
-          <li>Custom lead capture and enquiry forms</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- STEP 02 · SET — Cursor scheduler (books to calendar) -->
-    <div class="feature-card deal-card flow-step flow-step--set">
-      <div class="flow-step-topline">
-        <span class="flow-step-kicker">Set</span>
-        <span class="flow-tier-badge">Tier 02</span>
-      </div>
-      <h3 class="flow-step-head">The Front Desk</h3>
-      <div class="flow-step-copy">
-        <p class="flow-step-sub">Turn website traffic into conversations, qualified leads and booked appointments — automatically.</p>
-        <p class="flow-step-note">Your website does more than collect a form. It can answer questions, guide prospects and give qualified leads a direct path to book.</p>
-      </div>
-      <!-- Cursor scheduler -->
-      <div class="flow-step-widget">
-        <div id="scheduler-card" style="position:relative;">
-          <div id="scheduler-cursor">
-            <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
-              <path d="M2 2L2 22L7 16L11.5 26L14 25L9.5 15L17 15Z" fill="#EDE8DA" stroke="#0C100D" stroke-width="0.8"/>
-            </svg>
-          </div>
-          <div class="font-mono" style="font-size:0.7rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;">
-            <div class="pulse-dot" style="width:5px;height:5px;border-radius:50%;background:#C2A04A;animation-delay:0.5s;"></div>
-            <span><span style="color:#BCBE7E;font-weight:600;">Set</span> · Answer. Qualify. Book.</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;">
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">S</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">M</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">T</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">W</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">T</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">F</div>
-            <div class="calendar-day" style="font-size:0.68rem;height:1.5rem;color:rgba(237,232,218,0.3);">S</div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:0.75rem;">
-            <div class="calendar-day" data-day="0">15</div>
-            <div class="calendar-day" data-day="1">16</div>
-            <div class="calendar-day" data-day="2">17</div>
-            <div class="calendar-day" data-day="3">18</div>
-            <div class="calendar-day" data-day="4">19</div>
-            <div class="calendar-day" data-day="5">20</div>
-            <div class="calendar-day" data-day="6">21</div>
-          </div>
-          <button id="confirm-btn">Confirm →</button>
-          <div id="booking-state" aria-hidden="true">
-            <span class="bs-title">Consultation booked</span>
-            <span class="bs-when">Thursday · 2:30 PM</span>
-          </div>
-        </div>
-      </div>
-      <div class="flow-step-deliv">
-        <div class="flow-step-inherits">Everything in The Foundation, plus</div>
-        <ul>
-          <li>24/7 AI chat concierge, trained on your business</li>
-          <li>Self-serve booking calendar with live availability</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- STEP 03 · RETRIEVE — Shuffler (dormant → re-engaged → booked) -->
-    <style>
-      /* Radar sweep widget — used by Hunt (scanning the field for new enquiries) */
-      .radar-wrap { display: flex; align-items: center; justify-content: center; height: 150px; }
-      .radar {
-        position: relative; width: 132px; height: 132px; border-radius: 50%;
-        overflow: hidden; border: 1px solid rgba(237,232,218,0.14);
-        background:
-          radial-gradient(circle at 50% 50%, rgba(194,160,74,0.05), transparent 72%),
-          repeating-radial-gradient(circle at 50% 50%, rgba(237,232,218,0.07) 0 1px, transparent 1px 24%);
-      }
-      .radar::after {
-        content: ''; position: absolute; inset: 0;
-        background:
-          linear-gradient(rgba(237,232,218,0.06), rgba(237,232,218,0.06)) center / 1px 100% no-repeat,
-          linear-gradient(rgba(237,232,218,0.06), rgba(237,232,218,0.06)) center / 100% 1px no-repeat;
-      }
-      .radar-sweep {
-        position: absolute; inset: 0; border-radius: 50%;
-        background: conic-gradient(from 0deg, rgba(194,160,74,0.5), rgba(194,160,74,0.1) 34deg, transparent 72deg);
-        animation: radar-spin 3.8s linear infinite;
-      }
-      @keyframes radar-spin { to { transform: rotate(360deg); } }
-      .radar-core { position: absolute; top: 50%; left: 50%; width: 6px; height: 6px; margin: -3px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 9px 2px rgba(194,160,74,0.5); }
-      .blip {
-        position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
-        box-shadow: 0 0 11px 3px rgba(194,160,74,0.55); opacity: 0;
-        transform: translate(-50%,-50%) scale(0.4); animation: radar-ping 3.8s ease-in-out infinite;
-      }
-      @keyframes radar-ping {
-        0%, 100% { opacity: 0; transform: translate(-50%,-50%) scale(0.4); }
-        6%       { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-        38%      { opacity: 0.15; }
-      }
-      .radar-cap {
-        text-align: center; margin-top: 0.9rem;
-        font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(237,232,218,0.5);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .radar-sweep { animation: none; }
-        .blip { animation: none; opacity: 0.9; transform: translate(-50%,-50%) scale(1); }
-      }
-    </style>
-    <div class="feature-card deal-card flow-step flow-step--retrieve">
-      <div class="flow-step-topline">
-        <span class="flow-step-kicker">Retrieve</span>
-        <span class="flow-tier-badge">Tier 03</span>
-      </div>
-      <h3 class="flow-step-head">The Growth Engine</h3>
-      <div class="flow-step-copy">
-        <p class="flow-step-sub">Keep every opportunity moving — before, during and after the sale.</p>
-        <p class="flow-step-note">Leads are organized, follow-up happens automatically, past opportunities are re-engaged, and completed work turns into more reviews and referrals.</p>
-      </div>
-      <!-- Shuffler stack — dormant → re-engaged → booked -->
-      <div class="flow-step-widget">
-        <div class="font-mono" style="font-size:0.68rem;color:rgba(237,232,218,0.5);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
-          <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:#C2A04A;"></span>
-          <span><span style="color:#C2A04A;font-weight:600;">Retrieve</span> · Follow up. Re-engage. Grow.</span>
-        </div>
-        <div style="position:relative;height:140px;">
-          <div id="shuffler-stack" style="position:relative;height:100%;"></div>
-        </div>
-      </div>
-      <div class="flow-step-deliv">
-        <div class="flow-step-inherits">Everything in The Front Desk, plus</div>
-        <ul>
-          <li>CRM and sales pipeline with your own dashboard</li>
-          <li>Automated lead follow-up and appointment reminders</li>
-          <li>Post-project follow-up and Google review automation</li>
-          <li>Reactivation campaigns for past and dormant leads</li>
-          <li>AI voice agent</li>
-        </ul>
-      </div>
-    </div>
+  <!-- THE TIERS · one table, every line item, no duplication -->
+  <div class="table-scroll reveal">
+    <table class="tiers">
+      <caption class="tbl-caption">What is included in each Fox &amp; Setter tier</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="th-inc">What's included</th>
+          <th scope="col"><span class="th-name">The Foundation</span><span class="th-tier">Hunt · Tier 01</span></th>
+          <th scope="col"><span class="th-name">The Front Desk</span><span class="th-tier">Set · Tier 02</span></th>
+          <th scope="col"><span class="th-name">The Growth Engine</span><span class="th-tier">Retrieve · Tier 03</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feat">Custom website — designed and written from scratch</td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Interactive widgets and configurator tools</td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Gallery, FAQ and service-area pages</td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Custom lead capture and enquiry forms</td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">24/7 AI chat concierge, trained on your business</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Self-serve booking calendar with live availability</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">CRM and sales pipeline with your own dashboard</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Automated lead follow-up and appointment reminders</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Post-project follow-up and Google review automation</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Reactivation campaigns for past and dormant leads</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">AI voice agent</td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="no" aria-label="Not included">—</span></td>
+          <td class="mark"><span class="yes" aria-label="Included">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- tier CTA — sits with the cards now that steps and tiers are one section -->
-  <div class="reveal" style="margin-top:2.75rem;display:flex;flex-wrap:wrap;gap:1rem 1.75rem;align-items:center;">
-    <a href="services.html" class="btn-primary">
-      <span>Compare the tiers</span>
-      <span style="font-size:1rem;">→</span>
-    </a>
-    <p style="font-size:0.88rem;color:rgba(237,232,218,0.45);line-height:1.6;max-width:44ch;">
-      One-time setup, then monthly. Costs agreed up front. No long-term contract.
-    </p>
+  <p class="tbl-note reveal">One-time setup, then monthly · Costs agreed up front · No long-term contract</p>
   </div>
 
   </div>
@@ -1673,6 +1427,327 @@
 
 
 
+
+
+<!-- ══════════════════════════════════════════════
+     ENGAGEMENT · TERMS — the money question, answered before the FAQ
+     (merged in from the retired services page)
+══════════════════════════════════════════════ -->
+<style>
+  #engagement .eng { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.25rem; }
+  @media (min-width: 780px) { #engagement .eng { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; } }
+  #engagement .eng h3 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.17em;
+    text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.7rem;
+  }
+  #engagement .eng p { font-size: 0.93rem; line-height: 1.65; color: rgba(237,232,218,0.72); }
+</style>
+<section id="engagement" style="padding:clamp(2.5rem,4vw,3.5rem) 2rem; max-width:1500px; margin:0 auto; position:relative; z-index:2;">
+  <div class="reveal" style="max-width:680px;">
+    <div class="section-label">How It Works</div>
+    <h2 class="font-display" style="font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:500;letter-spacing:-0.03em;color:#EDE8DA;line-height:1.14;text-wrap:balance;">
+      Plain terms, agreed before we start.
+    </h2>
+  </div>
+  <div class="eng">
+    <div class="reveal">
+      <h3>What it costs</h3>
+      <p>A one-time setup fee, then a monthly fee covering hosting, servers and adjustments. Every number agreed up front.</p>
+    </div>
+    <div class="reveal">
+      <h3>What you own</h3>
+      <p>The website and all its data are yours to keep. No lock-in, cancel any time.</p>
+    </div>
+    <div class="reveal">
+      <h3>Our promise</h3>
+      <p>We build it, and if you don't like it, you don't pay. Your data never goes into shared models.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     ROI CALCULATOR — what slow follow-up costs
+     (merged in from the retired services page)
+══════════════════════════════════════════════ -->
+<style>
+  .calc-grid { display: grid; grid-template-columns: 1fr 0.85fr; gap: 2.5rem; align-items: stretch; }
+  @media (max-width: 860px) { .calc-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+
+  .calc-panel { background: var(--pine); border: 1px solid rgba(30,58,45,0.45); border-radius: 2rem; padding: 2.5rem; }
+  .calc-field { margin-bottom: 2rem; }
+  .calc-field:last-child { margin-bottom: 0; }
+  .calc-field-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
+  .calc-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--bone); letter-spacing: 0.01em; }
+  .calc-value {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; font-weight: 500;
+    color: rgba(237,232,218,0.82); white-space: nowrap;
+    font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
+  }
+
+  /* Range slider */
+  .calc-range {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 3px;
+    border-radius: 9999px; background: rgba(237,232,218,0.15); outline: none; cursor: pointer;
+  }
+  .calc-range::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--pine);
+    box-shadow: 0 0 0 1px rgba(194,160,74,0.6), 0 4px 14px rgba(0,0,0,0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .calc-range::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 0 0 1px var(--gold), 0 6px 18px rgba(194,160,74,0.4); }
+  .calc-range::-moz-range-thumb {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--gold);
+    border: 3px solid var(--pine); box-shadow: 0 0 0 1px rgba(194,160,74,0.6); cursor: pointer;
+  }
+  .calc-range::-moz-range-track { height: 3px; border-radius: 9999px; background: rgba(237,232,218,0.15); }
+
+  /* Results card */
+  .calc-results {
+    background: linear-gradient(155deg, #1E3A2D 0%, #16271E 60%, #11201A 100%);
+    border: 1px solid rgba(194,160,74,0.28); border-radius: 2rem; padding: 2.5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+  }
+  .calc-headline-fig {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.8rem, 3.3vw, 2.4rem);
+    font-weight: 500; color: var(--gold); line-height: 0.98; letter-spacing: -0.02em;
+    text-shadow: 0 2px 26px rgba(194,160,74,0.28);
+    font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
+  }
+  .calc-headline-cap {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(194,160,74,0.92); margin-bottom: 0.55rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .calc-headline-cap::before { content: '\25B2'; font-size: 0.72em; line-height: 1; }
+  .calc-pain { margin-bottom: 1.6rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(237,232,218,0.12); }
+  .calc-pain-cap {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(228,152,145,0.95); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .calc-pain-cap::before { content: '\25BC'; font-size: 0.72em; line-height: 1; }
+  .calc-pain-fig {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 500; color: #E4988F; line-height: 1; letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
+  }
+  .calc-assumptions { font-family: 'Schibsted Grotesk', sans-serif; font-size: 0.92rem; color: rgba(237,232,218,0.5); margin-top: 1.75rem; line-height: 1.55; }
+
+  /* Recovery-assumption segmented control */
+  .calc-seg-wrap { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(237,232,218,0.1); }
+  .calc-seg-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+    letter-spacing: 0.14em; text-transform: uppercase; color: rgba(237,232,218,0.55);
+    line-height: 1.8; white-space: nowrap; margin-bottom: 1rem;
+  }
+  .calc-seg { display: flex; border: 1px solid rgba(30,58,45,0.6); border-radius: 9999px; overflow: hidden; background: rgba(12,16,13,0.35); }
+  .calc-seg button {
+    flex: 1; background: transparent; border: none; border-left: 1px solid rgba(30,58,45,0.5);
+    color: rgba(237,232,218,0.55); font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.02em; padding: 0.7rem 0.4rem;
+    cursor: pointer; transition: background 0.3s ease, color 0.3s ease; white-space: nowrap;
+  }
+  .calc-seg button:first-child { border-left: none; }
+  .calc-seg button[aria-pressed="true"] { background: var(--gold); color: var(--ink); font-weight: 600; }
+  .calc-seg button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+  /* 2×2 stat grid inside results card */
+  .calc-statgrid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(194,160,74,0.2); border: 1px solid rgba(194,160,74,0.2);
+    border-radius: 1rem; overflow: hidden; margin-top: 1.75rem;
+  }
+  .calc-stat { background: rgba(11,15,12,0.6); padding: 1.5rem 1.1rem; text-align: center; }
+  .calc-stat-fig {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 500;
+    color: var(--bone); line-height: 1; margin-bottom: 0.4rem; letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1;
+  }
+  .calc-stat-lbl {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(237,232,218,0.82); line-height: 1.35;
+  }
+
+  @media (max-width: 768px) {
+    /* The inner panels carry their own 2.5rem padding which, stacked inside the
+       section gutter, left the sliders almost no width. */
+    .calc-panel, .calc-results { padding: 1.5rem !important; }
+    .calc-grid { gap: 1.25rem !important; }
+    /* Three labels in one row overflow at phone widths. */
+    .calc-seg button { font-size: 0.64rem; padding: 0.65rem 0.3rem; letter-spacing: 0; }
+  }
+  @media (max-width: 420px) {
+    /* Narrowest phones: stack the recovery toggle so labels stay legible. */
+    .calc-seg { flex-direction: column; border-radius: 1rem; }
+    .calc-seg button { border-left: none; border-top: 1px solid rgba(30,58,45,0.5); padding: 0.7rem; font-size: 0.74rem; }
+    .calc-seg button:first-child { border-top: none; }
+  }
+</style>
+<section id="calculator" style="padding:clamp(2.5rem,4vw,3.5rem) 2rem; max-width:1500px; margin:0 auto; position:relative; z-index:2;">
+  <div class="reveal" style="margin-bottom:2.75rem;max-width:640px;">
+    <div class="section-label">The True Cost</div>
+    <h2 class="font-display" style="font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:500;color:#EDE8DA;margin-bottom:1rem;line-height:1.14;letter-spacing:-0.03em;text-wrap:balance;">
+      How much is slow follow-up costing you?
+    </h2>
+    <p style="font-size:1rem;color:rgba(237,232,218,0.6);line-height:1.6;">
+      <strong style="color:rgba(237,232,218,0.88);font-weight:700;">Adjust the sliders</strong> to see what slow replies and cold leads are costing you.
+    </p>
+  </div>
+
+  <div class="calc-grid reveal">
+    <!-- Inputs -->
+    <div class="calc-panel">
+      <div class="calc-field">
+        <div class="calc-field-head">
+          <label class="calc-label" for="calc-leads">Qualified enquiries / month</label>
+          <span class="calc-value" id="calc-leads-out">12</span>
+        </div>
+        <input class="calc-range" type="range" id="calc-leads" min="2" max="60" step="1" value="12" aria-label="Qualified enquiries per month">
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-head">
+          <label class="calc-label" for="calc-value">Average project value</label>
+          <span class="calc-value" id="calc-value-out">$45,000</span>
+        </div>
+        <input class="calc-range" type="range" id="calc-value" min="0" max="1000" step="1" value="687" aria-label="Average project value">
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-head">
+          <label class="calc-label" for="calc-close">Current close rate on existing leads</label>
+          <span class="calc-value" id="calc-close-out">25%</span>
+        </div>
+        <input class="calc-range" type="range" id="calc-close" min="5" max="100" step="1" value="25" aria-label="Current close rate">
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-head">
+          <label class="calc-label" for="calc-lost">Estimated clients lost to slow reply / weak follow-up</label>
+          <span class="calc-value" id="calc-lost-out">30%</span>
+        </div>
+        <input class="calc-range" type="range" id="calc-lost" min="5" max="60" step="1" value="30" aria-label="Leads lost to slow follow-up">
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-head">
+          <label class="calc-label" for="calc-fee">Your monthly investment in AI</label>
+          <span class="calc-value" id="calc-fee-out">$1,500</span>
+        </div>
+        <input class="calc-range" type="range" id="calc-fee" min="100" max="6000" step="100" value="1500" aria-label="Your monthly investment">
+      </div>
+
+      <!-- Recovery assumption -->
+      <div class="calc-seg-wrap">
+        <div class="calc-seg-label">The share of lost leads we bring back using automation</div>
+        <div class="calc-seg" role="group" aria-label="Recovery assumption">
+          <button type="button" data-r="0.30" aria-pressed="false">Conservative · 30%</button>
+          <button type="button" data-r="0.45" aria-pressed="true">Balanced · 45%</button>
+          <button type="button" data-r="0.60" aria-pressed="false">Optimistic · 60%</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="calc-results">
+      <div class="calc-pain">
+        <div class="calc-pain-cap">Lost to slow follow-up &middot; per year</div>
+        <div class="calc-pain-fig" id="calc-pain-fig">$0</div>
+      </div>
+      <div class="calc-headline-cap">Recovered with our system &middot; per year</div>
+      <div class="calc-headline-fig" id="calc-revenue">$0</div>
+      <div class="font-mono" style="font-size:0.7rem;letter-spacing:0.08em;color:rgba(237,232,218,0.45);margin-top:0.55rem;">net of your monthly investment</div>
+      <div class="calc-statgrid">
+        <div class="calc-stat">
+          <div class="calc-stat-fig" id="calc-deals">0</div>
+          <div class="calc-stat-lbl">Deals recovered / yr</div>
+        </div>
+        <div class="calc-stat">
+          <div class="calc-stat-fig" id="calc-roi">0×</div>
+          <div class="calc-stat-lbl">Return per $1 invested</div>
+        </div>
+        <div class="calc-stat">
+          <div class="calc-stat-fig" id="calc-net">$0</div>
+          <div class="calc-stat-lbl">Revenue recovered / yr</div>
+        </div>
+        <div class="calc-stat">
+          <div class="calc-stat-fig" id="calc-month">$0</div>
+          <div class="calc-stat-lbl">Recovered / month</div>
+        </div>
+      </div>
+      <p class="calc-assumptions">A planning estimate, not a promise.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FAQ — merged in from the retired FAQ page
+══════════════════════════════════════════════ -->
+<style>
+  .faq-item { border-top: 1px solid rgba(30,58,45,0.45); }
+  .faq-item:last-of-type { border-bottom: 1px solid rgba(30,58,45,0.45); }
+  .faq-item summary {
+    list-style: none; cursor: pointer; padding: 1.5rem 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1rem, 2.2vw, 1.15rem);
+    font-weight: 600; color: #EDE8DA; transition: color 0.25s ease;
+  }
+  .faq-item summary:hover { color: var(--gold); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-plus { color: var(--gold); font-size: 1.5rem; line-height: 1; flex-shrink: 0; transition: transform 0.3s ease; }
+  .faq-item[open] .faq-plus { transform: rotate(45deg); }
+  .faq-a { padding: 0 0 1.6rem; max-width: 760px; font-size: 0.98rem; color: rgba(237,232,218,0.6); line-height: 1.75; }
+</style>
+<section id="faq" style="padding:clamp(2.5rem,4vw,3.5rem) 2rem clamp(3rem,5vw,4rem); max-width:1500px; margin:0 auto; position:relative; z-index:2;">
+  <div class="reveal" style="max-width:680px;margin-bottom:2.5rem;">
+    <div class="section-label">Questions</div>
+    <h2 class="font-display" style="font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:500;letter-spacing:-0.03em;color:#EDE8DA;line-height:1.14;text-wrap:balance;">
+      The questions we get asked most.
+    </h2>
+  </div>
+  <div class="reveal" style="max-width:1000px;">
+    <details class="faq-item" open>
+      <summary>Who owns all of this once it's built?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">The website and all its data are yours to keep. No lock-in, no long-term contract, cancel any time.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What happens when your voice agent gets a call it can't handle?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">It never guesses. If it isn't sure, it passes the caller straight to your team.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How do the intake forms work?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">They ask the right questions up front and drop qualified enquiries straight into your CRM.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do we have to change the way we already work?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">No. Everything plugs into the CRM, calendar and inbox you already use. Your team carries on as they do now.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Is our client data safe?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Yes. Every agent runs on private, encrypted infrastructure. Your data never goes into shared models.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Once it's built, are we left on our own?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">No. The monthly fee covers the cost to keep your agents running and up to date.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What does it cost?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">A one-time setup fee plus a monthly fee covering servers and adjustments. All costs agreed up front.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What if we're not happy with it?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Our promise: we build it, and if you don't like it, you don't pay.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Where are you based?<span class="faq-plus">+</span></summary>
+      <div class="faq-a">Toronto, Canada. We work with clients across North America.</div>
+    </details>
+  </div>
+</section>
 
 
 <!-- ══════════════════════════════════════════════
@@ -1757,9 +1832,10 @@
       <div>
         <div class="font-mono" style="font-size:0.72rem;color:rgba(237,232,218,0.35);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;">Navigate</div>
         <nav style="display:flex;flex-direction:column;gap:0.75rem;">
+          <a href="#why-now"    class="nav-link" style="font-size:0.88rem;">Why Now?</a>
           <a href="#approach"   class="nav-link" style="font-size:0.88rem;">Approach</a>
-          <a href="services.html" class="nav-link" style="font-size:0.88rem;">Tiers</a>
-          <a href="faq.html"     class="nav-link" style="font-size:0.88rem;">FAQ</a>
+          <a href="#tiers" class="nav-link" style="font-size:0.88rem;">Tiers</a>
+          <a href="#faq"     class="nav-link" style="font-size:0.88rem;">FAQ</a>
           <a href="#contact"    class="nav-link" style="font-size:0.88rem;">Contact</a>
         </nav>
       </div>
@@ -1801,6 +1877,9 @@
        a narrow centre column. */
     #why-now,
     #work,
+    #engagement,
+    #calculator,
+    #faq,
     #contact   { padding-left:1.25rem !important; padding-right:1.25rem !important; }
     #approach  { padding:3.5vh 1.25rem 2.5rem !important; }
 
@@ -1926,32 +2005,7 @@
     gsap.set('#approach-reveal', { clipPath: 'none', webkitClipPath: 'none' });
   });
 
-  // ── 3. Feature cards — deal out from a stacked deck ─────
-  const dealMM = gsap.matchMedia();
-  // Desktop: the 3 cards start piled centre-stage (rotated/scaled like a
-  // held deck) and deal out into their row.
-  dealMM.add('(min-width: 768px)', () => {
-    const cards = gsap.utils.toArray('#approach .deal-card');
-    gsap.set('#approach .grid', { perspective: 1400 });
-    gsap.set(cards, { transformOrigin: 'center 60%' });
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: '#approach .grid', start: 'top 80%' },
-      onComplete: () => gsap.set(cards, { clearProps: 'transform' })  // let hover-lift work after
-    });
-    tl.from(cards[1], { yPercent: 26, scale: 0.82, rotationX: 18, opacity: 0, duration: 0.7, ease: 'power3.out' }, 0)
-      .from(cards[0], { xPercent: 122, yPercent: 14, rotationZ: 9,  rotationX: 14, scale: 0.82, opacity: 0, duration: 0.95, ease: 'power3.out' }, 0.12)
-      .from(cards[2], { xPercent: -122, yPercent: 14, rotationZ: -9, rotationX: 14, scale: 0.82, opacity: 0, duration: 0.95, ease: 'power3.out' }, 0.12);
-  });
-  // Mobile (single column): clean staggered rise.
-  dealMM.add('(max-width: 767px)', () => {
-    gsap.from('#approach .deal-card', {
-      y: 42, opacity: 0, stagger: 0.14, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: '#approach .grid', start: 'top 82%' }
-    });
-  });
-
-
-  // ── 6. Scroll reveal (generic) ──────────────────────────
+  // ── 3. Scroll reveal (generic) ──────────────────────────
   const revealEls = document.querySelectorAll('.reveal');
   const revObs = new IntersectionObserver((entries) => {
     entries.forEach((entry, idx) => {
@@ -1965,7 +2019,7 @@
 
   // ── Work gallery ─────────────────────────────────────
   // Three pages on a track. Each one scrolls itself down a screen, then the
-  // track slides across to the next. Hovering holds; any input restarts.
+  // track slides across to the next. It runs straight through; the arrows restart it.
   (function () {
     var wrap = document.querySelector('.wg');
     if (!wrap) return;
@@ -1976,12 +2030,12 @@
     var capEl  = document.getElementById('wg-cap');
     var cntEl  = document.getElementById('wg-count');
     var PAGES = [
-      { url: 'sixth-line-sauna.vercel.app',       dur: 11000,
-        cap: 'The site itself \u2014 the range, the proof and one way to start a conversation.' },
-      { url: 'sixth-line-sauna.vercel.app/build', dur: 9000,
-        cap: 'The build page \u2014 footprint, ceiling, heater and lining, with the drawing and the circuit sizing updating live.' },
-      { url: 'sixth-line-sauna.vercel.app/build', dur: 9000,
-        cap: 'The agent \u2014 trained on the client\'s own specifications. It answers the technical questions and hands to a person rather than quote a price.' }
+      { url: 'sixth-line-sauna.vercel.app',       dur: 7000,
+        cap: 'Our websites are custom designed to present your work properly, build trust and give the right clients a clear next step.' },
+      { url: 'sixth-line-sauna.vercel.app/build', dur: 6000,
+        cap: 'Custom pages and interactive tools, built around your specific products, services and customer experiences.' },
+      { url: 'sixth-line-sauna.vercel.app/build', dur: 5000,
+        cap: 'The agent \u2014 built on the best models, trained on your own specifications. It answers technical questions, books appointments straight into your calendar, and hands to a person when it should.' }
     ];
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var i = 0, timer = null;
@@ -1997,7 +2051,7 @@
       track.style.transform = 'translateX(' + (-i * 100) + '%)';
       slides.forEach(function (sl, k) { sl.classList.toggle('is-active', k === i); });
       var page = PAGES[i] || {};
-      var dur  = page.dur || 9000;
+      var dur  = page.dur || 6000;
       if (page.url) { urlEl.textContent = page.url; capEl.textContent = page.cap; }
       cntEl.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + slides.length).slice(-2);
       // restart the pan + progress animations from the top of the page
@@ -2015,15 +2069,11 @@
       if (e.key === 'ArrowRight') { show(i + 1); }
     });
 
-    // hover holds the current slide so it can actually be read
-    wrap.addEventListener('mouseenter', function () { wrap.classList.add('is-paused'); clearTimeout(timer); });
-    wrap.addEventListener('mouseleave', function () { wrap.classList.remove('is-paused'); show(i); });
-
     // don't animate offscreen
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
         es.forEach(function (e) {
-          if (e.isIntersecting) { if (!wrap.classList.contains('is-paused')) show(i); }
+          if (e.isIntersecting) { show(i); }
           else { clearTimeout(timer); wrap.classList.remove('is-playing'); }
         });
       }, { threshold: 0.25 }).observe(wrap);
@@ -2032,161 +2082,13 @@
     show(0);
   })();
 
-  // ── 7. Card Shuffler ────────────────────────────────────
-  const reactivationCards = [
-    { label:'Past enquiry',        duration:'6 months', client:'No response',        color:'rgba(237,232,218,0.4)' },
-    { label:'Follow-up sent',      duration:'Day 1',    client:'Sent automatically', color:'#E6D192' },
-    { label:'Lead re-engaged',     duration:'Day 3',    client:'Replied',            color:'#BCBE7E' },
-    { label:'Consultation booked', duration:'✓',        client:'Confirmed',          color:'#C2A04A' },
-  ];
-  let deckOrder = [0, 1, 2, 3];
-
-  function renderShuffler() {
-    const container = document.getElementById('shuffler-stack');
-    if (!container) return;
-    container.innerHTML = '';
-    deckOrder.slice(0, 3).forEach((cardIdx, stackPos) => {
-      const card = reactivationCards[cardIdx];
-      const el = document.createElement('div');
-      el.className = 'shuffler-card';
-      el.style.cssText = `
-        transform: translateY(${stackPos * 18}px) scale(${1 - stackPos * 0.05});
-        z-index: ${3 - stackPos};
-        opacity: ${1 - stackPos * 0.28};
-        box-shadow: ${stackPos === 0 ? '0 8px 32px rgba(0,0,0,0.4)' : 'none'};
-        top: 0;
-      `;
-      el.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:${card.color};">${card.label}</span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:rgba(237,232,218,0.3);">${card.duration}</span>
-        </div>
-        <div style="font-size:0.88rem;font-weight:600;color:#EDE8DA;">${card.client}</div>
-        <div style="height:1px;background:rgba(30,58,45,0.3);margin-top:0.75rem;"></div>
-      `;
-      container.appendChild(el);
-    });
-  }
-
-  function shuffleDeck() {
-    const last = deckOrder.pop();
-    deckOrder.unshift(last);
-    renderShuffler();
-  }
-
-  renderShuffler();
-  setInterval(shuffleDeck, 3000);
-
-  // ── 8. Typewriter ───────────────────────────────────────
-  const twLines = [
-    'New enquiry · private art collector',
-    'Qualified · budget confirmed',
-    'Routed to calendar',
-    'New enquiry · luxury auto dealership',
-    'Qualified · timeline: Q3',
-    'Appointment booked',
-    'New enquiry · estate agency, GTA',
-  ];
-  let twLine = 0, twChar = 0, twPhase = 'typing', twStr = '';
-  const twTextEl = document.getElementById('tw-text');
-  const twFeedEl = document.getElementById('tw-feed');
-
-  function twTick() {
-    const line = twLines[twLine];
-    if (twPhase === 'typing') {
-      if (twChar < line.length) {
-        twStr += line[twChar++];
-        if (twTextEl) twTextEl.textContent = twStr;
-        setTimeout(twTick, 42 + Math.random() * 22);
-      } else {
-        twPhase = 'pause';
-        setTimeout(twTick, 1800);
-      }
-    } else if (twPhase === 'pause') {
-      if (twFeedEl && twStr) {
-        const log = document.createElement('div');
-        log.style.cssText = 'font-family:"IBM Plex Mono",monospace;font-size:0.7rem;color:rgba(237,232,218,0.55);line-height:1.6;';
-        log.textContent = '› ' + twStr;
-        twFeedEl.insertBefore(log, twFeedEl.firstChild);
-        while (twFeedEl.children.length > 3) twFeedEl.removeChild(twFeedEl.lastChild);
-      }
-      twPhase = 'erasing';
-      setTimeout(twTick, 150);
-    } else {
-      if (twStr.length > 0) {
-        twStr = twStr.slice(0, -1);
-        if (twTextEl) twTextEl.textContent = twStr;
-        setTimeout(twTick, 18);
-      } else {
-        twLine = (twLine + 1) % twLines.length;
-        twChar = 0; twPhase = 'typing';
-        setTimeout(twTick, 280);
-      }
-    }
-  }
-  twTick();
-
-  // ── 9. Scheduler cursor animation ───────────────────────
-  function initScheduler() {
-    const cursor     = document.getElementById('scheduler-cursor');
-    const cardEl     = document.getElementById('scheduler-card');
-    const wedCell    = document.querySelector('.calendar-day[data-day="4"]');
-    const confirmBtn = document.getElementById('confirm-btn');
-    const bookedEl   = document.getElementById('booking-state');
-    if (!cursor || !cardEl || !wedCell || !confirmBtn) return;
-
-    function relPos(el) {
-      const cr = cardEl.getBoundingClientRect();
-      const er = el.getBoundingClientRect();
-      return { x: er.left - cr.left + er.width/2 - 11, y: er.top - cr.top + er.height/2 - 14 };
-    }
-
-    const wedPos  = relPos(wedCell);
-    const confPos = relPos(confirmBtn);
-
-    gsap.set(cursor, { x: wedPos.x - 55, y: wedPos.y - 38, opacity:0 });
-
-    const tl = gsap.timeline({
-      repeat: -1, repeatDelay: 2.5,
-      onRepeat: () => {
-        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('active'));
-        confirmBtn.classList.remove('confirmed');
-        confirmBtn.textContent = 'Confirm →';
-        if (bookedEl) bookedEl.classList.remove('is-booked');
-      }
-    });
-
-    tl
-      .to(cursor, { opacity:1, duration:0.4 })
-      .to(cursor, { x: wedPos.x, y: wedPos.y, duration:1.1, ease:'power2.inOut' })
-      .add(() => { wedCell.classList.add('active'); })
-      .to(cursor, { scale:0.82, duration:0.08 })
-      .to(cursor, { scale:1, duration:0.14 })
-      .to(cursor, { x: confPos.x, y: confPos.y, duration:1, ease:'power2.inOut' }, '+=0.55')
-      .add(() => {
-        confirmBtn.classList.add('confirmed'); confirmBtn.textContent = 'Confirmed ✓';
-        if (bookedEl) bookedEl.classList.add('is-booked');
-      })
-      .to(cursor, { scale:0.82, duration:0.08 })
-      .to(cursor, { scale:1, duration:0.14 })
-      .to(cursor, { opacity:0, duration:0.38 }, '+=1.2');
-  }
-  setTimeout(initScheduler, 600);
-
-  // ── 10. Membership enquire buttons ──────────────────────
-  document.querySelectorAll('.enquire-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
-    });
-  });
-
-  // ── 11. Footer entrance ─────────────────────────────────
+  // ── 4. Footer entrance ──────────────────────────────────
   gsap.from('#footer-content > *', {
     y:28, opacity:0, stagger:0.12, duration:0.85, ease:'power3.out',
     scrollTrigger:{ trigger:'footer', start:'top 80%' }
   });
 
-  // ── 12. Recalc scroll positions after late content ──────
+  // ── 5. Recalc scroll positions after late content ───────
   // The booking iframe and chat widget load and resize AFTER window load, which
   // can shift every ScrollTrigger's start/end and leave the Approach reveal
   // stuck mid-wipe. Refresh once everything has settled.
@@ -2194,6 +2096,111 @@
   setTimeout(() => ScrollTrigger.refresh(), 1500);
   setTimeout(() => ScrollTrigger.refresh(), 3500);
 
+</script>
+
+<!-- ROI calculator — merged in from the retired services page -->
+<script>
+  (function () {
+    var leads = document.getElementById('calc-leads');
+    var value = document.getElementById('calc-value');
+    var close = document.getElementById('calc-close');
+    var lost  = document.getElementById('calc-lost');
+    var fee   = document.getElementById('calc-fee');
+    if (!leads || !value || !close || !lost || !fee) return;
+
+    var leadsOut = document.getElementById('calc-leads-out');
+    var valueOut = document.getElementById('calc-value-out');
+    var closeOut = document.getElementById('calc-close-out');
+    var lostOut  = document.getElementById('calc-lost-out');
+    var feeOut   = document.getElementById('calc-fee-out');
+
+    var revOut   = document.getElementById('calc-revenue');
+    var dealsOut = document.getElementById('calc-deals');
+    var roiOut   = document.getElementById('calc-roi');
+    var netOut   = document.getElementById('calc-net');
+    var monthOut = document.getElementById('calc-month');
+    var painOut  = document.getElementById('calc-pain-fig');
+
+    var recovery = 0.45;   // share of lost leads won back (set by the toggle)
+
+    var nf  = new Intl.NumberFormat('en-US');
+    var usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+    function fillTrack(el) {
+      var pct = (el.value - el.min) / (el.max - el.min) * 100;
+      el.style.background = 'linear-gradient(90deg, rgba(237,232,218,0.5) 0%, rgba(237,232,218,0.5) ' + pct + '%, rgba(237,232,218,0.15) ' + pct + '%, rgba(237,232,218,0.15) 100%)';
+    }
+
+    // Animated count-up on the headline figure
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var revShown = 0, revRAF = null;
+    function setRevenue(target) {
+      if (reduceMotion) { revOut.textContent = usd.format(target); revShown = target; return; }
+      var start = revShown, t0 = null, dur = 520;
+      if (revRAF) cancelAnimationFrame(revRAF);
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        revOut.textContent = usd.format(start + (target - start) * e);
+        if (p < 1) revRAF = requestAnimationFrame(step); else revShown = target;
+      }
+      revRAF = requestAnimationFrame(step);
+    }
+
+    // Average project value uses a log scale so the low end gets fine control.
+    var VMIN = 50, VMAX = 1000000, LMIN = Math.log(VMIN), LSPAN = Math.log(VMAX) - LMIN;
+    function valueFromSlider(i) {
+      var v = Math.exp(LMIN + LSPAN * (i / 1000));
+      var mag = Math.pow(10, Math.floor(Math.log(v) / Math.LN10) - 1); // 2 significant figures
+      v = Math.round(v / mag) * mag;
+      return Math.min(VMAX, Math.max(VMIN, v));
+    }
+
+    function update() {
+      var nLeads = +leads.value;
+      var nValue = valueFromSlider(+value.value);
+      var nClose = +close.value / 100;
+      var nLost  = +lost.value / 100;
+      var nFee   = +fee.value;
+
+      leadsOut.textContent = nf.format(nLeads);
+      valueOut.textContent = usd.format(nValue);
+      closeOut.textContent = close.value + '%';
+      lostOut.textContent  = lost.value + '%';
+      feeOut.textContent   = usd.format(nFee);
+
+      var recoveredLeads = nLeads * 12 * nLost * recovery;  // lost leads won back / yr
+      var deals     = recoveredLeads * nClose;
+      var revenue   = deals * nValue;
+      var annualFee = nFee * 12;
+      var net       = revenue - annualFee;
+      var roi       = annualFee > 0 ? revenue / annualFee : 0;
+      var lostRevenue = nLeads * 12 * nLost * nClose * nValue;  // value of would-close deals lost today
+
+      setRevenue(net);
+      if (painOut) painOut.textContent = usd.format(lostRevenue);
+      dealsOut.textContent = deals.toFixed(1);
+      roiOut.textContent   = (roi >= 10 ? Math.round(roi) : roi.toFixed(1)) + '×';
+      netOut.textContent   = usd.format(revenue);
+      monthOut.textContent = usd.format(revenue / 12);
+
+      [leads, value, close, lost, fee].forEach(fillTrack);
+    }
+
+    [leads, value, close, lost, fee].forEach(function (el) { el.addEventListener('input', update); });
+
+    var segBtns = document.querySelectorAll('.calc-seg button');
+    segBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        recovery = +b.dataset.r;
+        segBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        update();
+      });
+    });
+
+    update();
+  })();
 </script>
 
 <script>(function(){function go(){document.body.classList.add('loaded');}if(document.readyState==='complete')go();else window.addEventListener('load',go);})();</script>
