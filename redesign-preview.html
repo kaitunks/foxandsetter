@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Redesign preview — Fox &amp; Setter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ground — cool near-white with a faint green cast, deliberately not cream */
+    --paper:#FAFAF7;
+    --surface:#F2F2EC;
+    --rule:#E0DFD7;
+    --rule-soft:#EBEAE3;
+
+    /* carried over from the existing brand */
+    --ink:#141815;
+    --forest:#1E3A2D;
+    --gold:#C2A04A;
+
+    --ink-70:rgba(20,24,21,.70);
+    --ink-50:rgba(20,24,21,.50);
+    --ink-38:rgba(20,24,21,.38);
+
+    --gut:clamp(1.25rem,4vw,2.5rem);
+    --max:1240px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Schibsted Grotesk',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+
+  /* ── shared type roles ───────────────────────────────── */
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);
+  }
+  .display{
+    font-weight:500;
+    letter-spacing:-.035em;
+    line-height:1.02;
+    text-wrap:balance;
+  }
+  .lede{
+    font-size:clamp(1.02rem,1.5vw,1.18rem);
+    line-height:1.6;
+    color:var(--ink-70);
+    max-width:52ch;
+  }
+
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:2px}
+
+  /* ── nav ─────────────────────────────────────────────── */
+  .nav{border-bottom:1px solid var(--rule);background:var(--paper)}
+  .nav-in{
+    max-width:var(--max);margin:0 auto;padding:1.1rem var(--gut);
+    display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  }
+  .brand{
+    font-weight:600;font-size:.95rem;letter-spacing:-.01em;text-decoration:none;
+  }
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{
+    font-size:.86rem;color:var(--ink-70);text-decoration:none;
+    transition:color .18s ease;
+  }
+  .nav-links a:hover{color:var(--ink)}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;
+    background:var(--forest);color:var(--paper);
+    font-size:.88rem;font-weight:500;
+    padding:.72rem 1.35rem;border-radius:2px;text-decoration:none;
+    transition:background .2s ease;
+  }
+  .btn:hover{background:#16291F}
+  .btn-sm{padding:.55rem 1.05rem;font-size:.82rem}
+
+  .btn-text{
+    font-size:.9rem;color:var(--ink-70);text-decoration:none;
+    border-bottom:1px solid var(--rule);padding-bottom:2px;
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .btn-text:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* ── hero ────────────────────────────────────────────── */
+  .hero{padding-block:clamp(4.5rem,11vw,9rem) clamp(4rem,9vw,7.5rem)}
+  .hero .eyebrow{display:block;margin-bottom:1.6rem}
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,4.4rem);
+    margin-bottom:2.8rem;
+    max-width:20ch;
+  }
+  /* the two clauses are a pair — keep each on its own line rather than
+     letting the measure break them mid-thought */
+  .hero h1 .cl{display:inline-block}
+  .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1.6rem}
+
+  /* ── section frame ───────────────────────────────────── */
+  .sec{padding-block:clamp(3.5rem,8vw,6rem);border-top:1px solid var(--rule)}
+  .sec-head{margin-bottom:clamp(2.5rem,5vw,4rem);max-width:64ch}
+  .sec-head .eyebrow{display:block;margin-bottom:1.1rem}
+  .sec-head h2{
+    font-size:clamp(1.75rem,3.4vw,2.7rem);
+    font-weight:500;letter-spacing:-.03em;line-height:1.1;text-wrap:balance;
+    max-width:23ch;
+  }
+
+  /* ── SIGNATURE: the transect ─────────────────────────
+     Hunt / Set / Retrieve is a real working sequence, so the tiers
+     sit as stations on a survey line rather than carrying decorative
+     01/02/03 markers. The gold point moves to the tier in focus. */
+  .transect{position:relative;margin-bottom:0}
+  .transect-line{
+    height:1px;background:var(--rule);
+    position:relative;
+  }
+  .transect-ticks{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    position:absolute;inset:0;
+  }
+  .tick{position:relative}
+  .tick::before{
+    content:'';position:absolute;left:50%;top:0;
+    width:1px;height:9px;background:var(--rule);
+    transform:translate(-50%,-4px);
+  }
+  .point{
+    position:absolute;top:50%;left:0;
+    width:9px;height:9px;border-radius:50%;
+    background:var(--gold);
+    transform:translate(-50%,-50%);
+    transition:left .42s cubic-bezier(.22,.61,.36,1);
+    will-change:left;
+  }
+  .point::after{
+    content:'';position:absolute;inset:-6px;border-radius:50%;
+    border:1px solid rgba(194,160,74,.4);
+  }
+
+  /* ── tiers ───────────────────────────────────────────── */
+  .tiers{
+    display:grid;grid-template-columns:repeat(3,1fr);
+  }
+  .tier{
+    padding:2.4rem 2rem 0 0;
+    border-left:1px solid var(--rule-soft);
+    padding-left:2rem;
+  }
+  .tier:first-child{border-left:none;padding-left:0}
+
+  .tier-field{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-38);
+    transition:color .25s ease;
+    display:block;margin-bottom:1.5rem;
+  }
+  .tier.is-active .tier-field{color:var(--gold)}
+
+  .tier h3{
+    font-size:clamp(1.3rem,2vw,1.6rem);
+    font-weight:500;letter-spacing:-.025em;line-height:1.15;
+    margin-bottom:.75rem;
+  }
+  .tier-sub{
+    font-size:.94rem;line-height:1.55;color:var(--ink-70);
+    margin-bottom:1.8rem;min-height:4.4em;
+  }
+  .tier-inc{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-38);
+    padding-bottom:.9rem;margin-bottom:1.1rem;
+    border-bottom:1px solid var(--rule-soft);
+    display:block;
+  }
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+  .tier li{
+    font-size:.9rem;line-height:1.45;color:var(--ink-70);
+    padding-left:1.1rem;position:relative;
+  }
+  .tier li::before{
+    content:'';position:absolute;left:0;top:.62em;
+    width:4px;height:1px;background:var(--ink-38);
+  }
+  .tier-price{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-50);
+    padding-top:1.1rem;border-top:1px solid var(--rule-soft);
+  }
+
+  .tiers-foot{
+    margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;
+  }
+  .tiers-note{font-size:.86rem;color:var(--ink-50)}
+
+  /* ── type specimen ───────────────────────────────────── */
+  .spec-grid{display:grid;gap:2.5rem}
+  .spec-row{display:grid;grid-template-columns:130px 1fr;gap:2rem;align-items:baseline}
+  .spec-k{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-38);
+  }
+  .s-h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:500;letter-spacing:-.035em;line-height:1.04}
+  .s-h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:500;letter-spacing:-.03em;line-height:1.12}
+  .s-body{font-size:1.02rem;line-height:1.65;color:var(--ink-70);max-width:58ch}
+  .s-mono{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50)}
+
+  /* ── footer / preview note ───────────────────────────── */
+  .foot{
+    border-top:1px solid var(--rule);
+    padding-block:2.5rem 4rem;
+    font-size:.88rem;line-height:1.65;color:var(--ink-50);
+  }
+  .foot b{color:var(--ink);font-weight:600}
+  .foot code{
+    font-family:'IBM Plex Mono',monospace;font-size:.82em;
+    background:var(--surface);padding:.12em .4em;border-radius:2px;color:var(--ink-70);
+  }
+
+  /* ── reveal ──────────────────────────────────────────── */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
+  .rv.in{opacity:1;transform:none}
+
+  /* ── responsive ──────────────────────────────────────── */
+  @media(max-width:860px){
+    .nav-links{display:none}
+    .tiers{grid-template-columns:1fr}
+    .tier{border-left:none;padding-left:0;padding-top:2rem;border-top:1px solid var(--rule-soft)}
+    .tier:first-child{border-top:none;padding-top:2.4rem}
+    .tier-sub{min-height:0}
+    .transect-ticks{grid-template-columns:1fr}
+    .transect .point{display:none}
+    .spec-row{grid-template-columns:1fr;gap:.6rem}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .point{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#">Fox &amp; Setter</a>
+    <ul class="nav-links">
+      <li><a href="#">What We Build</a></li>
+      <li><a href="#">Approach</a></li>
+      <li><a href="#tiers">Tiers</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+    <a class="btn btn-sm" href="#">Book a consult</a>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────── -->
+<header class="hero wrap">
+  <span class="eyebrow rv">Hunt. Set. Retrieve.</span>
+  <h1 class="display rv"><span class="cl">The instinct to find.</span> <span class="cl">The intelligence to close.</span></h1>
+  <div class="hero-cta rv">
+    <a class="btn" href="#">Book a free consult</a>
+    <a class="btn-text" href="#tiers">See the tiers</a>
+  </div>
+</header>
+
+<!-- ── TIERS ───────────────────────────────────────────── -->
+<section class="sec wrap" id="tiers">
+  <div class="sec-head rv">
+    <span class="eyebrow">The Tiers</span>
+    <h2>Three tiers, each including the one before it.</h2>
+  </div>
+
+  <!-- the transect: stations on a survey line, not decorative numbering -->
+  <div class="transect rv" id="transect" aria-hidden="true">
+    <div class="transect-line">
+      <div class="transect-ticks">
+        <span class="tick"></span><span class="tick"></span><span class="tick"></span>
+      </div>
+      <span class="point" id="point"></span>
+    </div>
+  </div>
+
+  <div class="tiers">
+    <article class="tier is-active rv" data-i="0">
+      <span class="tier-field">Hunt</span>
+      <h3>The Foundation</h3>
+      <p class="tier-sub">A site that shows the work properly and turns a visitor into an enquiry.</p>
+      <span class="tier-inc">What we build</span>
+      <ul>
+        <li>Custom website — no generic template</li>
+        <li>Interactive widgets and configurator tools</li>
+        <li>Gallery, FAQ and service-area pages</li>
+        <li>Custom lead capture, straight to your inbox</li>
+      </ul>
+      <div class="tier-price">By enquiry</div>
+    </article>
+
+    <article class="tier rv" data-i="1">
+      <span class="tier-field">Set</span>
+      <h3>The Front Desk</h3>
+      <p class="tier-sub">They book themselves, while you're on a roof or in a van.</p>
+      <span class="tier-inc">Everything in The Foundation, plus</span>
+      <ul>
+        <li>24/7 chat concierge, trained on your products</li>
+        <li>Self-serve booking calendar with live availability</li>
+      </ul>
+      <div class="tier-price">By enquiry</div>
+    </article>
+
+    <article class="tier rv" data-i="2">
+      <span class="tier-field">Retrieve</span>
+      <h3>The Growth Engine</h3>
+      <p class="tier-sub">Nothing goes cold. Follow-up happens whether anyone remembers it or not.</p>
+      <span class="tier-inc">Everything in The Front Desk, plus</span>
+      <ul>
+        <li>CRM and pipeline, with your own dashboard</li>
+        <li>Automated follow-up and appointment reminders</li>
+        <li>Post-project follow-up and Google review requests</li>
+        <li>Reactivation for dormant enquiries</li>
+      </ul>
+      <div class="tier-price">By enquiry</div>
+    </article>
+  </div>
+
+  <div class="tiers-foot rv">
+    <p class="tiers-note">One-time setup, then monthly. Costs agreed up front. No long-term contract.</p>
+    <a class="btn-text" href="#">Compare the tiers</a>
+  </div>
+</section>
+
+<!-- ── TYPE SPECIMEN ───────────────────────────────────── -->
+<section class="sec wrap">
+  <div class="sec-head rv">
+    <span class="eyebrow">Type</span>
+    <h2>Schibsted Grotesk, with IBM Plex Mono for data.</h2>
+  </div>
+
+  <div class="spec-grid">
+    <div class="spec-row rv">
+      <span class="spec-k">Display / hero</span>
+      <p class="s-h1">We learn your trade first.</p>
+    </div>
+    <div class="spec-row rv">
+      <span class="spec-k">Section heading</span>
+      <p class="s-h2">Tell us what you install. We'll go and learn it.</p>
+    </div>
+    <div class="spec-row rv">
+      <span class="spec-k">Body</span>
+      <p class="s-body">Before we design a page, we learn how your industry is regulated,
+        what an install costs, and what buyers ask before they commit. Then we listen to you.</p>
+    </div>
+    <div class="spec-row rv">
+      <span class="spec-k">Utility / labels</span>
+      <p class="s-mono">Prince Edward County, ON · Site · Agent · Intake · Booking</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER NOTE ─────────────────────────────────────── -->
+<div class="wrap">
+  <div class="foot">
+    <p style="margin-bottom:.6rem;">
+      <b>Preview only.</b> Nothing on the live site has changed —
+      <code>index.html</code>, <code>services.html</code>, <code>work.html</code> and
+      <code>faq.html</code> are untouched.
+    </p>
+    <p>
+      The gold point on the transect moves as you hover or tab through the three tiers.
+      Approve the direction and I'll roll it across all four pages.
+    </p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* reveal on scroll — one plain fade-up, no staggered choreography */
+  var rv = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -60px' });
+    rv.forEach(function(el){ io.observe(el); });
+  }
+
+  /* the point: sits on the station of whichever tier is in focus */
+  var point  = document.getElementById('point');
+  var ticks  = document.querySelectorAll('.transect .tick');
+  var tiers  = document.querySelectorAll('.tier');
+  var active = 0;
+
+  function place(i){
+    if (!point || !ticks[i]) return;
+    var t = ticks[i];
+    point.style.left = (t.offsetLeft + t.offsetWidth / 2) + 'px';
+    tiers.forEach(function(el, n){ el.classList.toggle('is-active', n === i); });
+  }
+
+  tiers.forEach(function(el, i){
+    el.addEventListener('mouseenter', function(){ active = i; place(i); });
+    el.addEventListener('focusin',    function(){ active = i; place(i); });
+  });
+
+  window.addEventListener('resize', function(){ place(active); });
+  requestAnimationFrame(function(){ place(0); });
+})();
+</script>
+
+</body>
+</html>

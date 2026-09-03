@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Title font comparison — Fox &amp; Setter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141815; --forest:#1E3A2D; --pine:#16271E; --bone:#EDE8DA; --gold:#C2A04A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--ink); color:var(--bone);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* same grain overlay as the real site, so weight/contrast reads true */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat:repeat;background-size:300px 300px;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 2rem}
+
+  header{padding:4rem 0 2.5rem}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:1rem;
+  }
+  .intro{font-size:1rem;line-height:1.7;color:rgba(237,232,218,.65);max-width:62ch}
+  .intro b{color:var(--bone);font-weight:600}
+
+  .jump{
+    display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem;
+    border-top:1px solid rgba(30,58,45,.8);padding-top:1.5rem;
+  }
+  .jump a{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.12em;
+    text-transform:uppercase;text-decoration:none;color:rgba(237,232,218,.6);
+    border:1px solid rgba(30,58,45,.9);border-radius:2px;padding:.5rem .85rem;
+    transition:color .2s ease,border-color .2s ease;
+  }
+  .jump a:hover{color:var(--gold);border-color:rgba(194,160,74,.5)}
+
+  /* ── one candidate block ── */
+  .cand{padding:3.5rem 0;border-top:1px solid rgba(30,58,45,.8)}
+  .cand:first-of-type{border-top:none}
+  .cand-head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+  .cand-n{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;
+    color:var(--gold);
+  }
+  .cand-name{
+    font-family:'Plus Jakarta Sans',sans-serif;font-size:1.05rem;font-weight:600;
+    letter-spacing:.02em;color:var(--bone);
+  }
+  .cand-note{
+    font-size:.85rem;color:rgba(237,232,218,.5);line-height:1.6;max-width:46ch;
+  }
+  .current-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(237,232,218,.45);
+    border:1px solid rgba(237,232,218,.22);border-radius:2px;padding:.22rem .5rem;
+  }
+
+  /* the specimens — sizes copied from the live site */
+  .spec-lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(237,232,218,.32);margin-bottom:.7rem;
+  }
+  .spec{margin-bottom:2.75rem}
+
+  .hero-line{
+    font-size:clamp(3rem,5.5vw,6rem);font-weight:400;font-style:italic;
+    line-height:.98;color:#EDE8DA;text-wrap:balance;margin-left:-.2em;
+  }
+  .hero-line span{display:inline-block}
+
+  .h2-line{
+    font-size:clamp(2rem,4vw,3.4rem);font-weight:400;font-style:italic;
+    line-height:1.12;color:#EDE8DA;text-wrap:balance;
+  }
+
+  .tier-line{
+    font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:400;font-style:italic;
+    line-height:1.15;color:#EDE8DA;
+  }
+
+  .pull-line{
+    font-style:italic;font-size:clamp(1.05rem,1.7vw,1.35rem);
+    color:rgba(237,232,218,.82);line-height:1.45;max-width:1040px;
+    border-left:2px solid rgba(194,160,74,.5);padding-left:1.5rem;
+  }
+
+  /* roman (non-italic) check — headings are italic on the site, but the
+     upright is worth seeing since it decides whether we could ever use it */
+  .roman-line{
+    font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;font-style:normal;
+    line-height:1.15;color:rgba(237,232,218,.9);
+  }
+
+  /* small-size survival test */
+  .small-line{font-size:1rem;font-style:italic;color:rgba(237,232,218,.7)}
+
+  /* ── per-candidate font assignment ── */
+  .f-cormorant .hero-line,.f-cormorant .h2-line,.f-cormorant .tier-line,
+  .f-cormorant .pull-line,.f-cormorant .roman-line,.f-cormorant .small-line{
+    font-family:'Cormorant Garamond',serif;
+  }
+  .f-fraunces .hero-line,.f-fraunces .h2-line,.f-fraunces .tier-line,
+  .f-fraunces .pull-line,.f-fraunces .roman-line,.f-fraunces .small-line{
+    font-family:'Fraunces',serif;font-variation-settings:'SOFT' 0,'WONK' 0;
+  }
+  .f-instrument .hero-line,.f-instrument .h2-line,.f-instrument .tier-line,
+  .f-instrument .pull-line,.f-instrument .roman-line,.f-instrument .small-line{
+    font-family:'Instrument Serif',serif;
+  }
+  .f-bodoni .hero-line,.f-bodoni .h2-line,.f-bodoni .tier-line,
+  .f-bodoni .pull-line,.f-bodoni .roman-line,.f-bodoni .small-line{
+    font-family:'Bodoni Moda',serif;
+  }
+
+  /* Fraunces is optically heavier at hero size — nudge it back so the
+     comparison is fair rather than flattering */
+  .f-fraunces .hero-line{font-weight:300}
+  .f-fraunces .h2-line{font-weight:300}
+
+  footer{
+    padding:3.5rem 0 5rem;border-top:1px solid rgba(30,58,45,.8);
+    font-size:.9rem;line-height:1.7;color:rgba(237,232,218,.55);
+  }
+  footer b{color:var(--bone);font-weight:600}
+
+  @media(max-width:640px){
+    .wrap{padding:0 1.25rem}
+    .cand{padding:2.5rem 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Fox &amp; Setter · Title font</div>
+    <p class="intro">
+      Your real headlines, at the real sizes, on the real palette — including the grain overlay,
+      because it changes how thin strokes read. <b>Cormorant Garamond is first, as the baseline.</b>
+      Headings on the site are italic, so that is what each block leads with; the upright is shown
+      further down because it decides whether the face could ever carry a non-italic heading.
+    </p>
+    <nav class="jump">
+      <a href="#cormorant">01 · Cormorant (current)</a>
+      <a href="#fraunces">02 · Fraunces</a>
+      <a href="#instrument">03 · Instrument Serif</a>
+      <a href="#bodoni">04 · Bodoni Moda</a>
+    </nav>
+  </header>
+
+  <!-- 01 · CORMORANT — baseline -->
+  <section class="cand f-cormorant" id="cormorant">
+    <div class="cand-head">
+      <span class="cand-n">01</span>
+      <span class="cand-name">Cormorant Garamond</span>
+      <span class="current-tag">Current</span>
+      <span class="cand-note">Delicate, high-contrast, very light on screen. The thin strokes are
+        what tends to read as fragile at hero size against a dark ground.</span>
+    </div>
+
+    <div class="spec">
+      <div class="spec-lbl">Hero — index.html</div>
+      <div class="hero-line"><span>The instinct to find.</span> <span>The intelligence to close.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Section heading — approach / services</div>
+      <div class="h2-line">We learn your trade first.</div>
+      <div class="h2-line" style="margin-top:.6rem;">Three tiers. Each one builds on the last.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Tier name — homepage cards</div>
+      <div class="tier-line">The Growth Engine</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Pull quote — work.html</div>
+      <p class="pull-line">The research doesn't show up on the page. It shows up in the questions the site already knows how to answer.</p>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Upright / roman</div>
+      <div class="roman-line">Quiet intelligence for estates of taste.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Small size survival — 1rem</div>
+      <p class="small-line">Hunt. Set. Retrieve. — Websites, AI agents and follow-up systems for luxury home-install trades.</p>
+    </div>
+  </section>
+
+  <!-- 02 · FRAUNCES -->
+  <section class="cand f-fraunces" id="fraunces">
+    <div class="cand-head">
+      <span class="cand-n">02</span>
+      <span class="cand-name">Fraunces</span>
+      <span class="cand-note">Warmer and sturdier, old-style. Soft/wonk axes dialled to zero here
+        so it stays composed. Holds up better against the grain than Cormorant.</span>
+    </div>
+
+    <div class="spec">
+      <div class="spec-lbl">Hero — index.html</div>
+      <div class="hero-line"><span>The instinct to find.</span> <span>The intelligence to close.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Section heading — approach / services</div>
+      <div class="h2-line">We learn your trade first.</div>
+      <div class="h2-line" style="margin-top:.6rem;">Three tiers. Each one builds on the last.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Tier name — homepage cards</div>
+      <div class="tier-line">The Growth Engine</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Pull quote — work.html</div>
+      <p class="pull-line">The research doesn't show up on the page. It shows up in the questions the site already knows how to answer.</p>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Upright / roman</div>
+      <div class="roman-line">Quiet intelligence for estates of taste.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Small size survival — 1rem</div>
+      <p class="small-line">Hunt. Set. Retrieve. — Websites, AI agents and follow-up systems for luxury home-install trades.</p>
+    </div>
+  </section>
+
+  <!-- 03 · INSTRUMENT SERIF -->
+  <section class="cand f-instrument" id="instrument">
+    <div class="cand-head">
+      <span class="cand-n">03</span>
+      <span class="cand-name">Instrument Serif</span>
+      <span class="cand-note">Tighter, denser, editorial. One weight only, which forces restraint.
+        Strongest at very large sizes; least flexible if you later need a bold heading.</span>
+    </div>
+
+    <div class="spec">
+      <div class="spec-lbl">Hero — index.html</div>
+      <div class="hero-line"><span>The instinct to find.</span> <span>The intelligence to close.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Section heading — approach / services</div>
+      <div class="h2-line">We learn your trade first.</div>
+      <div class="h2-line" style="margin-top:.6rem;">Three tiers. Each one builds on the last.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Tier name — homepage cards</div>
+      <div class="tier-line">The Growth Engine</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Pull quote — work.html</div>
+      <p class="pull-line">The research doesn't show up on the page. It shows up in the questions the site already knows how to answer.</p>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Upright / roman</div>
+      <div class="roman-line">Quiet intelligence for estates of taste.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Small size survival — 1rem</div>
+      <p class="small-line">Hunt. Set. Retrieve. — Websites, AI agents and follow-up systems for luxury home-install trades.</p>
+    </div>
+  </section>
+
+  <!-- 04 · BODONI MODA -->
+  <section class="cand f-bodoni" id="bodoni">
+    <div class="cand-head">
+      <span class="cand-n">04</span>
+      <span class="cand-name">Bodoni Moda</span>
+      <span class="cand-note">Extreme thick/thin, flat serifs. The most overtly expensive of the
+        four — and the coldest. Watch the hairlines against the grain overlay.</span>
+    </div>
+
+    <div class="spec">
+      <div class="spec-lbl">Hero — index.html</div>
+      <div class="hero-line"><span>The instinct to find.</span> <span>The intelligence to close.</span></div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Section heading — approach / services</div>
+      <div class="h2-line">We learn your trade first.</div>
+      <div class="h2-line" style="margin-top:.6rem;">Three tiers. Each one builds on the last.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Tier name — homepage cards</div>
+      <div class="tier-line">The Growth Engine</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Pull quote — work.html</div>
+      <p class="pull-line">The research doesn't show up on the page. It shows up in the questions the site already knows how to answer.</p>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Upright / roman</div>
+      <div class="roman-line">Quiet intelligence for estates of taste.</div>
+    </div>
+    <div class="spec">
+      <div class="spec-lbl">Small size survival — 1rem</div>
+      <p class="small-line">Hunt. Set. Retrieve. — Websites, AI agents and follow-up systems for luxury home-install trades.</p>
+    </div>
+  </section>
+
+  <footer>
+    Nothing on the live site has changed yet — this page is standalone.
+    Tell me which number you want and I'll swap it across
+    <b>index.html</b>, <b>services.html</b>, <b>work.html</b> and <b>faq.html</b>,
+    including the Google Fonts link on each page.
+  </footer>
+
+</div>
+
+</body>
+</html>
